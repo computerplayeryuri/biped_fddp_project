@@ -1,0 +1,12 @@
+stage: multistep_fddp_c1_ar_fit
+order: 3
+sample_time_s: 0.02
+coefficients:
+- 1.8562259702304857
+- -1.1129670381464247
+- 0.14093948683528165
+spectral_radius: 0.9083289082231913
+stabilized: false
+rmse_deg: 0.02580677987993215
+reused_implementation: /home/zhijian/biped_fddp_project/mpc/16_validate_fddp_two_step_c1_fir_qp.py
+command_reference_advance_s: 0.03

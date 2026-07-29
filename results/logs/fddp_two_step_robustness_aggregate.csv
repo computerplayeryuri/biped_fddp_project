@@ -1,0 +1,15 @@
+scenario_label,category,mode,trial_count,success_count,success_rate,success_rate_wilson_95,event_match_rate
+nominal,nominal,c0,5,5,1.0,"(0.5655175352168251, 1.0)",0.0
+nominal,nominal,c2,5,5,1.0,"(0.5655175352168251, 1.0)",1.0
+push_plus_4N,push,c0,5,0,0.0,"(0.0, 0.43448246478317476)",0.0
+push_plus_4N,push,c2,5,0,0.0,"(0.0, 0.43448246478317476)",0.75
+friction_mu_0p50,friction,c0,5,5,1.0,"(0.5655175352168251, 1.0)",0.0
+friction_mu_0p50,friction,c2,5,5,1.0,"(0.5655175352168251, 1.0)",1.0
+slope_plus_3deg,slope,c0,5,5,1.0,"(0.5655175352168251, 1.0)",0.0
+slope_plus_3deg,slope,c2,5,5,1.0,"(0.5655175352168251, 1.0)",1.0
+step_4mm,step,c0,5,5,1.0,"(0.5655175352168251, 1.0)",0.0
+step_4mm,step,c2,5,5,1.0,"(0.5655175352168251, 1.0)",1.0
+command_delay_12ms,command_delay,c0,5,5,1.0,"(0.5655175352168251, 1.0)",0.0
+command_delay_12ms,command_delay,c2,5,5,1.0,"(0.5655175352168251, 1.0)",0.75
+sensor_delay_20ms,sensor_delay,c0,5,5,1.0,"(0.5655175352168251, 1.0)",0.0
+sensor_delay_20ms,sensor_delay,c2,5,5,1.0,"(0.5655175352168251, 1.0)",0.75

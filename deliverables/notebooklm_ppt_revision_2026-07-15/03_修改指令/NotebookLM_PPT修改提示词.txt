@@ -1,0 +1,62 @@
+你是一名熟悉 Crocoddyl FDDP、Pinocchio、MuJoCo、FIR system identification、QP-MPC 和双足机器人控制的 MSc robotics presentation editor。
+
+请依据上传的原始PPT、项目证据摘要、YAML日志和原始figures，重构一份15分钟专业组会演示。正文保持专业英文，speaker notes使用中文并保留English technical terms。
+
+必须遵守：
+
+1. 不得发明任何数据、实验、硬件结果或成功状态。
+2. 当前只能声称 simulation validation and runtime-loadability；不能声称 hardware walking、hardware real-time validation 或 fully robust continuous walking。
+3. q_cmd是position command；tau_ref仅为FDDP planning/analysis output，绝不是hardware torque command。
+4. Stage 8/9 scripted gait不得包装为FDDP-generated gait。
+5. 固定contact schedule是预先指定的；FDDP没有自主发现contact sequence。
+6. 分开表达FDDP optimisation内部的contacts/residuals/bounds与Python post-solve acceptance gates。
+7. 10-step planning/contact gates已经通过，但full 10 s MuJoCo natural-contact replay尚未通过最终event gate。
+8. C0、C1、C2是递进架构：C0 baseline；C1=C0+FIR-QP correction；C2=C1+contact observer/phase retiming。不要称为三个独立controller。
+9. C1结果主要来自CoM-shift references；不得包装为final 10-step gait recovery。
+10. C2 natural-contact结果为3/4 events matched、1 skipped；不得写成fully synchronised。
+11. Robustness必须同时展示4 N push在C0和C2下均为0/5。
+12. Timing只能称logged compute-time evidence；不得称hardware real-time safety proven。
+
+请将主线重构为：
+
+Slide 1 — Research question and simulation-only claim boundary。
+Slide 2 — Why position control does not remove nonlinear dynamics/contact difficulty。
+Slide 3 — Offline FDDP → MuJoCo → C0/C1/C2 architecture。
+Slide 4 — Fixed DS–SS–DS schedule and phase-dependent contact/swing models。
+Slide 5 — What FDDP optimises versus what independent gates verify。
+Slide 6 — Development ladder: CoM shift → single steps → alternating two-step → accepted 10-step planning。
+Slide 7 — Accepted 10-step planning/contact evidence，使用正式数值和contact-feasibility figure。
+Slide 8 — MuJoCo replay：two-step pass与10-step-reference smoke event-gate failure并列展示。
+Slide 9 — C0/C1/C2 equations and incremental roles。
+Slide 10 — C1 settling/IAE improvement，peak unchanged，并标明CoM-shift scope。
+Slide 11 — C2 3/4 event matching和47.375 ms phase offset。
+Slide 12 — 70-trial robustness、4 N push failure、当前结论和下一步。
+
+Backup slides：
+
+- Independent verification gates。
+- Fair-comparison protocol。
+- Compute-time evidence and missing limiter/fallback instrumentation。
+- Model mismatch and claim boundary。
+
+视觉要求：
+
+- 删除所有“A NotebookLM”水印。
+- 不使用通用AI机器人插图；使用上传的actual MuJoCo/FDDP figures和GIF。
+- 16:9；FDDP blue、C1 teal、C2 orange、failure red。
+- 每页一个takeaway；不超过5个主要bullet。
+- 正文至少20–22 pt；坐标轴至少16–18 pt。
+- 原始PNG文件名放speaker notes，不作为页面主要caption。
+- 使用Passed / Partial / Failed-Pending统一状态标签。
+- 每个成功结论必须标注适用范围，例如planning only、two-step replay、CoM-shift C1、natural-contact prototype。
+
+请先输出：
+
+1. 逐页revision plan；
+2. 每页最终英文文案；
+3. 每页推荐figure和layout；
+4. 每页40–70秒speaker notes；
+5. 原页到新页的change log；
+6. 10个专业技术问题及简洁回答。
+
+在生成最终PPT前，再次检查所有数值、单位、公式、通过/失败状态和claim boundary。

@@ -1,0 +1,952 @@
+stage: urdf_mjcf_consistency_audit
+urdf: /home/zhijian/biped_fddp_project/model/biped_v1.urdf
+mjcf: /home/zhijian/biped_fddp_project/model/biped_planar.xml
+units: 'SI: m, kg, s, rad'
+frame_convention: +X robot right/pitch axis, +Y forward, +Z upward
+source_note: dimensions and inertials are current project estimates/proxies unless
+  independently measured
+summary:
+  mapped_mjcf_body_count: 14
+  mapped_urdf_inertial_link_count: 16
+  audited_joint_count: 6
+  row_count: 154
+  matched_count: 115
+  unexpected_mismatch_count: 0
+  status_counts:
+    consumer_specific: 2
+    deliberate_mismatch: 18
+    deliberate_simplification: 12
+    matched: 115
+    mjcf_only_runtime_feature: 4
+    mjcf_only_uncalibrated: 1
+    rigid_body_folded: 2
+  full_equivalence: false
+  audit_integrity_passed: true
+rows:
+- category: body_mass
+  item: hip_plate_link
+  urdf_value: '0.065'
+  mjcf_value: '0.065'
+  status: matched
+  note: kg
+- category: inertial_origin
+  item: hip_plate_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: COM in body/link frame, m
+- category: inertia_tensor
+  item: hip_plate_link
+  urdf_value: '[[4.59820833e-05,0.0,0.0],[0.0,0.000156677083,0.0],[0.0,0.0,0.000202388333]]'
+  mjcf_value: '[[4.59820833e-05,0.0,0.0],[0.0,0.000156677083,0.0],[0.0,0.0,0.000202388333]]'
+  status: matched
+  note: kg m^2; MJCF foot values rounded
+- category: standing_base_origin
+  item: hip_plate_link
+  urdf_value: '[0.0,0.0,0.28800000000000003]'
+  mjcf_value: '[0.0,0.0,0.288]'
+  status: matched
+  note: MJCF floating-base zero pose places the URDF foot bottom on z=0
+- category: visual_geometry_size
+  item: hip_plate_link
+  urdf_value: '[0.17,0.092,0.005]'
+  mjcf_value: '[0.17,0.092,0.005]'
+  status: matched
+  note: URDF full box size vs twice MJCF half-size
+- category: visual_geometry_origin
+  item: hip_plate_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: geometry origin in owning link/body frame
+- category: collision_enablement
+  item: hip_plate_link
+  urdf_value: 'true'
+  mjcf_value: '0'
+  status: deliberate_simplification
+  note: feet collide in both; non-foot MJCF collision is intentionally disabled
+- category: body_mass
+  item: electronics_lump_link
+  urdf_value: '0.2583'
+  mjcf_value: '0.2583'
+  status: matched
+  note: kg
+- category: inertial_origin
+  item: electronics_lump_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: COM in body/link frame, m
+- category: inertia_tensor
+  item: electronics_lump_link
+  urdf_value: '[[0.0001434426,0.0,0.0],[0.0,0.0003479301,0.0],[0.0,0.0,0.0004154325]]'
+  mjcf_value: '[[0.0001434426,0.0,0.0],[0.0,0.0003479301,0.0],[0.0,0.0,0.0004154325]]'
+  status: matched
+  note: kg m^2; MJCF foot values rounded
+- category: body_origin
+  item: electronics_lump_link
+  urdf_value: '[0.0,0.0,0.03]'
+  mjcf_value: '[0.0,0.0,0.03]'
+  status: matched
+  note: URDF parent-to-joint/child transform vs MJCF local body pos
+- category: visual_geometry_size
+  item: electronics_lump_link
+  urdf_value: '[0.12,0.07,0.042]'
+  mjcf_value: '[0.12,0.07,0.042]'
+  status: matched
+  note: URDF full box size vs twice MJCF half-size
+- category: visual_geometry_origin
+  item: electronics_lump_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: geometry origin in owning link/body frame
+- category: collision_enablement
+  item: electronics_lump_link
+  urdf_value: 'true'
+  mjcf_value: '0'
+  status: deliberate_simplification
+  note: feet collide in both; non-foot MJCF collision is intentionally disabled
+- category: body_mass
+  item: left_hip_motor_link
+  urdf_value: '0.055'
+  mjcf_value: '0.055'
+  status: matched
+  note: kg
+- category: inertial_origin
+  item: left_hip_motor_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: COM in body/link frame, m
+- category: inertia_tensor
+  item: left_hip_motor_link
+  urdf_value: '[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]'
+  mjcf_value: '[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]'
+  status: matched
+  note: kg m^2; MJCF foot values rounded
+- category: body_origin
+  item: left_hip_motor_link
+  urdf_value: '[-0.0525,0.0,-0.045]'
+  mjcf_value: '[-0.0525,0.0,-0.045]'
+  status: matched
+  note: URDF parent-to-joint/child transform vs MJCF local body pos
+- category: visual_geometry_size
+  item: left_hip_motor_link
+  urdf_value: '[0.0452,0.0247,0.035]'
+  mjcf_value: '[0.0452,0.0247,0.035]'
+  status: matched
+  note: URDF full box size vs twice MJCF half-size
+- category: visual_geometry_origin
+  item: left_hip_motor_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: geometry origin in owning link/body frame
+- category: collision_enablement
+  item: left_hip_motor_link
+  urdf_value: 'true'
+  mjcf_value: '0'
+  status: deliberate_simplification
+  note: feet collide in both; non-foot MJCF collision is intentionally disabled
+- category: body_mass
+  item: left_thigh_bracket_link
+  urdf_value: '0.048'
+  mjcf_value: '0.048'
+  status: matched
+  note: kg
+- category: inertial_origin
+  item: left_thigh_bracket_link
+  urdf_value: '[0.0,0.0,-0.05]'
+  mjcf_value: '[0.0,0.0,-0.05]'
+  status: matched
+  note: COM in body/link frame, m
+- category: inertia_tensor
+  item: left_thigh_bracket_link
+  urdf_value: '[[4.36e-05,0.0,0.0],[0.0,4.7056e-05,0.0],[0.0,0.0,1.0656e-05]]'
+  mjcf_value: '[[4.36e-05,0.0,0.0],[0.0,4.7056e-05,0.0],[0.0,0.0,1.0656e-05]]'
+  status: matched
+  note: kg m^2; MJCF foot values rounded
+- category: body_origin
+  item: left_thigh_bracket_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: URDF parent-to-joint/child transform vs MJCF local body pos
+- category: visual_geometry_size
+  item: left_thigh_bracket_link
+  urdf_value: '[0.042,0.03,0.1]'
+  mjcf_value: '[0.042,0.03,0.1]'
+  status: matched
+  note: URDF full box size vs twice MJCF half-size
+- category: visual_geometry_origin
+  item: left_thigh_bracket_link
+  urdf_value: '[0.0,0.0,-0.05]'
+  mjcf_value: '[0.0,0.0,-0.05]'
+  status: matched
+  note: geometry origin in owning link/body frame
+- category: collision_enablement
+  item: left_thigh_bracket_link
+  urdf_value: 'true'
+  mjcf_value: '0'
+  status: deliberate_simplification
+  note: feet collide in both; non-foot MJCF collision is intentionally disabled
+- category: body_mass
+  item: left_knee_motor_link
+  urdf_value: '0.055'
+  mjcf_value: '0.055'
+  status: matched
+  note: kg
+- category: inertial_origin
+  item: left_knee_motor_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: COM in body/link frame, m
+- category: inertia_tensor
+  item: left_knee_motor_link
+  urdf_value: '[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]'
+  mjcf_value: '[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]'
+  status: matched
+  note: kg m^2; MJCF foot values rounded
+- category: body_origin
+  item: left_knee_motor_link
+  urdf_value: '[0.0,0.0,-0.1]'
+  mjcf_value: '[0.0,0.0,-0.1]'
+  status: matched
+  note: URDF parent-to-joint/child transform vs MJCF local body pos
+- category: visual_geometry_size
+  item: left_knee_motor_link
+  urdf_value: '[0.0452,0.0247,0.035]'
+  mjcf_value: '[0.0452,0.0247,0.035]'
+  status: matched
+  note: URDF full box size vs twice MJCF half-size
+- category: visual_geometry_origin
+  item: left_knee_motor_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: geometry origin in owning link/body frame
+- category: collision_enablement
+  item: left_knee_motor_link
+  urdf_value: 'true'
+  mjcf_value: '0'
+  status: deliberate_simplification
+  note: feet collide in both; non-foot MJCF collision is intentionally disabled
+- category: body_mass
+  item: left_shank_bracket_link
+  urdf_value: '0.048'
+  mjcf_value: '0.048'
+  status: matched
+  note: kg
+- category: inertial_origin
+  item: left_shank_bracket_link
+  urdf_value: '[0.0,0.0,-0.05]'
+  mjcf_value: '[0.0,0.0,-0.05]'
+  status: matched
+  note: COM in body/link frame, m
+- category: inertia_tensor
+  item: left_shank_bracket_link
+  urdf_value: '[[4.36e-05,0.0,0.0],[0.0,4.7056e-05,0.0],[0.0,0.0,1.0656e-05]]'
+  mjcf_value: '[[4.36e-05,0.0,0.0],[0.0,4.7056e-05,0.0],[0.0,0.0,1.0656e-05]]'
+  status: matched
+  note: kg m^2; MJCF foot values rounded
+- category: body_origin
+  item: left_shank_bracket_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: URDF parent-to-joint/child transform vs MJCF local body pos
+- category: visual_geometry_size
+  item: left_shank_bracket_link
+  urdf_value: '[0.042,0.03,0.1]'
+  mjcf_value: '[0.042,0.03,0.1]'
+  status: matched
+  note: URDF full box size vs twice MJCF half-size
+- category: visual_geometry_origin
+  item: left_shank_bracket_link
+  urdf_value: '[0.0,0.0,-0.05]'
+  mjcf_value: '[0.0,0.0,-0.05]'
+  status: matched
+  note: geometry origin in owning link/body frame
+- category: collision_enablement
+  item: left_shank_bracket_link
+  urdf_value: 'true'
+  mjcf_value: '0'
+  status: deliberate_simplification
+  note: feet collide in both; non-foot MJCF collision is intentionally disabled
+- category: body_mass
+  item: left_ankle_motor_link
+  urdf_value: '0.055'
+  mjcf_value: '0.055'
+  status: matched
+  note: kg
+- category: inertial_origin
+  item: left_ankle_motor_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: COM in body/link frame, m
+- category: inertia_tensor
+  item: left_ankle_motor_link
+  urdf_value: '[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]'
+  mjcf_value: '[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]'
+  status: matched
+  note: kg m^2; MJCF foot values rounded
+- category: body_origin
+  item: left_ankle_motor_link
+  urdf_value: '[0.0,0.0,-0.1]'
+  mjcf_value: '[0.0,0.0,-0.1]'
+  status: matched
+  note: URDF parent-to-joint/child transform vs MJCF local body pos
+- category: visual_geometry_size
+  item: left_ankle_motor_link
+  urdf_value: '[0.0452,0.0247,0.035]'
+  mjcf_value: '[0.0452,0.0247,0.035]'
+  status: matched
+  note: URDF full box size vs twice MJCF half-size
+- category: visual_geometry_origin
+  item: left_ankle_motor_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: geometry origin in owning link/body frame
+- category: collision_enablement
+  item: left_ankle_motor_link
+  urdf_value: 'true'
+  mjcf_value: '0'
+  status: deliberate_simplification
+  note: feet collide in both; non-foot MJCF collision is intentionally disabled
+- category: body_mass
+  item: left_foot_link
+  urdf_value: '0.0992'
+  mjcf_value: '0.0992'
+  status: matched
+  note: kg
+- category: inertial_origin
+  item: left_foot_link
+  urdf_value: '[0.0,0.0,-0.04]'
+  mjcf_value: '[0.0,0.0,-0.04]'
+  status: matched
+  note: COM in body/link frame, m
+- category: inertia_tensor
+  item: left_foot_link
+  urdf_value: '[[0.00015454766667000002,0.0,0.0],[0.0,5.3277666667e-05,0.0],[0.0,0.0,0.00020684583333]]'
+  mjcf_value: '[[0.00015455,0.0,0.0],[0.0,5.328e-05,0.0],[0.0,0.0,0.00020685]]'
+  status: matched
+  note: kg m^2; MJCF foot values rounded
+- category: body_origin
+  item: left_foot_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: URDF parent-to-joint/child transform vs MJCF local body pos
+- category: visual_geometry_size
+  item: left_foot_link
+  urdf_value: '[0.085,0.145,0.006]'
+  mjcf_value: '[0.085,0.145,0.006]'
+  status: matched
+  note: URDF full box size vs twice MJCF half-size
+- category: visual_geometry_origin
+  item: left_foot_link
+  urdf_value: '[0.0,0.0,-0.04]'
+  mjcf_value: '[0.0,0.0,-0.04]'
+  status: matched
+  note: geometry origin in owning link/body frame
+- category: collision_enablement
+  item: left_foot_link
+  urdf_value: 'true'
+  mjcf_value: '1'
+  status: matched
+  note: feet collide in both; non-foot MJCF collision is intentionally disabled
+- category: rigid_body_folding
+  item: left_foot_link
+  urdf_value: '["left_foot_link","left_foot_contact_lump"]'
+  mjcf_value: '"left_foot_link"'
+  status: rigid_body_folded
+  note: contact-lump mass/COM/inertia folded into foot; its separate geometry is omitted
+- category: body_mass
+  item: right_hip_motor_link
+  urdf_value: '0.055'
+  mjcf_value: '0.055'
+  status: matched
+  note: kg
+- category: inertial_origin
+  item: right_hip_motor_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: COM in body/link frame, m
+- category: inertia_tensor
+  item: right_hip_motor_link
+  urdf_value: '[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]'
+  mjcf_value: '[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]'
+  status: matched
+  note: kg m^2; MJCF foot values rounded
+- category: body_origin
+  item: right_hip_motor_link
+  urdf_value: '[0.0525,0.0,-0.045]'
+  mjcf_value: '[0.0525,0.0,-0.045]'
+  status: matched
+  note: URDF parent-to-joint/child transform vs MJCF local body pos
+- category: visual_geometry_size
+  item: right_hip_motor_link
+  urdf_value: '[0.0452,0.0247,0.035]'
+  mjcf_value: '[0.0452,0.0247,0.035]'
+  status: matched
+  note: URDF full box size vs twice MJCF half-size
+- category: visual_geometry_origin
+  item: right_hip_motor_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: geometry origin in owning link/body frame
+- category: collision_enablement
+  item: right_hip_motor_link
+  urdf_value: 'true'
+  mjcf_value: '0'
+  status: deliberate_simplification
+  note: feet collide in both; non-foot MJCF collision is intentionally disabled
+- category: body_mass
+  item: right_thigh_bracket_link
+  urdf_value: '0.048'
+  mjcf_value: '0.048'
+  status: matched
+  note: kg
+- category: inertial_origin
+  item: right_thigh_bracket_link
+  urdf_value: '[0.0,0.0,-0.05]'
+  mjcf_value: '[0.0,0.0,-0.05]'
+  status: matched
+  note: COM in body/link frame, m
+- category: inertia_tensor
+  item: right_thigh_bracket_link
+  urdf_value: '[[4.36e-05,0.0,0.0],[0.0,4.7056e-05,0.0],[0.0,0.0,1.0656e-05]]'
+  mjcf_value: '[[4.36e-05,0.0,0.0],[0.0,4.7056e-05,0.0],[0.0,0.0,1.0656e-05]]'
+  status: matched
+  note: kg m^2; MJCF foot values rounded
+- category: body_origin
+  item: right_thigh_bracket_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: URDF parent-to-joint/child transform vs MJCF local body pos
+- category: visual_geometry_size
+  item: right_thigh_bracket_link
+  urdf_value: '[0.042,0.03,0.1]'
+  mjcf_value: '[0.042,0.03,0.1]'
+  status: matched
+  note: URDF full box size vs twice MJCF half-size
+- category: visual_geometry_origin
+  item: right_thigh_bracket_link
+  urdf_value: '[0.0,0.0,-0.05]'
+  mjcf_value: '[0.0,0.0,-0.05]'
+  status: matched
+  note: geometry origin in owning link/body frame
+- category: collision_enablement
+  item: right_thigh_bracket_link
+  urdf_value: 'true'
+  mjcf_value: '0'
+  status: deliberate_simplification
+  note: feet collide in both; non-foot MJCF collision is intentionally disabled
+- category: body_mass
+  item: right_knee_motor_link
+  urdf_value: '0.055'
+  mjcf_value: '0.055'
+  status: matched
+  note: kg
+- category: inertial_origin
+  item: right_knee_motor_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: COM in body/link frame, m
+- category: inertia_tensor
+  item: right_knee_motor_link
+  urdf_value: '[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]'
+  mjcf_value: '[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]'
+  status: matched
+  note: kg m^2; MJCF foot values rounded
+- category: body_origin
+  item: right_knee_motor_link
+  urdf_value: '[0.0,0.0,-0.1]'
+  mjcf_value: '[0.0,0.0,-0.1]'
+  status: matched
+  note: URDF parent-to-joint/child transform vs MJCF local body pos
+- category: visual_geometry_size
+  item: right_knee_motor_link
+  urdf_value: '[0.0452,0.0247,0.035]'
+  mjcf_value: '[0.0452,0.0247,0.035]'
+  status: matched
+  note: URDF full box size vs twice MJCF half-size
+- category: visual_geometry_origin
+  item: right_knee_motor_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: geometry origin in owning link/body frame
+- category: collision_enablement
+  item: right_knee_motor_link
+  urdf_value: 'true'
+  mjcf_value: '0'
+  status: deliberate_simplification
+  note: feet collide in both; non-foot MJCF collision is intentionally disabled
+- category: body_mass
+  item: right_shank_bracket_link
+  urdf_value: '0.048'
+  mjcf_value: '0.048'
+  status: matched
+  note: kg
+- category: inertial_origin
+  item: right_shank_bracket_link
+  urdf_value: '[0.0,0.0,-0.05]'
+  mjcf_value: '[0.0,0.0,-0.05]'
+  status: matched
+  note: COM in body/link frame, m
+- category: inertia_tensor
+  item: right_shank_bracket_link
+  urdf_value: '[[4.36e-05,0.0,0.0],[0.0,4.7056e-05,0.0],[0.0,0.0,1.0656e-05]]'
+  mjcf_value: '[[4.36e-05,0.0,0.0],[0.0,4.7056e-05,0.0],[0.0,0.0,1.0656e-05]]'
+  status: matched
+  note: kg m^2; MJCF foot values rounded
+- category: body_origin
+  item: right_shank_bracket_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: URDF parent-to-joint/child transform vs MJCF local body pos
+- category: visual_geometry_size
+  item: right_shank_bracket_link
+  urdf_value: '[0.042,0.03,0.1]'
+  mjcf_value: '[0.042,0.03,0.1]'
+  status: matched
+  note: URDF full box size vs twice MJCF half-size
+- category: visual_geometry_origin
+  item: right_shank_bracket_link
+  urdf_value: '[0.0,0.0,-0.05]'
+  mjcf_value: '[0.0,0.0,-0.05]'
+  status: matched
+  note: geometry origin in owning link/body frame
+- category: collision_enablement
+  item: right_shank_bracket_link
+  urdf_value: 'true'
+  mjcf_value: '0'
+  status: deliberate_simplification
+  note: feet collide in both; non-foot MJCF collision is intentionally disabled
+- category: body_mass
+  item: right_ankle_motor_link
+  urdf_value: '0.055'
+  mjcf_value: '0.055'
+  status: matched
+  note: kg
+- category: inertial_origin
+  item: right_ankle_motor_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: COM in body/link frame, m
+- category: inertia_tensor
+  item: right_ankle_motor_link
+  urdf_value: '[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]'
+  mjcf_value: '[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]'
+  status: matched
+  note: kg m^2; MJCF foot values rounded
+- category: body_origin
+  item: right_ankle_motor_link
+  urdf_value: '[0.0,0.0,-0.1]'
+  mjcf_value: '[0.0,0.0,-0.1]'
+  status: matched
+  note: URDF parent-to-joint/child transform vs MJCF local body pos
+- category: visual_geometry_size
+  item: right_ankle_motor_link
+  urdf_value: '[0.0452,0.0247,0.035]'
+  mjcf_value: '[0.0452,0.0247,0.035]'
+  status: matched
+  note: URDF full box size vs twice MJCF half-size
+- category: visual_geometry_origin
+  item: right_ankle_motor_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: geometry origin in owning link/body frame
+- category: collision_enablement
+  item: right_ankle_motor_link
+  urdf_value: 'true'
+  mjcf_value: '0'
+  status: deliberate_simplification
+  note: feet collide in both; non-foot MJCF collision is intentionally disabled
+- category: body_mass
+  item: right_foot_link
+  urdf_value: '0.0992'
+  mjcf_value: '0.0992'
+  status: matched
+  note: kg
+- category: inertial_origin
+  item: right_foot_link
+  urdf_value: '[0.0,0.0,-0.04]'
+  mjcf_value: '[0.0,0.0,-0.04]'
+  status: matched
+  note: COM in body/link frame, m
+- category: inertia_tensor
+  item: right_foot_link
+  urdf_value: '[[0.00015454766667000002,0.0,0.0],[0.0,5.3277666667e-05,0.0],[0.0,0.0,0.00020684583333]]'
+  mjcf_value: '[[0.00015455,0.0,0.0],[0.0,5.328e-05,0.0],[0.0,0.0,0.00020685]]'
+  status: matched
+  note: kg m^2; MJCF foot values rounded
+- category: body_origin
+  item: right_foot_link
+  urdf_value: '[0.0,0.0,0.0]'
+  mjcf_value: '[0.0,0.0,0.0]'
+  status: matched
+  note: URDF parent-to-joint/child transform vs MJCF local body pos
+- category: visual_geometry_size
+  item: right_foot_link
+  urdf_value: '[0.085,0.145,0.006]'
+  mjcf_value: '[0.085,0.145,0.006]'
+  status: matched
+  note: URDF full box size vs twice MJCF half-size
+- category: visual_geometry_origin
+  item: right_foot_link
+  urdf_value: '[0.0,0.0,-0.04]'
+  mjcf_value: '[0.0,0.0,-0.04]'
+  status: matched
+  note: geometry origin in owning link/body frame
+- category: collision_enablement
+  item: right_foot_link
+  urdf_value: 'true'
+  mjcf_value: '1'
+  status: matched
+  note: feet collide in both; non-foot MJCF collision is intentionally disabled
+- category: rigid_body_folding
+  item: right_foot_link
+  urdf_value: '["right_foot_link","right_foot_contact_lump"]'
+  mjcf_value: '"right_foot_link"'
+  status: rigid_body_folded
+  note: contact-lump mass/COM/inertia folded into foot; its separate geometry is omitted
+- category: total_mass
+  item: all mapped bodies
+  urdf_value: '1.0437000000000003'
+  mjcf_value: '1.0437000000000003'
+  status: matched
+  note: kg
+- category: joint_axis
+  item: left_hip_pitch_joint
+  urdf_value: '[1.0,0.0,0.0]'
+  mjcf_value: '[1.0,0.0,0.0]'
+  status: matched
+  note: axis expressed in joint/child frame
+- category: joint_limit
+  item: left_hip_pitch_joint
+  urdf_value: '[-0.55,0.55]'
+  mjcf_value: '[-0.55,0.55]'
+  status: matched
+  note: rad
+- category: joint_damping
+  item: left_hip_pitch_joint
+  urdf_value: '0.02'
+  mjcf_value: '0.02'
+  status: matched
+  note: N m s/rad proxy parameter
+- category: joint_passive_friction
+  item: left_hip_pitch_joint
+  urdf_value: '0.01'
+  mjcf_value: '0.0'
+  status: deliberate_mismatch
+  note: URDF Coulomb friction is not represented in current MJCF
+- category: actuator_effort
+  item: left_hip_pitch_joint
+  urdf_value: '2.94'
+  mjcf_value: '[-2.0,2.0]'
+  status: deliberate_mismatch
+  note: URDF effort 2.94 N m; MJCF position actuator is capped at +/-2 N m
+- category: actuator_position_range
+  item: left_hip_pitch_joint
+  urdf_value: '[-0.55,0.55]'
+  mjcf_value: '[-0.55,0.55]'
+  status: matched
+  note: position-command range, rad
+- category: actuator_velocity
+  item: left_hip_pitch_joint
+  urdf_value: '4.712'
+  mjcf_value: '8.0'
+  status: deliberate_mismatch
+  note: URDF velocity limit vs replay proxy command slew limit
+- category: joint_axis
+  item: left_knee_pitch_joint
+  urdf_value: '[1.0,0.0,0.0]'
+  mjcf_value: '[1.0,0.0,0.0]'
+  status: matched
+  note: axis expressed in joint/child frame
+- category: joint_limit
+  item: left_knee_pitch_joint
+  urdf_value: '[-1.2,0.1]'
+  mjcf_value: '[-1.2,0.1]'
+  status: matched
+  note: rad
+- category: joint_damping
+  item: left_knee_pitch_joint
+  urdf_value: '0.02'
+  mjcf_value: '0.02'
+  status: matched
+  note: N m s/rad proxy parameter
+- category: joint_passive_friction
+  item: left_knee_pitch_joint
+  urdf_value: '0.01'
+  mjcf_value: '0.0'
+  status: deliberate_mismatch
+  note: URDF Coulomb friction is not represented in current MJCF
+- category: actuator_effort
+  item: left_knee_pitch_joint
+  urdf_value: '2.94'
+  mjcf_value: '[-2.0,2.0]'
+  status: deliberate_mismatch
+  note: URDF effort 2.94 N m; MJCF position actuator is capped at +/-2 N m
+- category: actuator_position_range
+  item: left_knee_pitch_joint
+  urdf_value: '[-1.2,0.1]'
+  mjcf_value: '[-1.2,0.1]'
+  status: matched
+  note: position-command range, rad
+- category: actuator_velocity
+  item: left_knee_pitch_joint
+  urdf_value: '4.712'
+  mjcf_value: '8.0'
+  status: deliberate_mismatch
+  note: URDF velocity limit vs replay proxy command slew limit
+- category: joint_axis
+  item: left_ankle_pitch_joint
+  urdf_value: '[1.0,0.0,0.0]'
+  mjcf_value: '[1.0,0.0,0.0]'
+  status: matched
+  note: axis expressed in joint/child frame
+- category: joint_limit
+  item: left_ankle_pitch_joint
+  urdf_value: '[-0.45,0.45]'
+  mjcf_value: '[-0.45,0.45]'
+  status: matched
+  note: rad
+- category: joint_damping
+  item: left_ankle_pitch_joint
+  urdf_value: '0.02'
+  mjcf_value: '0.02'
+  status: matched
+  note: N m s/rad proxy parameter
+- category: joint_passive_friction
+  item: left_ankle_pitch_joint
+  urdf_value: '0.01'
+  mjcf_value: '0.0'
+  status: deliberate_mismatch
+  note: URDF Coulomb friction is not represented in current MJCF
+- category: actuator_effort
+  item: left_ankle_pitch_joint
+  urdf_value: '2.94'
+  mjcf_value: '[-2.0,2.0]'
+  status: deliberate_mismatch
+  note: URDF effort 2.94 N m; MJCF position actuator is capped at +/-2 N m
+- category: actuator_position_range
+  item: left_ankle_pitch_joint
+  urdf_value: '[-0.45,0.45]'
+  mjcf_value: '[-0.45,0.45]'
+  status: matched
+  note: position-command range, rad
+- category: actuator_velocity
+  item: left_ankle_pitch_joint
+  urdf_value: '4.712'
+  mjcf_value: '8.0'
+  status: deliberate_mismatch
+  note: URDF velocity limit vs replay proxy command slew limit
+- category: joint_axis
+  item: right_hip_pitch_joint
+  urdf_value: '[1.0,0.0,0.0]'
+  mjcf_value: '[1.0,0.0,0.0]'
+  status: matched
+  note: axis expressed in joint/child frame
+- category: joint_limit
+  item: right_hip_pitch_joint
+  urdf_value: '[-0.55,0.55]'
+  mjcf_value: '[-0.55,0.55]'
+  status: matched
+  note: rad
+- category: joint_damping
+  item: right_hip_pitch_joint
+  urdf_value: '0.02'
+  mjcf_value: '0.02'
+  status: matched
+  note: N m s/rad proxy parameter
+- category: joint_passive_friction
+  item: right_hip_pitch_joint
+  urdf_value: '0.01'
+  mjcf_value: '0.0'
+  status: deliberate_mismatch
+  note: URDF Coulomb friction is not represented in current MJCF
+- category: actuator_effort
+  item: right_hip_pitch_joint
+  urdf_value: '2.94'
+  mjcf_value: '[-2.0,2.0]'
+  status: deliberate_mismatch
+  note: URDF effort 2.94 N m; MJCF position actuator is capped at +/-2 N m
+- category: actuator_position_range
+  item: right_hip_pitch_joint
+  urdf_value: '[-0.55,0.55]'
+  mjcf_value: '[-0.55,0.55]'
+  status: matched
+  note: position-command range, rad
+- category: actuator_velocity
+  item: right_hip_pitch_joint
+  urdf_value: '4.712'
+  mjcf_value: '8.0'
+  status: deliberate_mismatch
+  note: URDF velocity limit vs replay proxy command slew limit
+- category: joint_axis
+  item: right_knee_pitch_joint
+  urdf_value: '[1.0,0.0,0.0]'
+  mjcf_value: '[1.0,0.0,0.0]'
+  status: matched
+  note: axis expressed in joint/child frame
+- category: joint_limit
+  item: right_knee_pitch_joint
+  urdf_value: '[-1.2,0.1]'
+  mjcf_value: '[-1.2,0.1]'
+  status: matched
+  note: rad
+- category: joint_damping
+  item: right_knee_pitch_joint
+  urdf_value: '0.02'
+  mjcf_value: '0.02'
+  status: matched
+  note: N m s/rad proxy parameter
+- category: joint_passive_friction
+  item: right_knee_pitch_joint
+  urdf_value: '0.01'
+  mjcf_value: '0.0'
+  status: deliberate_mismatch
+  note: URDF Coulomb friction is not represented in current MJCF
+- category: actuator_effort
+  item: right_knee_pitch_joint
+  urdf_value: '2.94'
+  mjcf_value: '[-2.0,2.0]'
+  status: deliberate_mismatch
+  note: URDF effort 2.94 N m; MJCF position actuator is capped at +/-2 N m
+- category: actuator_position_range
+  item: right_knee_pitch_joint
+  urdf_value: '[-1.2,0.1]'
+  mjcf_value: '[-1.2,0.1]'
+  status: matched
+  note: position-command range, rad
+- category: actuator_velocity
+  item: right_knee_pitch_joint
+  urdf_value: '4.712'
+  mjcf_value: '8.0'
+  status: deliberate_mismatch
+  note: URDF velocity limit vs replay proxy command slew limit
+- category: joint_axis
+  item: right_ankle_pitch_joint
+  urdf_value: '[1.0,0.0,0.0]'
+  mjcf_value: '[1.0,0.0,0.0]'
+  status: matched
+  note: axis expressed in joint/child frame
+- category: joint_limit
+  item: right_ankle_pitch_joint
+  urdf_value: '[-0.45,0.45]'
+  mjcf_value: '[-0.45,0.45]'
+  status: matched
+  note: rad
+- category: joint_damping
+  item: right_ankle_pitch_joint
+  urdf_value: '0.02'
+  mjcf_value: '0.02'
+  status: matched
+  note: N m s/rad proxy parameter
+- category: joint_passive_friction
+  item: right_ankle_pitch_joint
+  urdf_value: '0.01'
+  mjcf_value: '0.0'
+  status: deliberate_mismatch
+  note: URDF Coulomb friction is not represented in current MJCF
+- category: actuator_effort
+  item: right_ankle_pitch_joint
+  urdf_value: '2.94'
+  mjcf_value: '[-2.0,2.0]'
+  status: deliberate_mismatch
+  note: URDF effort 2.94 N m; MJCF position actuator is capped at +/-2 N m
+- category: actuator_position_range
+  item: right_ankle_pitch_joint
+  urdf_value: '[-0.45,0.45]'
+  mjcf_value: '[-0.45,0.45]'
+  status: matched
+  note: position-command range, rad
+- category: actuator_velocity
+  item: right_ankle_pitch_joint
+  urdf_value: '4.712'
+  mjcf_value: '8.0'
+  status: deliberate_mismatch
+  note: URDF velocity limit vs replay proxy command slew limit
+- category: actuator_semantics
+  item: six leg joints
+  urdf_value: '"no URDF transmission/driver block"'
+  mjcf_value: '{"type":"MJCF position","delay_s":0.02,"time_constant_s":0.03,"speed_rad_s":8.0}'
+  status: consumer_specific
+  note: replay q_cmd proxy is not a calibrated hardware actuator model
+- category: root_dofs
+  item: planar floating base
+  urdf_value: '"not represented as URDF joints"'
+  mjcf_value: '{"forward":[0,1,0],"vertical":[0,0,1],"pitch":[1,0,0]}'
+  status: consumer_specific
+  note: MJCF adds +Y, +Z and +X planar root coordinates
+- category: contact_parameters
+  item: foot-ground contact
+  urdf_value: '"unspecified in URDF"'
+  mjcf_value: '{"friction":[0.8,0.01,0.001],"solref":[0.01,1.0],"solimp":[0.9,0.95,0.001]}'
+  status: mjcf_only_uncalibrated
+  note: MuJoCo-only simulation parameters; not hardware-calibrated
+- category: contact_site_geometry
+  item: left_toe_site
+  urdf_value: '{"foot_forward_half_m":0.0725,"foot_bottom_z_m":-0.043000000000000003}'
+  mjcf_value: '[0.0,0.068,-0.043]'
+  status: matched
+  note: toe/heel site lies within footprint and on the foot bottom plane
+- category: contact_sensor
+  item: left_toe_touch
+  urdf_value: '"no URDF sensor block"'
+  mjcf_value: '"left_toe_touch"'
+  status: mjcf_only_runtime_feature
+  note: natural-contact C2 uses this MuJoCo touch sensor
+- category: contact_site_geometry
+  item: left_heel_site
+  urdf_value: '{"foot_forward_half_m":0.0725,"foot_bottom_z_m":-0.043000000000000003}'
+  mjcf_value: '[0.0,-0.068,-0.043]'
+  status: matched
+  note: toe/heel site lies within footprint and on the foot bottom plane
+- category: contact_sensor
+  item: left_heel_touch
+  urdf_value: '"no URDF sensor block"'
+  mjcf_value: '"left_heel_touch"'
+  status: mjcf_only_runtime_feature
+  note: natural-contact C2 uses this MuJoCo touch sensor
+- category: contact_site_geometry
+  item: right_toe_site
+  urdf_value: '{"foot_forward_half_m":0.0725,"foot_bottom_z_m":-0.043000000000000003}'
+  mjcf_value: '[0.0,0.068,-0.043]'
+  status: matched
+  note: toe/heel site lies within footprint and on the foot bottom plane
+- category: contact_sensor
+  item: right_toe_touch
+  urdf_value: '"no URDF sensor block"'
+  mjcf_value: '"right_toe_touch"'
+  status: mjcf_only_runtime_feature
+  note: natural-contact C2 uses this MuJoCo touch sensor
+- category: contact_site_geometry
+  item: right_heel_site
+  urdf_value: '{"foot_forward_half_m":0.0725,"foot_bottom_z_m":-0.043000000000000003}'
+  mjcf_value: '[0.0,-0.068,-0.043]'
+  status: matched
+  note: toe/heel site lies within footprint and on the foot bottom plane
+- category: contact_sensor
+  item: right_heel_touch
+  urdf_value: '"no URDF sensor block"'
+  mjcf_value: '"right_heel_touch"'
+  status: mjcf_only_runtime_feature
+  note: natural-contact C2 uses this MuJoCo touch sensor
+claim_boundary: The mapping ledger is complete for the current files, but the models
+  are not fully equivalent and the MJCF contact/actuator parameters are not hardware
+  calibrated.

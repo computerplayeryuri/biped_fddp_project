@@ -1,0 +1,381 @@
+stage: C1_QP2_reference_aligned_empirical_FIR_QP_MPC_tuning_sweep
+purpose: Evaluate common FIR-QP-MPC candidates after MuJoCo reference alignment and
+  pulse-response identification.
+scope_note: Fixed-time phase C1 only; C2 event-phase synchronisation is inactive.
+model:
+  sample_time_s: 0.02
+  horizon_s: 0.24
+  alpha_limit_deg: 5.0
+  alpha_slew_deg_per_update: 1.0
+  G_rad_per_rad:
+  - 0.27
+  - 0.062
+  - -0.228
+  - 0.27
+  - 0.062
+  - -0.228
+  AR_order: 4
+  directions:
+    forward:
+      FIR_coefficients_rad_per_rad:
+      - 0.0007445358339875578
+      - -0.027643165141767068
+      - -0.01633190892812062
+      - 0.013125950141283602
+      - 0.03698061813654483
+      - 0.020703967299705597
+      - 0.0011480286546924662
+      - -0.017403870220158376
+      - -0.024034816738382626
+      - -0.019930687127644744
+      - -0.04221116935058844
+      - -0.032306897498573704
+      - -0.015668951540027422
+      - 0.003202228967590742
+      - 0.03199533591127948
+      AR:
+        coefficients:
+        - 1.1120152454049033
+        - -0.052213681591909825
+        - -0.4841399350984797
+        - 0.10076433983151382
+        spectral_radius: 0.8663307515015981
+        stabilized: false
+        fit_rmse_deg: 0.030452352418247446
+        source: /home/zhijian/biped_fddp_project/results/logs/c0_reference_only_forward_pitch_disturbance.csv
+    backward:
+      FIR_coefficients_rad_per_rad:
+      - 0.0007445313698188063
+      - -0.027643152709116794
+      - -0.016331899842086498
+      - 0.013125927431524175
+      - 0.03698060913416299
+      - 0.020703973047130193
+      - 0.0011480532579894612
+      - -0.01740384371794061
+      - -0.024034744615800817
+      - -0.019930652430555976
+      - -0.042211185839983456
+      - -0.03230693417051039
+      - -0.015668990814760142
+      - 0.003202225781385894
+      - 0.03199533986221262
+      AR:
+        coefficients:
+        - 1.452620360718365
+        - -0.5922550392526089
+        - -0.19757360353664383
+        - 0.09553704428219557
+        spectral_radius: 0.8589016157068953
+        stabilized: false
+        fit_rmse_deg: 0.016910542414876023
+        source: /home/zhijian/biped_fddp_project/results/logs/c0_reference_only_backward_pitch_disturbance.csv
+disturbance:
+  time_s: 0.4
+  root_pitch_deg: 2.0
+  root_pitch_rate_rad_s: 0.25
+acceptance:
+  min_contacts: 4
+  min_IAE_improvement_ratio: 0.02
+  max_peak_increase_ratio: 0.05
+  max_final_increase_deg: 0.05
+  max_joint_correction_deg: 1.5
+candidate_results:
+- candidate:
+    name: conservative
+    q: 800.0
+    r: 50.0
+    slew: 80.0
+  directions:
+    forward:
+      C0: &id001
+        candidate: C0
+        direction: forward
+        fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz
+        mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_forward.csv
+        pitch:
+          iae_deg_s: 0.27099987504941403
+          peak_abs_error_deg: 2.2648421178258498
+          final_abs_error_deg: 0.009805976206992608
+          settling_time_to_0p5deg_s: 0.24800000000000044
+        stability:
+          initial_torso_height_m: 0.288
+          minimum_torso_height_m: 0.28724193331765274
+          min_contacts: 4
+        command:
+          max_abs_joint_correction_deg: 0.0
+          median_qp_solve_time_us: null
+          max_qp_solve_time_us: null
+      C1:
+        candidate: conservative
+        direction: forward
+        fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz
+        mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_forward.csv
+        pitch:
+          iae_deg_s: 0.2506243030300274
+          peak_abs_error_deg: 2.2648421178258515
+          final_abs_error_deg: 0.004957249039568047
+          settling_time_to_0p5deg_s: 0.16800000000000037
+        stability:
+          initial_torso_height_m: 0.288
+          minimum_torso_height_m: 0.2872713793765431
+          min_contacts: 4
+        command:
+          max_abs_joint_correction_deg: 0.29458702181261337
+          median_qp_solve_time_us: 694.893
+          max_qp_solve_time_us: 1905.036
+      comparison:
+        iae_improvement_ratio: 0.07518664728414114
+        peak_error_increase_ratio: 7.843181762733537e-16
+        final_abs_error_increase_deg: -0.004848727167424561
+        stability_pass: true
+        performance_pass: true
+        integrity_passed: true
+    backward:
+      C0: &id002
+        candidate: C0
+        direction: backward
+        fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+        mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_backward.csv
+        pitch:
+          iae_deg_s: 0.2681021162056502
+          peak_abs_error_deg: 2.2467298541972407
+          final_abs_error_deg: 0.000941741227896728
+          settling_time_to_0p5deg_s: 0.24600000000000044
+        stability:
+          initial_torso_height_m: 0.288
+          minimum_torso_height_m: 0.28754293918368007
+          min_contacts: 4
+        command:
+          max_abs_joint_correction_deg: 0.0
+          median_qp_solve_time_us: null
+          max_qp_solve_time_us: null
+      C1:
+        candidate: conservative
+        direction: backward
+        fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+        mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_backward.csv
+        pitch:
+          iae_deg_s: 0.24430893861539527
+          peak_abs_error_deg: 2.2467298541972456
+          final_abs_error_deg: 0.005569539023993772
+          settling_time_to_0p5deg_s: 0.17000000000000037
+        stability:
+          initial_torso_height_m: 0.288
+          minimum_torso_height_m: 0.2875017011068617
+          min_contacts: 4
+        command:
+          max_abs_joint_correction_deg: 0.2971545678185432
+          median_qp_solve_time_us: 686.796
+          max_qp_solve_time_us: 1325.933
+      comparison:
+        iae_improvement_ratio: 0.0887466981872093
+        peak_error_increase_ratio: 2.1742628733155365e-15
+        final_abs_error_increase_deg: 0.0046277977960970445
+        stability_pass: true
+        performance_pass: true
+        integrity_passed: true
+  common_parameter_pass: true
+  mean_iae_improvement_ratio: 0.08196667273567522
+- candidate:
+    name: balanced
+    q: 1500.0
+    r: 20.0
+    slew: 25.0
+  directions:
+    forward:
+      C0: *id001
+      C1:
+        candidate: balanced
+        direction: forward
+        fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz
+        mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_forward.csv
+        pitch:
+          iae_deg_s: 0.24740359425382905
+          peak_abs_error_deg: 2.264842117825846
+          final_abs_error_deg: 0.001458894467888447
+          settling_time_to_0p5deg_s: 0.16600000000000037
+        stability:
+          initial_torso_height_m: 0.288
+          minimum_torso_height_m: 0.28735884794438527
+          min_contacts: 4
+        command:
+          max_abs_joint_correction_deg: 0.7112347183484434
+          median_qp_solve_time_us: 679.828
+          max_qp_solve_time_us: 1507.705
+      comparison:
+        iae_improvement_ratio: 0.08707118699328716
+        peak_error_increase_ratio: -1.5686363525467073e-15
+        final_abs_error_increase_deg: -0.00834708173910416
+        stability_pass: true
+        performance_pass: true
+        integrity_passed: true
+    backward:
+      C0: *id002
+      C1:
+        candidate: balanced
+        direction: backward
+        fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+        mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_backward.csv
+        pitch:
+          iae_deg_s: 0.22949238686762422
+          peak_abs_error_deg: 2.24672985419724
+          final_abs_error_deg: 0.007872812532935819
+          settling_time_to_0p5deg_s: 0.16600000000000037
+        stability:
+          initial_torso_height_m: 0.288
+          minimum_torso_height_m: 0.28754932797017446
+          min_contacts: 4
+        command:
+          max_abs_joint_correction_deg: 0.668957134520207
+          median_qp_solve_time_us: 702.078
+          max_qp_solve_time_us: 1385.772
+      comparison:
+        iae_improvement_ratio: 0.14401128153874793
+        peak_error_increase_ratio: -3.953205224210066e-16
+        final_abs_error_increase_deg: 0.006931071305039091
+        stability_pass: true
+        performance_pass: true
+        integrity_passed: true
+  common_parameter_pass: true
+  mean_iae_improvement_ratio: 0.11554123426601753
+- candidate:
+    name: responsive
+    q: 2500.0
+    r: 10.0
+    slew: 12.0
+  directions:
+    forward:
+      C0: *id001
+      C1:
+        candidate: responsive
+        direction: forward
+        fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz
+        mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_forward.csv
+        pitch:
+          iae_deg_s: 0.2693380509817017
+          peak_abs_error_deg: 2.264842117825848
+          final_abs_error_deg: 0.0032984641868820963
+          settling_time_to_0p5deg_s: 0.16800000000000037
+        stability:
+          initial_torso_height_m: 0.288
+          minimum_torso_height_m: 0.2874519075370146
+          min_contacts: 0
+        command:
+          max_abs_joint_correction_deg: 0.9828070031134841
+          median_qp_solve_time_us: 678.515
+          max_qp_solve_time_us: 1114.161
+      comparison:
+        iae_improvement_ratio: 0.006132194959164825
+        peak_error_increase_ratio: -7.843181762733537e-16
+        final_abs_error_increase_deg: -0.006507512020110512
+        stability_pass: false
+        performance_pass: false
+        integrity_passed: false
+    backward:
+      C0: *id002
+      C1:
+        candidate: responsive
+        direction: backward
+        fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+        mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_backward.csv
+        pitch:
+          iae_deg_s: 0.2514829488910642
+          peak_abs_error_deg: 2.246729854197242
+          final_abs_error_deg: 0.006016405873482042
+          settling_time_to_0p5deg_s: 0.16800000000000037
+        stability:
+          initial_torso_height_m: 0.288
+          minimum_torso_height_m: 0.28748205922687536
+          min_contacts: 4
+        command:
+          max_abs_joint_correction_deg: 0.8012082607815508
+          median_qp_solve_time_us: 680.208
+          max_qp_solve_time_us: 1028.132
+      comparison:
+        iae_improvement_ratio: 0.06198819893625206
+        peak_error_increase_ratio: 5.929807836315099e-16
+        final_abs_error_increase_deg: 0.005074664645585314
+        stability_pass: true
+        performance_pass: true
+        integrity_passed: true
+  common_parameter_pass: false
+  mean_iae_improvement_ratio: 0.03406019694770845
+- candidate:
+    name: aggressive
+    q: 4000.0
+    r: 5.0
+    slew: 6.0
+  directions:
+    forward:
+      C0: *id001
+      C1:
+        candidate: aggressive
+        direction: forward
+        fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz
+        mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_forward.csv
+        pitch:
+          iae_deg_s: 0.26768523073928724
+          peak_abs_error_deg: 2.2648421178258467
+          final_abs_error_deg: 0.018587799841241905
+          settling_time_to_0p5deg_s: 0.16800000000000037
+        stability:
+          initial_torso_height_m: 0.288
+          minimum_torso_height_m: 0.2874228805452559
+          min_contacts: 4
+        command:
+          max_abs_joint_correction_deg: 0.8780169674164358
+          median_qp_solve_time_us: 729.344
+          max_qp_solve_time_us: 1459.785
+      comparison:
+        iae_improvement_ratio: 0.012231165455417276
+        peak_error_increase_ratio: -1.372556808478369e-15
+        final_abs_error_increase_deg: 0.008781823634249297
+        stability_pass: true
+        performance_pass: false
+        integrity_passed: false
+    backward:
+      C0: *id002
+      C1:
+        candidate: aggressive
+        direction: backward
+        fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+        mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_backward.csv
+        pitch:
+          iae_deg_s: 0.2671244702564527
+          peak_abs_error_deg: 2.24672985419724
+          final_abs_error_deg: 0.013083759890531512
+          settling_time_to_0p5deg_s: 0.24000000000000044
+        stability:
+          initial_torso_height_m: 0.288
+          minimum_torso_height_m: 0.287425766642216
+          min_contacts: 4
+        command:
+          max_abs_joint_correction_deg: 0.5669082545658947
+          median_qp_solve_time_us: 677.788
+          max_qp_solve_time_us: 1087.059
+      comparison:
+        iae_improvement_ratio: 0.003646543201649378
+        peak_error_increase_ratio: -3.953205224210066e-16
+        final_abs_error_increase_deg: 0.012142018662634783
+        stability_pass: true
+        performance_pass: false
+        integrity_passed: false
+  common_parameter_pass: false
+  mean_iae_improvement_ratio: 0.007938854328533328
+selection:
+  status: valid_common_candidate_found
+  selected_candidate: balanced
+  common_parameter_pass: true
+  mean_iae_improvement_ratio: 0.11554123426601753
+selected_outputs:
+  forward:
+    c0_csv: /home/zhijian/biped_fddp_project/results/logs/c1_qp2_c0_forward.csv
+    selected_c1_csv: /home/zhijian/biped_fddp_project/results/logs/c1_qp2_balanced_forward.csv
+    pitch_plot: /home/zhijian/biped_fddp_project/results/figures/c1_qp2_forward_pitch_comparison.png
+    correction_plot: /home/zhijian/biped_fddp_project/results/figures/c1_qp2_forward_corrections.png
+  backward:
+    c0_csv: /home/zhijian/biped_fddp_project/results/logs/c1_qp2_c0_backward.csv
+    selected_c1_csv: /home/zhijian/biped_fddp_project/results/logs/c1_qp2_balanced_backward.csv
+    pitch_plot: /home/zhijian/biped_fddp_project/results/figures/c1_qp2_backward_pitch_comparison.png
+    correction_plot: /home/zhijian/biped_fddp_project/results/figures/c1_qp2_backward_corrections.png

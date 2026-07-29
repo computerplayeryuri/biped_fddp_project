@@ -1,0 +1,75 @@
+stage: two_step_fddp_natural_toe_heel_c2
+purpose: MuJoCo natural toe/heel contact-event C2 phase retiming around two-step FDDP
+  position-command replay, not hardware walking.
+inputs:
+  reference_npz: /home/zhijian/biped_fddp_project/transfer/trajectories/fddp_two_step_alternating_ref.npz
+  mujoco_xml: /home/zhijian/biped_fddp_project/model/biped_planar.xml
+  tau_ref_usage: analysis_only_never_sent_to_ctrl
+metrics:
+  scheduled_contact_events: 4
+  natural_observed_contact_events: 4
+  matched_contact_events: 3
+  skipped_contact_events: 1
+  max_abs_phase_offset_ms: 47.375000000001165
+  min_global_contact_count: 2
+  min_torso_height_m: 0.2816944583187392
+  initial_torso_height_m: 0.288
+scheduled_events:
+- &id001
+  time_s: 0.2
+  kind: left_liftoff
+  index: 20
+  source: left_contact_active
+- &id002
+  time_s: 0.9
+  kind: left_touchdown
+  index: 90
+  source: left_contact_active
+- &id003
+  time_s: 1.1
+  kind: right_liftoff
+  index: 110
+  source: right_contact_active
+- &id004
+  time_s: 1.8
+  kind: right_touchdown
+  index: 180
+  source: right_contact_active
+event_records:
+- status: matched
+  observed_event:
+    time_s: 0.3080000000000002
+    kind: left_liftoff
+  reference_event: *id001
+  timing_error_s: 0.10800000000000021
+  old_offset_s: 0.0
+  new_offset_s: -0.02
+- status: matched
+  observed_event:
+    time_s: 0.9460000000000007
+    kind: left_touchdown
+  reference_event: *id002
+  timing_error_s: 0.02600000000000069
+  old_offset_s: -0.02
+  new_offset_s: -0.039500000000000535
+- status: skipped
+  wall_time_s: 1.260000000000001
+  reference_event: *id003
+- status: unmatched_kind_or_window
+  observed_event:
+    time_s: 1.268000000000001
+    kind: right_liftoff
+  reference_event: *id004
+  timing_error_s: -0.5714999999999997
+- status: matched
+  observed_event:
+    time_s: 1.8500000000000014
+    kind: right_touchdown
+  reference_event: *id004
+  timing_error_s: 0.010500000000000842
+  old_offset_s: -0.039500000000000535
+  new_offset_s: -0.047375000000001166
+integrity_passed: true
+outputs:
+  csv: /home/zhijian/biped_fddp_project/results/logs/fddp_two_step_natural_contact_c2.csv
+  figure: /home/zhijian/biped_fddp_project/results/figures/fddp_two_step_natural_contact_c2.png

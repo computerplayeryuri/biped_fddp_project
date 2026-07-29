@@ -1,0 +1,10 @@
+joint_limits_rad:
+  left_hip_pitch_joint: [-0.55, 0.55]
+  left_knee_pitch_joint: [-1.20, 0.10]
+  left_ankle_pitch_joint: [-0.45, 0.45]
+
+  right_hip_pitch_joint: [-0.55, 0.55]
+  right_knee_pitch_joint: [-1.20, 0.10]
+  right_ankle_pitch_joint: [-0.45, 0.45]
+
+safety_margin_rad: 0.10

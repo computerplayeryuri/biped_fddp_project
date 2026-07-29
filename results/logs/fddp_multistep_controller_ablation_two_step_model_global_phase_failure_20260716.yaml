@@ -1,0 +1,113 @@
+schema_version: fddp-multistep-controller-ablation-v1
+stage: fddp_multistep_shared_controller_ablation
+claim_boundary: simulation_only
+run_kind: full
+smoke_steps: null
+reference_duration_s: 10.0
+modes:
+- C0
+- C1
+- phase_only
+- C2_final
+disturbance:
+  time_s: 0.4
+  pitch_rad: 0.03490658503988659
+  pitch_deg: 2.0
+  pitch_rate_rad_s: 0.25
+inputs:
+  reference_npz: /home/zhijian/biped_fddp_project/transfer/trajectories/fddp_multistep_10step_ref.npz
+  nominal_pitch_baseline_csv: /home/zhijian/biped_fddp_project/results/logs/fddp_multistep_nominal_replay.csv
+  fir_yaml: /home/zhijian/biped_fddp_project/results/logs/fddp_two_step_c1_fir_identification.yaml
+  ar_yaml: /home/zhijian/biped_fddp_project/results/logs/fddp_two_step_c1_ar_fit.yaml
+  tau_ref_usage: analysis_only_never_sent_to_ctrl
+mode_metrics:
+  C0:
+    peak_abs_error_deg: 1.9895449454465455
+    iae_deg_s: 3.7587927614046306
+    max_abs_alpha_deg: 0.0
+    max_abs_delta_q_deg: 0.0
+    max_abs_phase_offset_ms: 0.0
+    minimum_contacts: 2
+    minimum_height_fraction: 0.9790236711580992
+    matched_contact_events: 20
+    scheduled_contact_events: 20
+    event_match_ratio: 1.0
+    event_order_valid: true
+    mean_abs_contact_timing_error_s: 0.05669999999986859
+    limiter_active_fraction: 0.0
+    saturation_fraction: 0.0
+  C1:
+    peak_abs_error_deg: 1.8451697603507062
+    iae_deg_s: 3.5335612637554847
+    max_abs_alpha_deg: 4.670425489698201
+    max_abs_delta_q_deg: 1.2610148822185145
+    max_abs_phase_offset_ms: 0.0
+    minimum_contacts: 2
+    minimum_height_fraction: 0.9789059112140357
+    matched_contact_events: 20
+    scheduled_contact_events: 20
+    event_match_ratio: 1.0
+    event_order_valid: true
+    mean_abs_contact_timing_error_s: 0.056199999999999785
+    limiter_active_fraction: 0.0
+    saturation_fraction: 0.0
+  phase_only:
+    peak_abs_error_deg: 2.216051731670157
+    iae_deg_s: 3.777951238030435
+    max_abs_alpha_deg: 0.0
+    max_abs_delta_q_deg: 0.0
+    max_abs_phase_offset_ms: 59.9999809264533
+    minimum_contacts: 2
+    minimum_height_fraction: 0.9790224422810314
+    matched_contact_events: 11
+    scheduled_contact_events: 20
+    event_match_ratio: 0.55
+    event_order_valid: true
+    mean_abs_contact_timing_error_s: 0.05999999999976189
+    limiter_active_fraction: 0.0
+    saturation_fraction: 0.0
+  C2_final:
+    peak_abs_error_deg: 2.0672932102411505
+    iae_deg_s: 3.536162865190974
+    max_abs_alpha_deg: 5.0
+    max_abs_delta_q_deg: 1.3499999999999999
+    max_abs_phase_offset_ms: 59.99969482408823
+    minimum_contacts: 2
+    minimum_height_fraction: 0.9788802234604637
+    matched_contact_events: 11
+    scheduled_contact_events: 20
+    event_match_ratio: 0.55
+    event_order_valid: true
+    mean_abs_contact_timing_error_s: 0.043636363636125816
+    limiter_active_fraction: 0.0
+    saturation_fraction: 0.0
+acceptance:
+  passed: false
+  checks:
+    c1_iae_improvement: false
+    c1_peak_ratio: true
+    c2_iae_ratio: true
+    c2_peak_ratio: false
+    c2_contact_timing_improvement: false
+  failures:
+  - c1_iae_improvement
+  - c2_peak_ratio
+  - c2_contact_timing_improvement
+  thresholds:
+    period_s: 0.02
+    maximum_alpha_deg: 5.0
+    maximum_foothold_offset_m: 0.015
+    c1_minimum_iae_improvement_fraction: 0.1
+    c1_maximum_peak_ratio: 1.05
+    c2_maximum_iae_to_c1_ratio: 1.02
+    c2_maximum_peak_to_c1_ratio: 1.05
+    c2_minimum_contact_timing_improvement_fraction: 0.3
+integrity_passed: false
+failures:
+- c1_iae_improvement
+- c2_peak_ratio
+- c2_contact_timing_improvement
+outputs:
+  csv: /home/zhijian/biped_fddp_project/results/logs/fddp_multistep_controller_ablation.csv
+  yaml: /home/zhijian/biped_fddp_project/results/logs/fddp_multistep_controller_ablation.yaml
+  figure: /home/zhijian/biped_fddp_project/results/figures/fddp_multistep_controller_ablation.png

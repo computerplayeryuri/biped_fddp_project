@@ -1,0 +1,56 @@
+stage: 7C_contact_rank_audit
+purpose: Determine whether two simultaneous 6D rigid foot contacts leave enough local
+  kinematic freedom for a non-static CoM-shift task.
+model:
+  urdf: /home/zhijian/biped_fddp_project/model/biped_v1.urdf
+  nq: 13
+  nv: 12
+support_frames:
+  left: left_foot_contact_fixed
+  right: right_foot_contact_fixed
+  left_world_position_m:
+  - -0.0525
+  - 0.0
+  - 3.469446951953614e-17
+  right_world_position_m:
+  - 0.0525
+  - 0.0
+  - 3.469446951953614e-17
+two_foot_6d_contact:
+  jacobian_shape:
+  - 12
+  - 12
+  rank: 8
+  nullity: 4
+  svd_tolerance: 6.1449167525128354e-15
+  singular_values:
+  - 2.3061870664032935
+  - 1.749142221108165
+  - 1.6309919513835862
+  - 1.4160700263785788
+  - 1.4142135623730954
+  - 1.3866330497843222
+  - 1.2279363804863677
+  - 0.13985589272164287
+  - 1.7332958355013304e-16
+  - 6.461667720936452e-17
+  - 1.6367397650690205e-17
+  - 1.1761510509385584e-18
+two_foot_3d_translation_contact:
+  jacobian_shape:
+  - 6
+  - 12
+  rank: 5
+  nullity: 7
+  svd_tolerance: 3.9890237570663e-15
+  singular_values:
+  - 1.497080492157987
+  - 1.4706682476678987
+  - 1.4142135623730954
+  - 0.29036614816469236
+  - 0.07139611545058037
+  - 1.2626564615982987e-16
+conclusion: The two 6D foot contacts leave local velocity freedom at x0. The previous
+  drift must be investigated as a solver/contact-tuning issue.
+recommended_next_model: Inspect contact reference placement and FDDP convergence before
+  changing the contact dimensionality.

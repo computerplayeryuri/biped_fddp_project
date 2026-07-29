@@ -1,0 +1,350 @@
+stage: 7C_damped_6d_contact_full_continuation
+direction: backward
+purpose: Record every continuation stage before exporting a full-scale FDDP CoM-shift
+  reference.
+contact_dynamics:
+  type: two 6D flat-foot contacts
+  JMinvJt_damping: 1.0e-08
+  baumgarte_gains_Kp_Kd:
+  - 0.0
+  - 0.0
+warmstart_source: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_warmstart.npz
+magnitudes_m:
+- 0.0005
+- 0.001
+- 0.0015
+- 0.002
+- 0.0025
+- 0.003
+- 0.0035
+- 0.004
+- 0.0045
+- 0.005
+- 0.0055
+- 0.006
+stages:
+- stage_index: 1
+  requested_peak_shift_y_m: -0.0005
+  warmstart_scale_ratio: 0.08333333333333333
+  seed_type: scaled_kinematic_warmstart
+  initial_shooting_gaps:
+    max_gap_norm: 0.013810526253072651
+    rms_gap_norm: 0.00844242403514583
+    first_gap_norm: 5.119604284158818e-10
+    last_gap_norm: 3.5960546682886006e-07
+  attempts:
+  - attempt: primary
+    max_iterations: 220
+    return_success: true
+    stop_criterion: 4.1986676577688046e-11
+    threshold: 1.0e-07
+    accepted_convergence: true
+    initial_cost: 1.2521559836720355e-06
+    final_cost: 3.718604385620233e-07
+    iteration_record_count: 2
+  accepted_convergence: true
+  final_cost: 3.718604385620233e-07
+  final_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+- stage_index: 2
+  requested_peak_shift_y_m: -0.001
+  warmstart_scale_ratio: 0.16666666666666666
+  seed_type: previous_fddp_solution
+  initial_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+  attempts:
+  - attempt: primary
+    max_iterations: 220
+    return_success: true
+    stop_criterion: 2.083522527991819e-10
+    threshold: 1.0e-07
+    accepted_convergence: true
+    initial_cost: 0.003606534474141033
+    final_cost: 1.4879434933223048e-06
+    iteration_record_count: 2
+  accepted_convergence: true
+  final_cost: 1.4879434933223048e-06
+  final_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+- stage_index: 3
+  requested_peak_shift_y_m: -0.0015
+  warmstart_scale_ratio: 0.25
+  seed_type: previous_fddp_solution
+  initial_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+  attempts:
+  - attempt: primary
+    max_iterations: 220
+    return_success: true
+    stop_criterion: 7.563460878162088e-10
+    threshold: 1.0e-07
+    accepted_convergence: true
+    initial_cost: 0.003608413256320534
+    final_cost: 3.3497056677672964e-06
+    iteration_record_count: 2
+  accepted_convergence: true
+  final_cost: 3.3497056677672964e-06
+  final_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+- stage_index: 4
+  requested_peak_shift_y_m: -0.002
+  warmstart_scale_ratio: 0.3333333333333333
+  seed_type: previous_fddp_solution
+  initial_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+  attempts:
+  - attempt: primary
+    max_iterations: 220
+    return_success: true
+    stop_criterion: 1.7135427300244817e-09
+    threshold: 1.0e-07
+    accepted_convergence: true
+    initial_cost: 0.0036110541393143385
+    final_cost: 5.95982865744328e-06
+    iteration_record_count: 2
+  accepted_convergence: true
+  final_cost: 5.95982865744328e-06
+  final_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+- stage_index: 5
+  requested_peak_shift_y_m: -0.0025
+  warmstart_scale_ratio: 0.4166666666666667
+  seed_type: previous_fddp_solution
+  initial_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+  attempts:
+  - attempt: primary
+    max_iterations: 220
+    return_success: true
+    stop_criterion: 4.201750320047353e-09
+    threshold: 1.0e-07
+    accepted_convergence: true
+    initial_cost: 0.0036144067367257574
+    final_cost: 9.321600669346716e-06
+    iteration_record_count: 2
+  accepted_convergence: true
+  final_cost: 9.321600669346716e-06
+  final_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+- stage_index: 6
+  requested_peak_shift_y_m: -0.003
+  warmstart_scale_ratio: 0.5
+  seed_type: previous_fddp_solution
+  initial_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+  attempts:
+  - attempt: primary
+    max_iterations: 220
+    return_success: true
+    stop_criterion: 5.476868966642201e-09
+    threshold: 1.0e-07
+    accepted_convergence: true
+    initial_cost: 0.0036185456153409543
+    final_cost: 1.3440219882567085e-05
+    iteration_record_count: 2
+  accepted_convergence: true
+  final_cost: 1.3440219882567085e-05
+  final_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+- stage_index: 7
+  requested_peak_shift_y_m: -0.0035
+  warmstart_scale_ratio: 0.5833333333333334
+  seed_type: previous_fddp_solution
+  initial_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+  attempts:
+  - attempt: primary
+    max_iterations: 220
+    return_success: true
+    stop_criterion: 5.992795246781859e-09
+    threshold: 1.0e-07
+    accepted_convergence: true
+    initial_cost: 0.003623453439456665
+    final_cost: 1.8319615340325113e-05
+    iteration_record_count: 2
+  accepted_convergence: true
+  final_cost: 1.8319615340325113e-05
+  final_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+- stage_index: 8
+  requested_peak_shift_y_m: -0.004
+  warmstart_scale_ratio: 0.6666666666666666
+  seed_type: previous_fddp_solution
+  initial_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+  attempts:
+  - attempt: primary
+    max_iterations: 220
+    return_success: true
+    stop_criterion: 1.2531371051809808e-08
+    threshold: 1.0e-07
+    accepted_convergence: true
+    initial_cost: 0.0036290989123533746
+    final_cost: 2.3969968947155493e-05
+    iteration_record_count: 2
+  accepted_convergence: true
+  final_cost: 2.3969968947155493e-05
+  final_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+- stage_index: 9
+  requested_peak_shift_y_m: -0.0045
+  warmstart_scale_ratio: 0.7499999999999999
+  seed_type: previous_fddp_solution
+  initial_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+  attempts:
+  - attempt: primary
+    max_iterations: 220
+    return_success: true
+    stop_criterion: 2.209109521526859e-08
+    threshold: 1.0e-07
+    accepted_convergence: true
+    initial_cost: 0.0036355352952935137
+    final_cost: 3.0397459614613096e-05
+    iteration_record_count: 2
+  accepted_convergence: true
+  final_cost: 3.0397459614613096e-05
+  final_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+- stage_index: 10
+  requested_peak_shift_y_m: -0.005
+  warmstart_scale_ratio: 0.8333333333333334
+  seed_type: previous_fddp_solution
+  initial_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+  attempts:
+  - attempt: primary
+    max_iterations: 220
+    return_success: true
+    stop_criterion: 6.125315190123541e-08
+    threshold: 1.0e-07
+    accepted_convergence: true
+    initial_cost: 0.0036427665103105716
+    final_cost: 3.7622924840250295e-05
+    iteration_record_count: 2
+  accepted_convergence: true
+  final_cost: 3.7622924840250295e-05
+  final_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+- stage_index: 11
+  requested_peak_shift_y_m: -0.0055
+  warmstart_scale_ratio: 0.9166666666666666
+  seed_type: previous_fddp_solution
+  initial_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+  attempts:
+  - attempt: primary
+    max_iterations: 220
+    return_success: true
+    stop_criterion: 3.869079542497076e-08
+    threshold: 1.0e-07
+    accepted_convergence: true
+    initial_cost: 0.003650660691924591
+    final_cost: 4.56163787145328e-05
+    iteration_record_count: 2
+  accepted_convergence: true
+  final_cost: 4.56163787145328e-05
+  final_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+- stage_index: 12
+  requested_peak_shift_y_m: -0.006
+  warmstart_scale_ratio: 1.0
+  seed_type: previous_fddp_solution
+  initial_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+  attempts:
+  - attempt: primary
+    max_iterations: 220
+    return_success: true
+    stop_criterion: 7.432901904806861e-08
+    threshold: 1.0e-07
+    accepted_convergence: true
+    initial_cost: 0.0036594892696791277
+    final_cost: 5.443279942022281e-05
+    iteration_record_count: 2
+  accepted_convergence: true
+  final_cost: 5.443279942022281e-05
+  final_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+status: passed
+final_trajectory: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+final_summary: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref_summary.yaml
+final_com_motion:
+  requested_peak_shift_y_m: -0.006
+  achieved_peak_shift_y_m: -0.006038248945653808
+  peak_abs_y_tracking_error_m: 4.740275097953484e-05
+  final_return_error_y_m: 1.8798796342556058e-06
+final_shooting_gaps:
+  max_gap_norm: 0.0
+  rms_gap_norm: 0.0
+  first_gap_norm: 0.0
+  last_gap_norm: 0.0

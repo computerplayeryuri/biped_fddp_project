@@ -1,0 +1,12 @@
+stage: two_step_fddp_c2_same_disturbance
+reference_npz: /home/zhijian/biped_fddp_project/transfer/trajectories/fddp_two_step_alternating_ref.npz
+tau_ref_usage: analysis_only
+metrics:
+  peak_abs_error_deg: 2.709050108072737
+  iae_deg_s: 0.483403608837115
+  max_abs_phase_offset_ms: 49.00000000000104
+  matched_contact_events: 3
+  min_contacts: 2
+outputs:
+  csv: /home/zhijian/biped_fddp_project/results/logs/fddp_two_step_c2_pitch_disturbance.csv
+  figure: /home/zhijian/biped_fddp_project/results/figures/fddp_two_step_c0_c1_c2_pitch.png

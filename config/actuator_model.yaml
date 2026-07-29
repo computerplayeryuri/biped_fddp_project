@@ -1,0 +1,8 @@
+# Initial simulation values only. Replace after actual ST3215 bench calibration.
+physics_timestep_s: 0.002
+control_timestep_s: 0.020
+servo_delay_s: 0.020
+servo_time_constant_s: 0.040
+safe_speed_rad_s: 2.0
+max_reference_correction_rad: 0.05236      # 3 deg
+max_reference_change_per_cycle_rad: 0.00873 # 0.5 deg

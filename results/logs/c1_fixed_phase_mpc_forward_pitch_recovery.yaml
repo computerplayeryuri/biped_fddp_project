@@ -1,0 +1,141 @@
+stage: C1A_v2_fixed_time_phase_fddp_mpc_pitch_recovery
+purpose: Validate horizon-level root-pitch recovery using fixed-time-phase nonlinear
+  FDDP-MPC.
+scope_note: One-shot planner validation only; not yet repeated online MuJoCo MPC or
+  C2 event phase synchronisation.
+inputs:
+  urdf: /home/zhijian/biped_fddp_project/model/biped_v1.urdf
+  c0_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz
+  direction: forward
+  phase_index: 40
+  phase_time_s: 0.4
+  prediction_horizon_nodes: 30
+  prediction_horizon_s: 0.3
+contact_dynamics:
+  type: two 6D flat-foot contacts
+  JMinvJt_damping: 1.0e-08
+  baumgarte_gains_Kp_Kd:
+  - 0.0
+  - 0.0
+injected_disturbance:
+  root_pitch_deg: 2.0
+  root_pitch_rate_rad_s: 0.25
+state_activation_weights:
+  running:
+  - 5.0
+  - 5.0
+  - 5.0
+  - 2500.0
+  - 20.0
+  - 20.0
+  - 10.0
+  - 10.0
+  - 10.0
+  - 10.0
+  - 10.0
+  - 10.0
+  - 2.0
+  - 2.0
+  - 2.0
+  - 1200.0
+  - 10.0
+  - 10.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  terminal:
+  - 30.0
+  - 30.0
+  - 30.0
+  - 30000.0
+  - 100.0
+  - 100.0
+  - 100.0
+  - 100.0
+  - 100.0
+  - 100.0
+  - 100.0
+  - 100.0
+  - 20.0
+  - 20.0
+  - 20.0
+  - 8000.0
+  - 50.0
+  - 50.0
+  - 5.0
+  - 5.0
+  - 5.0
+  - 5.0
+  - 5.0
+  - 5.0
+  root_pitch_tangent_index: 3
+  root_pitch_rate_tangent_index: 15
+solver:
+  name: SolverFDDP
+  max_iterations: 250
+  return_success: true
+  stop_criterion: 2.4639351212979502e-08
+  threshold: 1.0e-07
+  accepted_convergence: true
+  wall_clock_solve_time_ms: 186.02304900014133
+  initial_cost: 0.3945625637439205
+  final_cost: 7.7961978928359095
+  initial_shooting_gaps:
+    max_gap_norm: 0.26456666678283397
+    rms_gap_norm: 0.048303043786970305
+    first_gap_norm: 0.26456666678283397
+    last_gap_norm: 0.0
+  final_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+recovery_metrics:
+  nominal_current_root_pitch_deg: -1.7661056549816874
+  disturbed_current_root_pitch_deg: 0.2338943450183119
+  initial_pitch_error_deg: 1.9999999999999993
+  nominal_terminal_root_pitch_deg: -2.366846462785408
+  mpc_terminal_root_pitch_deg: -2.068282597701406
+  terminal_pitch_error_deg: 0.29856386508400184
+  pitch_error_reduction_ratio: 0.850718067457999
+  nominal_terminal_pitch_rate_rad_s: -0.00120874518931041
+  mpc_terminal_pitch_rate_rad_s: -0.0012418114373854705
+  terminal_pitch_rate_error_rad_s: -3.306624807506049e-05
+position_command_candidate:
+  definition: q_cmd_next = q_plan[1], the next desired position command for the actuator
+    layer.
+  q_nominal_next_rad:
+  - -0.008474259044826996
+  - 0.008392643895799756
+  - 0.03266743870405944
+  - -0.00847522010907501
+  - 0.008394565670237062
+  - 0.03266647799389549
+  q_cmd_next_rad:
+  - 0.0009031253152342513
+  - 0.010548646844466601
+  - 0.024716425459066306
+  - 0.0010097687663129656
+  - 0.010335360571262348
+  - 0.024823068397423514
+  delta_q_cmd_rad:
+  - 0.009377384360061247
+  - 0.0021560029486668453
+  - -0.007951013244993137
+  - 0.009484988875387975
+  - 0.0019407949010252865
+  - -0.007843409596471979
+  max_abs_delta_q_cmd_deg: 0.5434498312882681
+joint_limits:
+  minimum_lower_margin_rad: 0.39663864036219687
+  minimum_upper_margin_rad: 0.04093850345854246
+  minimum_margin_rad: 0.04093850345854246
+  within_position_limits: true
+  has_safety_margin: true
+integrity_passed: true
+failures: []
+next_step: 'C1-B: implement repeated MuJoCo closed-loop MPC with a MuJoCo-to-Pinocchio
+  state mapper.'

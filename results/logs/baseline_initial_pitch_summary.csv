@@ -1,0 +1,4 @@
+initial_pitch_deg,csv_path,fall_detected,recovered_to_within_1deg,final_pitch_deg,max_abs_pitch_deg,final_left_full_support,final_right_full_support
+0.0,/home/zhijian/biped_fddp_project/results/logs/baseline_initial_pitch_zero0deg.csv,False,True,0.0,0.0,1,1
+5.0,/home/zhijian/biped_fddp_project/results/logs/baseline_initial_pitch_plus5deg.csv,False,True,8.193389127572206e-17,5.165207559051404,1,1
+-5.0,/home/zhijian/biped_fddp_project/results/logs/baseline_initial_pitch_minus5deg.csv,False,True,-5.516186222273788e-17,5.165207559051404,1,1

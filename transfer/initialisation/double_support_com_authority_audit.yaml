@@ -1,0 +1,85 @@
+stage: 7C_contact_manifold_com_authority_audit
+purpose: Determine whether the remaining local degrees of freedom under two 6D support
+  contacts can generate forward CoM_y motion.
+coordinate_convention:
+  forward_axis: +Y
+  pitch_axis: +X
+model:
+  urdf: /home/zhijian/biped_fddp_project/model/biped_v1.urdf
+  nq: 13
+  nv: 12
+two_foot_6d_contact:
+  jacobian_shape:
+  - 12
+  - 12
+  rank: 8
+  nullity: 4
+  svd_tolerance: 6.1449167525128354e-15
+  singular_values:
+  - 2.3061870664032935
+  - 1.7491422211081638
+  - 1.6309919513835862
+  - 1.4160700263785786
+  - 1.4142135623730951
+  - 1.3866330497843224
+  - 1.2279363804863677
+  - 0.1398558927216428
+  - 1.7332958355013297e-16
+  - 6.46166772093645e-17
+  - 1.6367397650690212e-17
+  - 1.1761510509385582e-18
+com_y_authority:
+  authority_norm: 0.079470549574958
+  authority_threshold: 1.0e-08
+  available: true
+  com_y_jacobian_world_row:
+  - 0.0
+  - 1.0
+  - 0.0
+  - 0.11927277953434892
+  - 0.0
+  - 0.0
+  - 0.047818338603046864
+  - 0.02087573057391971
+  - 0.003801858771677685
+  - 0.047818338603046864
+  - 0.02087573057391971
+  - 0.003801858771677685
+small_tangent_integration_test:
+  performed: true
+  requested_com_y_rate_mps: 0.01
+  test_dt_s: 0.01
+  least_norm_tangent_velocity:
+  - 0.0
+  - 0.01864454611919006
+  - 0.0
+  - -0.0687353360485557
+  - 0.0
+  - -9.257246060711154e-18
+  - -0.017873492217669318
+  - 0.01770309656239913
+  - 0.06890573170382583
+  - -0.0178734922176692
+  - 0.0177030965623991
+  - 0.06890573170382577
+  tangent_velocity_norm: 0.12583277772060486
+  linearised_contact_velocity_residual: 7.390573850140499e-17
+  predicted_com_y_rate_mps: 0.010000000000000004
+  expected_com_y_delta_m: 0.0001
+  integrated_com_y_delta_m: 9.999999429461113e-05
+  left_foot_translation_drift_m: 7.798717147204056e-09
+  right_foot_translation_drift_m: 7.798717147204167e-09
+  joint_velocity_rad_per_s:
+  - -0.017873492217669318
+  - 0.01770309656239913
+  - 0.06890573170382583
+  - -0.0178734922176692
+  - 0.0177030965623991
+  - 0.06890573170382577
+conclusion: CoM_y has non-zero first-order authority inside the two-foot 6D contact
+  nullspace at x0. The desired double-support shift is kinematically available; the
+  FDDP failures are therefore most likely due to poor initialisation and/or numerical
+  contact-dynamics conditioning.
+recommended_next_step: Build a contact-consistent kinematic warm-start trajectory,
+  then use it as SolverFDDP's initial xs/us guess instead of repeating x0 at every
+  node.

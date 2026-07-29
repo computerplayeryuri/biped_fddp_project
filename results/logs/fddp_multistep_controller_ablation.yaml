@@ -1,0 +1,298 @@
+schema_version: fddp-multistep-controller-ablation-v1
+stage: fddp_multistep_shared_controller_ablation
+claim_boundary: simulation_only
+run_kind: full
+smoke_steps: null
+reference_duration_s: 10.0
+modes:
+- C0
+- C1
+- phase_only
+- C2_final
+disturbance:
+  time_s: 0.4
+  pitch_rad: 0.03490658503988659
+  pitch_deg: 2.0
+  pitch_rate_rad_s: 0.25
+inputs:
+  reference_npz: /home/zhijian/biped_fddp_project/transfer/trajectories/fddp_multistep_10step_ref.npz
+  nominal_pitch_baseline_csv: /home/zhijian/biped_fddp_project/results/logs/fddp_multistep_nominal_replay.csv
+  fir_yaml: /home/zhijian/biped_fddp_project/results/logs/fddp_multistep_c1_fir_identification.yaml
+  ar_yaml: /home/zhijian/biped_fddp_project/results/logs/fddp_multistep_c1_ar_fit.yaml
+  tau_ref_usage: analysis_only_never_sent_to_ctrl
+mode_metrics:
+  C0:
+    push_force_n: 0.0
+    push_start_s: 0.8
+    push_duration_s: 0.12
+    seed: 0
+    initial_joint_noise_std_rad: 0.0
+    robustness_configuration:
+      friction_mu: 0.8
+      slope_deg: 0.0
+      step_height_m: 0.0
+      command_delay_s: 0.02
+      sensor_delay_s: 0.0
+      actuator_gain: 1.0
+      actuator_time_constant_s: 0.03
+      initial_joint_noise_std_rad: 0.0
+      initial_pitch_noise_std_rad: 0.0
+    controller_configuration:
+      fir_qp_candidate:
+        name: r_low
+        q: 1500.0
+        r: 10.0
+        slew: 25.0
+      recovery_fir_qp_candidate:
+        name: recovery_fast_30seed
+        q: 2500.0
+        r: 5.0
+        slew: 10.0
+      recovery_activation_pitch_deg: 3.0
+      phase_sync:
+        max_offset_s: 0.1
+        match_window_s: 0.22
+        max_step_s: 0.04
+        correction_gain: 0.75
+    peak_abs_error_deg: 1.9895449454465455
+    iae_deg_s: 3.7587927614046306
+    max_abs_alpha_deg: 0.0
+    max_abs_delta_q_deg: 0.0
+    max_abs_phase_offset_ms: 0.0
+    maximum_unintended_flight_s: 0.0
+    minimum_contacts: 2
+    minimum_height_fraction: 0.9790236711580992
+    matched_contact_events: 20
+    scheduled_contact_events: 20
+    event_match_ratio: 1.0
+    event_order_valid: true
+    phase_aligned_matched_contact_events: 0
+    phase_aligned_skipped_contact_events: 0
+    phase_aligned_event_match_ratio: 0.0
+    phase_aligned_event_order_valid: true
+    raw_matched_contact_events: 20
+    raw_scheduled_contact_events: 20
+    raw_event_match_ratio: 1.0
+    raw_event_order_valid: true
+    mean_abs_contact_timing_error_s: 0.05669999999986859
+    phase_aligned_mean_abs_contact_timing_error_s: .inf
+    raw_mean_abs_contact_timing_error_s: 0.05669999999986859
+    limiter_active_fraction: 0.0
+    recovery_active_fraction: 0.0
+    saturation_fraction: 0.0
+  C1:
+    push_force_n: 0.0
+    push_start_s: 0.8
+    push_duration_s: 0.12
+    seed: 0
+    initial_joint_noise_std_rad: 0.0
+    robustness_configuration:
+      friction_mu: 0.8
+      slope_deg: 0.0
+      step_height_m: 0.0
+      command_delay_s: 0.02
+      sensor_delay_s: 0.0
+      actuator_gain: 1.0
+      actuator_time_constant_s: 0.03
+      initial_joint_noise_std_rad: 0.0
+      initial_pitch_noise_std_rad: 0.0
+    controller_configuration:
+      fir_qp_candidate:
+        name: r_low
+        q: 1500.0
+        r: 10.0
+        slew: 25.0
+      recovery_fir_qp_candidate:
+        name: recovery_fast_30seed
+        q: 2500.0
+        r: 5.0
+        slew: 10.0
+      recovery_activation_pitch_deg: 3.0
+      phase_sync:
+        max_offset_s: 0.1
+        match_window_s: 0.22
+        max_step_s: 0.04
+        correction_gain: 0.75
+    peak_abs_error_deg: 1.8224741854667303
+    iae_deg_s: 3.3533849070722095
+    max_abs_alpha_deg: 5.0
+    max_abs_delta_q_deg: 1.3500000000000003
+    max_abs_phase_offset_ms: 0.0
+    maximum_unintended_flight_s: 0.0
+    minimum_contacts: 2
+    minimum_height_fraction: 0.9790595797129553
+    matched_contact_events: 20
+    scheduled_contact_events: 20
+    event_match_ratio: 1.0
+    event_order_valid: true
+    phase_aligned_matched_contact_events: 0
+    phase_aligned_skipped_contact_events: 0
+    phase_aligned_event_match_ratio: 0.0
+    phase_aligned_event_order_valid: true
+    raw_matched_contact_events: 20
+    raw_scheduled_contact_events: 20
+    raw_event_match_ratio: 1.0
+    raw_event_order_valid: true
+    mean_abs_contact_timing_error_s: 0.05659999999999985
+    phase_aligned_mean_abs_contact_timing_error_s: .inf
+    raw_mean_abs_contact_timing_error_s: 0.05659999999999985
+    limiter_active_fraction: 0.0
+    recovery_active_fraction: 0.0
+    saturation_fraction: 0.0
+  phase_only:
+    push_force_n: 0.0
+    push_start_s: 0.8
+    push_duration_s: 0.12
+    seed: 0
+    initial_joint_noise_std_rad: 0.0
+    robustness_configuration:
+      friction_mu: 0.8
+      slope_deg: 0.0
+      step_height_m: 0.0
+      command_delay_s: 0.02
+      sensor_delay_s: 0.0
+      actuator_gain: 1.0
+      actuator_time_constant_s: 0.03
+      initial_joint_noise_std_rad: 0.0
+      initial_pitch_noise_std_rad: 0.0
+    controller_configuration:
+      fir_qp_candidate:
+        name: r_low
+        q: 1500.0
+        r: 10.0
+        slew: 25.0
+      recovery_fir_qp_candidate:
+        name: recovery_fast_30seed
+        q: 2500.0
+        r: 5.0
+        slew: 10.0
+      recovery_activation_pitch_deg: 3.0
+      phase_sync:
+        max_offset_s: 0.1
+        match_window_s: 0.22
+        max_step_s: 0.04
+        correction_gain: 0.75
+    peak_abs_error_deg: 1.9895449454465455
+    iae_deg_s: 3.5377938168938075
+    max_abs_alpha_deg: 0.0
+    max_abs_delta_q_deg: 0.0
+    max_abs_phase_offset_ms: 80.0
+    maximum_unintended_flight_s: 0.0
+    minimum_contacts: 2
+    minimum_height_fraction: 0.9785609955769994
+    matched_contact_events: 20
+    scheduled_contact_events: 20
+    event_match_ratio: 1.0
+    event_order_valid: true
+    phase_aligned_matched_contact_events: 20
+    phase_aligned_skipped_contact_events: 0
+    phase_aligned_event_match_ratio: 1.0
+    phase_aligned_event_order_valid: true
+    raw_matched_contact_events: 20
+    raw_scheduled_contact_events: 20
+    raw_event_match_ratio: 1.0
+    raw_event_order_valid: true
+    mean_abs_contact_timing_error_s: 0.0366999999999673
+    phase_aligned_mean_abs_contact_timing_error_s: 0.03799999999996751
+    raw_mean_abs_contact_timing_error_s: 0.0366999999999673
+    limiter_active_fraction: 0.0
+    recovery_active_fraction: 0.0
+    saturation_fraction: 0.0
+  C2_final:
+    push_force_n: 0.0
+    push_start_s: 0.8
+    push_duration_s: 0.12
+    seed: 0
+    initial_joint_noise_std_rad: 0.0
+    robustness_configuration:
+      friction_mu: 0.8
+      slope_deg: 0.0
+      step_height_m: 0.0
+      command_delay_s: 0.02
+      sensor_delay_s: 0.0
+      actuator_gain: 1.0
+      actuator_time_constant_s: 0.03
+      initial_joint_noise_std_rad: 0.0
+      initial_pitch_noise_std_rad: 0.0
+    controller_configuration:
+      fir_qp_candidate:
+        name: r_low
+        q: 1500.0
+        r: 10.0
+        slew: 25.0
+      recovery_fir_qp_candidate:
+        name: recovery_fast_30seed
+        q: 2500.0
+        r: 5.0
+        slew: 10.0
+      recovery_activation_pitch_deg: 3.0
+      phase_sync:
+        max_offset_s: 0.1
+        match_window_s: 0.22
+        max_step_s: 0.04
+        correction_gain: 0.75
+    peak_abs_error_deg: 1.8224741854667303
+    iae_deg_s: 3.389675797092189
+    max_abs_alpha_deg: 5.0
+    max_abs_delta_q_deg: 1.3500000000000003
+    max_abs_phase_offset_ms: 80.0
+    maximum_unintended_flight_s: 0.0
+    minimum_contacts: 2
+    minimum_height_fraction: 0.9788976991530651
+    matched_contact_events: 20
+    scheduled_contact_events: 20
+    event_match_ratio: 1.0
+    event_order_valid: true
+    phase_aligned_matched_contact_events: 20
+    phase_aligned_skipped_contact_events: 0
+    phase_aligned_event_match_ratio: 1.0
+    phase_aligned_event_order_valid: true
+    raw_matched_contact_events: 20
+    raw_scheduled_contact_events: 20
+    raw_event_match_ratio: 1.0
+    raw_event_order_valid: true
+    mean_abs_contact_timing_error_s: 0.0342999999999991
+    phase_aligned_mean_abs_contact_timing_error_s: 0.0349999999999993
+    raw_mean_abs_contact_timing_error_s: 0.0342999999999991
+    limiter_active_fraction: 0.0
+    recovery_active_fraction: 0.0
+    saturation_fraction: 0.0
+acceptance:
+  passed: true
+  checks:
+    c1_iae_improvement: true
+    c1_peak_ratio: true
+    c2_iae_ratio: true
+    c2_peak_ratio: true
+    c2_contact_timing_improvement: true
+  failures: []
+  thresholds:
+    period_s: 0.02
+    maximum_alpha_deg: 5.0
+    maximum_foothold_offset_m: 0.015
+    fir_qp_candidate:
+      name: r_low
+      q: 1500.0
+      r: 10.0
+      slew: 25.0
+    recovery_fir_qp_candidate:
+      name: recovery_fast_30seed
+      q: 2500.0
+      r: 5.0
+      slew: 10.0
+    recovery_activation_pitch_deg: 3.0
+    phase_sync_max_offset_s: 0.1
+    phase_sync_match_window_s: 0.22
+    phase_sync_max_step_s: 0.04
+    phase_sync_correction_gain: 0.75
+    c1_minimum_iae_improvement_fraction: 0.1
+    c1_maximum_peak_ratio: 1.05
+    c2_maximum_iae_to_c1_ratio: 1.02
+    c2_maximum_peak_to_c1_ratio: 1.05
+    c2_minimum_contact_timing_improvement_fraction: 0.3
+integrity_passed: true
+failures: []
+outputs:
+  csv: /home/zhijian/biped_fddp_project/results/logs/fddp_multistep_controller_ablation.csv
+  yaml: /home/zhijian/biped_fddp_project/results/logs/fddp_multistep_controller_ablation.yaml
+  figure: /home/zhijian/biped_fddp_project/results/figures/fddp_multistep_controller_ablation.png

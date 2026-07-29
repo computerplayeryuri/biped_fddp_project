@@ -1,0 +1,52 @@
+stage: fddp_multistep_bounded_push_recovery
+claim_boundary: simulation_only_position_command
+seeds:
+- 0
+- 1
+- 2
+push:
+  forces_n:
+  - -4.0
+  - 4.0
+  start_s: 0.8
+  duration_s: 0.12
+limits:
+  max_alpha_rad: 0.08726646259971647
+  max_foothold_y_m: 0.015
+  maximum_unintended_flight_s: 0.02
+  minimum_height_fraction: 0.65
+  maximum_pitch_error_deg: 15.0
+  minimum_event_match_ratio: 0.9
+  maximum_saturation_fraction: 0.0
+  minimum_success_rate: 0.9
+candidate_results:
+- candidate: fir_fast
+  stage: fir_qp_retune
+  status: executed
+  forward_success_count: 3
+  forward_trial_count: 3
+  forward_success_rate: 1.0
+  backward_success_count: 3
+  backward_trial_count: 3
+  backward_success_rate: 1.0
+  accepted: true
+- candidate: fir_fast_phase_1p0
+  stage: phase_gain_scheduling
+  status: not_run_earlier_stage_accepted
+  forward_success_rate: null
+  backward_success_rate: null
+  accepted: false
+- candidate: bounded_foothold_requires_replan
+  stage: bounded_foothold
+  status: not_run_earlier_stage_accepted
+  forward_success_rate: null
+  backward_success_rate: null
+  accepted: false
+selected_candidate: fir_fast
+accepted: true
+blocked_reason: null
+foothold_claim: not_executed_without_reference_and_contact_feasibility_regeneration
+outputs:
+  trials_csv: /home/zhijian/biped_fddp_project/results/logs/fddp_multistep_recovery_sweep.csv
+  selection_yaml: /home/zhijian/biped_fddp_project/results/logs/fddp_multistep_recovery_selection.yaml
+  figure: /home/zhijian/biped_fddp_project/results/figures/fddp_multistep_recovery_sweep.png

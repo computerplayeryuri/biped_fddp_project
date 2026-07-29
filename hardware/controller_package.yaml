@@ -1,0 +1,57 @@
+controller_package: biped_fddp_mpc_controller_runtime
+scope: PC-side or ROS2-side joint-position command generation for six ST3215 servos
+status: simulation_verified_runtime_interface_pending_hardware_bench_test
+update_rate_hz: 50
+command_type: joint_position_rad
+never_send_as_motor_torque: true
+runtime_module: hardware.controller_runtime
+factory: make_controller
+controllers:
+  C0:
+    class: C0Controller
+    role: actuator-aware FDDP reference playback baseline
+    online_correction: none
+    contact_phase_sync: false
+  C1:
+    class: C1FIRQPMPCController
+    role: fixed-phase FDDP-guided FIR-QP-MPC pitch correction
+    online_correction: scalar alpha mapped by G to six joint-position corrections
+    contact_phase_sync: false
+  C2:
+    class: C2ContactPhaseFIRQPMPCController
+    role: C1 plus toe/heel contact-event phase synchronisation
+    online_correction: scalar alpha mapped by G to six joint-position corrections
+    contact_phase_sync: true
+joint_order:
+  - left_hip_pitch_joint
+  - left_knee_pitch_joint
+  - left_ankle_pitch_joint
+  - right_hip_pitch_joint
+  - right_knee_pitch_joint
+  - right_ankle_pitch_joint
+required_inputs:
+  common:
+    - time_s
+    - root_pitch_rad
+    - root_pitch_rate_rad_s
+  C2_extra:
+    - left_toe_contact
+    - left_heel_contact
+    - right_toe_contact
+    - right_heel_contact
+outputs:
+  - q_cmd_rad[6]
+  - delta_q_rad[6]
+  - alpha_rad
+  - reference_time_s
+  - safety.joint_limit_violation
+  - safety.rate_limit_active
+safety_sources:
+  joint_limits: config/robot_limits.yaml
+  actuator_limits: config/actuator_model.yaml
+hardware_notes:
+  - q_cmd_rad is the hardware-facing command concept: q_cmd = q_ref + delta_q.
+  - tau_ref from FDDP is not a motor command for ST3215 servos.
+  - Bench-test each servo ID, zero direction, joint limits, and communication timeout before full-body tests.
+  - Start hardware validation with C0 low-amplitude reference playback before enabling C1/C2 corrections.
+  - C2 contact inputs may come from toe/heel switches; use debounced boolean contact states.

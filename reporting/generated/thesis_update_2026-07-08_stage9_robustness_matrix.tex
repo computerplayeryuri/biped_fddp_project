@@ -1,0 +1,92 @@
+% Generated Stage 9 update from results/logs/stage9_scripted_robustness_matrix_summary.yaml.
+% This block is Overleaf-ready but should be placed in the Results/Evaluation chapter.
+
+\section{Stage 9 Software Robustness Matrix}
+\label{sec:stage9_software_robustness_matrix_20260708}
+
+To strengthen the stability and robustness evidence, a Stage 9 software-only
+robustness matrix was added around the current scripted C2 alternating-step
+preview. The test matrix extends the previous short Stage 8 contact-transition
+preview to longer durations and additional stress conditions: long-duration
+operation, friction variation, slope-equivalent loading, small raised toe-step
+contacts, and external push pulses.
+
+The matrix should be interpreted carefully. It validates the current software
+stack and MuJoCo contact-event plumbing under scripted periodic stepping. It is
+not a newly solved full FDDP walking trajectory, and it is not hardware walking
+validation. It is nevertheless useful because it turns the robustness claim
+from an untested statement into a measured simulation envelope.
+
+\begin{table}[htbp]
+\centering
+\caption{Stage 9 scripted C2 software robustness matrix.}
+\label{tab:stage9_robustness_matrix_20260708}
+\scriptsize
+\begin{tabular}{@{}p{0.16\textwidth}p{0.19\textwidth}p{0.09\textwidth}p{0.23\textwidth}p{0.24\textwidth}@{}}
+\toprule
+Stress family & Tested range & Pass/total & Strongest passing case & First failing boundary \\
+\midrule
+Long duration & \SI{10}{\second}, \SI{30}{\second}, \SI{60}{\second} & 3/3 & \SI{60}{\second}, 119/120 events matched & none tested \\
+Friction & $\mu=0.50$ to $\mu=1.10$ & 4/4 & $\mu=0.50$, peak pitch \SI{0.82}{\degree} & none tested \\
+Slope-equivalent load & $\pm\SI{3}{\degree}$, $\pm\SI{6}{\degree}$ & 4/4 & $-\SI{6}{\degree}$, peak pitch \SI{1.55}{\degree} & none tested \\
+Small toe step & \SI{2}{\milli\metre}, \SI{4}{\milli\metre}, \SI{6}{\milli\metre} & 1/3 & \SI{2}{\milli\metre}, 17/20 events matched & \SI{4}{\milli\metre} event-match failure \\
+Push pulse & $\pm\SI{2}{\newton}$, $\pm\SI{4}{\newton}$, $\pm\SI{6}{\newton}$ & 2/6 & $\pm\SI{2}{\newton}$ no fall & $\pm\SI{4}{\newton}$ contact loss; $\pm\SI{6}{\newton}$ fall \\
+\midrule
+Total & 20 scenarios & 14/20 & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The aggregate pass/fail result and peak-pitch envelope are visualised in
+Figures~\ref{fig:stage9_robustness_pass_fail} and
+\ref{fig:stage9_robustness_peak_pitch}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{stage9_scripted_robustness_matrix_pass_fail.png}
+\caption{Stage 9 software robustness matrix pass/fail outcome across duration,
+friction, slope-equivalent loading, small-step, and push-pulse scenarios.}
+\label{fig:stage9_robustness_pass_fail}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{stage9_scripted_robustness_matrix_pitch.png}
+\caption{Peak absolute torso pitch across the Stage 9 scripted robustness
+matrix.}
+\label{fig:stage9_robustness_peak_pitch}
+\end{figure}
+
+The most stable part of the envelope is long-duration scripted stepping on
+flat terrain. The \SI{60}{\second} case matched 119/120 scheduled contact
+events, kept peak pitch below \SI{0.81}{\degree}, and did not trigger a fall.
+Friction variation from $\mu=0.50$ to $\mu=1.10$ and slope-equivalent
+loading up to $\pm\SI{6}{\degree}$ also passed the current acceptance criteria.
+
+The matrix also identifies the current robustness boundary. A
+\SI{2}{\milli\metre} raised toe step passed, but \SI{4}{\milli\metre} and
+\SI{6}{\milli\metre} steps failed the event-matching/contact robustness
+criteria. Push pulses of $\pm\SI{2}{\newton}$ passed, while $\pm\SI{4}{\newton}$
+caused transient support contact loss without a fall, and $\pm\SI{6}{\newton}$
+crossed the \SI{30}{\degree} pitch fall threshold after approximately
+\SI{2.2}{\second}. These failures should be reported as measured limits of the
+current scripted controller rather than hidden or relaxed.
+
+The resulting conclusion is therefore:
+
+\begin{quote}
+The current software stack is stable under the tested long-duration, friction,
+slope-equivalent, low-step-height, and small-push simulation conditions. The
+current scripted controller is not robust to larger toe-step perturbations or
+large push pulses. Full FDDP walking-gait validation and hardware walking
+experiments remain required before claiming general robust biped locomotion.
+\end{quote}
+
+The supporting files are:
+
+\begin{itemize}
+    \item \path{results/logs/stage9_scripted_robustness_matrix_summary.yaml}
+    \item \path{results/logs/stage9_scripted_robustness_matrix_table.csv}
+    \item \path{results/figures/stage9_scripted_robustness_matrix_pass_fail.png}
+    \item \path{results/figures/stage9_scripted_robustness_matrix_pitch.png}
+\end{itemize}

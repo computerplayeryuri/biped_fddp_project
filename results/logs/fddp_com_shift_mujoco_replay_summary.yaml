@@ -1,0 +1,124 @@
+stage: 7C_mujoco_replay_of_damped_6d_fddp_references
+purpose: Validate stable actuator-aware MuJoCo execution of exported forward/backward
+  FDDP nominal CoM-shift references.
+runs:
+- stage: 7C_mujoco_replay_of_damped_6d_fddp_reference
+  direction: forward
+  purpose: Replay FDDP q_ref in the MuJoCo planar model through a simplified position-command
+    actuator proxy and assess stable execution.
+  inputs:
+    mujoco_xml: /home/zhijian/biped_fddp_project/model/biped_planar.xml
+    fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz
+    q_ref_shape:
+    - 121
+    - 6
+    dq_ref_shape:
+    - 121
+    - 6
+    reference_duration_s: 1.2
+    fddp_reference_dt_s: 0.01
+    mujoco_dt_s: 0.002
+  joint_mapping:
+    joint_order: &id001
+    - left_hip_pitch_joint
+    - left_knee_pitch_joint
+    - left_ankle_pitch_joint
+    - right_hip_pitch_joint
+    - right_knee_pitch_joint
+    - right_ankle_pitch_joint
+    mujoco_actuator_ids:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+  actuator_proxy:
+    command_delay_s: 0.02
+    first_order_time_constant_s: 0.03
+    max_command_speed_rad_per_s: 8.0
+  optional_contact_sensors_found:
+    left_toe: 12
+    left_heel: 13
+    right_toe: 14
+    right_heel: 15
+  execution_metrics:
+    finite: true
+    initial_torso_height_m: 0.288
+    min_torso_height_m: 0.28765552828046326
+    max_abs_torso_pitch_deg: 2.7061982847295587
+    min_global_contact_count: 8
+    joint_rmse_deg:
+      left_hip_pitch_joint: 0.12202348388056085
+      left_knee_pitch_joint: 0.1485189297064177
+      left_ankle_pitch_joint: 0.3976359237043908
+      right_hip_pitch_joint: 0.12202048178485493
+      right_knee_pitch_joint: 0.14852017398852219
+      right_ankle_pitch_joint: 0.39763561976722744
+    max_joint_rmse_deg: 0.3976359237043908
+    mujoco_achieved_com_y_shift_m: 0.006528743171248744
+    fddp_target_com_y_shift_m: 0.006
+  integrity_passed: true
+  failures: []
+  outputs:
+    csv: /home/zhijian/biped_fddp_project/results/logs/fddp_com_shift_mujoco_replay_forward.csv
+    joint_plot: /home/zhijian/biped_fddp_project/results/figures/fddp_com_shift_mujoco_replay_forward_joints.png
+    body_plot: /home/zhijian/biped_fddp_project/results/figures/fddp_com_shift_mujoco_replay_forward_body.png
+    contact_plot: /home/zhijian/biped_fddp_project/results/figures/fddp_com_shift_mujoco_replay_forward_contacts.png
+- stage: 7C_mujoco_replay_of_damped_6d_fddp_reference
+  direction: backward
+  purpose: Replay FDDP q_ref in the MuJoCo planar model through a simplified position-command
+    actuator proxy and assess stable execution.
+  inputs:
+    mujoco_xml: /home/zhijian/biped_fddp_project/model/biped_planar.xml
+    fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+    q_ref_shape:
+    - 121
+    - 6
+    dq_ref_shape:
+    - 121
+    - 6
+    reference_duration_s: 1.2
+    fddp_reference_dt_s: 0.01
+    mujoco_dt_s: 0.002
+  joint_mapping:
+    joint_order: *id001
+    mujoco_actuator_ids:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+  actuator_proxy:
+    command_delay_s: 0.02
+    first_order_time_constant_s: 0.03
+    max_command_speed_rad_per_s: 8.0
+  optional_contact_sensors_found:
+    left_toe: 12
+    left_heel: 13
+    right_toe: 14
+    right_heel: 15
+  execution_metrics:
+    finite: true
+    initial_torso_height_m: 0.288
+    min_torso_height_m: 0.2876555274684626
+    max_abs_torso_pitch_deg: 2.706178756850091
+    min_global_contact_count: 8
+    joint_rmse_deg:
+      left_hip_pitch_joint: 0.12204696605494907
+      left_knee_pitch_joint: 0.14855023481427876
+      left_ankle_pitch_joint: 0.3976254691625471
+      right_hip_pitch_joint: 0.12204916768915007
+      right_knee_pitch_joint: 0.14854541470463783
+      right_ankle_pitch_joint: 0.39762764473948614
+    max_joint_rmse_deg: 0.39762764473948614
+    mujoco_achieved_com_y_shift_m: -0.006528723144682068
+    fddp_target_com_y_shift_m: -0.006
+  integrity_passed: true
+  failures: []
+  outputs:
+    csv: /home/zhijian/biped_fddp_project/results/logs/fddp_com_shift_mujoco_replay_backward.csv
+    joint_plot: /home/zhijian/biped_fddp_project/results/figures/fddp_com_shift_mujoco_replay_backward_joints.png
+    body_plot: /home/zhijian/biped_fddp_project/results/figures/fddp_com_shift_mujoco_replay_backward_body.png
+    contact_plot: /home/zhijian/biped_fddp_project/results/figures/fddp_com_shift_mujoco_replay_backward_contacts.png

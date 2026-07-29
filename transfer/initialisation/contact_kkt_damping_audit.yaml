@@ -1,0 +1,161 @@
+stage: 7C_contact_kkt_damping_audit
+purpose: Find a non-zero operational-space-inertia damping value for rank-deficient
+  bilateral contact dynamics before resuming FDDP.
+model:
+  urdf: /home/zhijian/biped_fddp_project/model/biped_v1.urdf
+  nq: 13
+  nv: 12
+  nu: 6
+contact_jacobian_rank:
+  two_foot_6d:
+    rank: 8
+    rows: 12
+    nullity: 4
+    svd_tolerance: 6.1449167525128354e-15
+    singular_values:
+    - 2.3061870664032935
+    - 1.749142221108165
+    - 1.6309919513835862
+    - 1.4160700263785788
+    - 1.4142135623730954
+    - 1.3866330497843222
+    - 1.2279363804863677
+    - 0.13985589272164287
+    - 1.7332958355013304e-16
+    - 6.461667720936452e-17
+    - 1.6367397650690205e-17
+    - 1.1761510509385584e-18
+  two_foot_3d:
+    rank: 5
+    rows: 6
+    nullity: 7
+    svd_tolerance: 3.9890237570663e-15
+    singular_values:
+    - 1.497080492157987
+    - 1.4706682476678987
+    - 1.4142135623730954
+    - 0.29036614816469236
+    - 0.07139611545058037
+    - 1.2626564615982987e-16
+damping_cases:
+- 0.0
+- 1.0e-10
+- 1.0e-08
+- 1.0e-06
+- 0.0001
+results:
+  6D:
+  - contact_kind: 6D
+    damping: 0.0
+    completed_steps: 40
+    finite: true
+    one_step_state_difference_norm: 4.2517783496275453e-17
+    termination: completed
+    final_state_difference_norm: 1.7442022199146484e-15
+    max_left_translation_error_m: 5.003707553108401e-17
+    max_right_translation_error_m: 4.163336342344337e-17
+    max_left_rotation_error_rad: 2.489442812916806e-16
+    max_right_rotation_error_rad: 2.489442812916806e-16
+  - contact_kind: 6D
+    damping: 1.0e-10
+    completed_steps: 40
+    finite: true
+    one_step_state_difference_norm: 5.119609668486033e-12
+    termination: completed
+    final_state_difference_norm: 2.0903175032143545e-10
+    max_left_translation_error_m: 4.1978531761801626e-11
+    max_right_translation_error_m: 4.197855951737724e-11
+    max_left_rotation_error_rad: 1.0565160315358961e-16
+    max_right_rotation_error_rad: 1.0565160315358961e-16
+  - contact_kind: 6D
+    damping: 1.0e-08
+    completed_steps: 40
+    finite: true
+    one_step_state_difference_norm: 5.119604284158818e-10
+    termination: completed
+    final_state_difference_norm: 2.0903245501547148e-08
+    max_left_translation_error_m: 4.197865471899931e-09
+    max_right_translation_error_m: 4.197865444144355e-09
+    max_left_rotation_error_rad: 9.554125404358281e-17
+    max_right_rotation_error_rad: 9.554125404358281e-17
+  - contact_kind: 6D
+    damping: 1.0e-06
+    completed_steps: 40
+    finite: true
+    one_step_state_difference_norm: 5.1196017899454565e-08
+    termination: completed
+    final_state_difference_norm: 2.090323624778312e-06
+    max_left_translation_error_m: 4.1978635773043393e-07
+    max_right_translation_error_m: 4.1978635773043393e-07
+    max_left_rotation_error_rad: 2.5722454428158e-17
+    max_right_rotation_error_rad: 2.5722454428158e-17
+  - contact_kind: 6D
+    damping: 0.0001
+    completed_steps: 40
+    finite: true
+    one_step_state_difference_norm: 5.119337308394232e-06
+    termination: completed
+    final_state_difference_norm: 0.0002090215638615859
+    max_left_translation_error_m: 4.197646715781156e-05
+    max_right_translation_error_m: 4.197646715781156e-05
+    max_left_rotation_error_rad: 5.0660950071749985e-18
+    max_right_rotation_error_rad: 5.0660950071749985e-18
+  3D:
+  - contact_kind: 3D
+    damping: 0.0
+    completed_steps: 40
+    finite: true
+    one_step_state_difference_norm: 0.0925584360432
+    termination: completed
+    final_state_difference_norm: 0.050307572684506745
+    max_left_translation_error_m: 3.108103962310077e-05
+    max_right_translation_error_m: 0.002508451677632454
+    max_left_rotation_error_rad: 0.02382736375827456
+    max_right_rotation_error_rad: 0.02382736375827456
+  - contact_kind: 3D
+    damping: 1.0e-10
+    completed_steps: 40
+    finite: true
+    one_step_state_difference_norm: 5.119609671629804e-12
+    termination: completed
+    final_state_difference_norm: 2.0903183733717107e-10
+    max_left_translation_error_m: 4.197855951737552e-11
+    max_right_translation_error_m: 4.1978531761799907e-11
+    max_left_rotation_error_rad: 3.996055270406587e-16
+    max_right_rotation_error_rad: 3.996055270406587e-16
+  - contact_kind: 3D
+    damping: 1.0e-08
+    completed_steps: 40
+    finite: true
+    one_step_state_difference_norm: 5.119604106532019e-10
+    termination: completed
+    final_state_difference_norm: 2.09032456407606e-08
+    max_left_translation_error_m: 4.197865471899931e-09
+    max_right_translation_error_m: 4.197865444144355e-09
+    max_left_rotation_error_rad: 1.6555258757249102e-16
+    max_right_rotation_error_rad: 1.6555258757249102e-16
+  - contact_kind: 3D
+    damping: 1.0e-06
+    completed_steps: 40
+    finite: true
+    one_step_state_difference_norm: 5.119601788169188e-08
+    termination: completed
+    final_state_difference_norm: 2.090323624917526e-06
+    max_left_translation_error_m: 4.197863577581895e-07
+    max_right_translation_error_m: 4.1978635773043393e-07
+    max_left_rotation_error_rad: 3.2816156816878603e-16
+    max_right_rotation_error_rad: 3.2816156816878603e-16
+  - contact_kind: 3D
+    damping: 0.0001
+    completed_steps: 40
+    finite: true
+    one_step_state_difference_norm: 5.119337308394232e-06
+    termination: completed
+    final_state_difference_norm: 0.00020902156386182338
+    max_left_translation_error_m: 4.1976467157894826e-05
+    max_right_translation_error_m: 4.197646715786707e-05
+    max_left_rotation_error_rad: 3.1506211105599623e-16
+    max_right_rotation_error_rad: 3.1506211105599623e-16
+recommended_6d_damping: 0.0
+interpretation: A stable 6D flat-foot damping candidate was found. Future double-support
+  FDDP models must pass this non-zero value as JMinvJt_damping.

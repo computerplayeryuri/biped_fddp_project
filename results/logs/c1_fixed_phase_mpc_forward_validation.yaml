@@ -1,0 +1,83 @@
+stage: C1A_fixed_time_phase_fddp_mpc_one_shot_validation
+purpose: Validate a short-horizon fixed-time-phase nonlinear FDDP-MPC replan from
+  a controlled synthetic root-pitch disturbance.
+scope_note: This is a solver/reference-window validation. It does not yet use online
+  MuJoCo state estimation or contact-event phase resynchronisation.
+inputs:
+  urdf: /home/zhijian/biped_fddp_project/model/biped_v1.urdf
+  c0_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz
+  direction: forward
+  phase_index: 40
+  phase_time_s: 0.4
+  prediction_horizon_nodes: 20
+  prediction_horizon_s: 0.2
+contact_dynamics:
+  type: two 6D flat-foot contacts
+  JMinvJt_damping: 1.0e-08
+  baumgarte_gains_Kp_Kd:
+  - 0.0
+  - 0.0
+injected_disturbance:
+  root_pitch_deg: 2.0
+  root_pitch_rate_rad_s: 0.25
+solver:
+  name: SolverFDDP
+  max_iterations: 150
+  return_success: true
+  stop_criterion: 7.852115921889013e-08
+  threshold: 1.0e-07
+  accepted_convergence: true
+  wall_clock_solve_time_ms: 150.98107700032415
+  initial_cost: 0.005287469799772253
+  final_cost: 0.6350630102225181
+  initial_shooting_gaps:
+    max_gap_norm: 0.26456666678283397
+    rms_gap_norm: 0.05915890515069524
+    first_gap_norm: 0.26456666678283397
+    last_gap_norm: 0.0
+  final_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+position_command_candidate:
+  definition: q_cmd_next = q_plan[1]; this is the next desired joint-position target
+    for the position-controlled actuator layer.
+  q_nominal_next_rad:
+  - -0.008474259044826996
+  - 0.008392643895799756
+  - 0.03266743870405944
+  - -0.00847522010907501
+  - 0.008394565670237062
+  - 0.03266647799389549
+  q_cmd_next_rad:
+  - -0.00628793945511195
+  - 0.0075993073689620706
+  - 0.027497087024041467
+  - -0.006272100968086823
+  - 0.007567630242387853
+  - 0.027512925681757512
+  delta_q_cmd_rad:
+  - 0.002186319589715046
+  - -0.000793336526837685
+  - -0.005170351680017976
+  - 0.002203119140988187
+  - -0.0008269354278492083
+  - -0.005153552312137981
+  max_abs_delta_q_cmd_deg: 0.29623932986340473
+root_pitch_response:
+  nominal_current_deg: -1.7661056549816874
+  disturbed_current_deg: 0.2338943450183119
+  mpc_predicted_next_deg: 0.49263656628888947
+  nominal_next_deg: -1.867030161347545
+  next_deviation_from_nominal_deg: 2.3596667276364345
+joint_limits:
+  minimum_lower_margin_rad: 0.42092027950314576
+  minimum_upper_margin_rad: 0.09205879716922331
+  minimum_margin_rad: 0.09205879716922331
+  within_position_limits: true
+  has_safety_margin: true
+integrity_passed: false
+failures:
+- next-step root-pitch deviation from nominal is too large
+next_step: Do not proceed to closed-loop MuJoCo MPC until this validation is fixed.

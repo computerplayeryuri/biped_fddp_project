@@ -1,0 +1,8 @@
+trial,push_force_N,pulse_start_s,pulse_duration_s,fall,recovered_within_1deg,settling_time_s,peak_abs_pitch_deg,peak_forward_displacement_mm,peak_joint_rmse_deg,final_left_full_support,final_right_full_support,log_file
+zero0N,0.0,1.0,0.12,0,1,1.1200000000000008,0.0,0.0,0.0,1,1,actuator_push_baseline_zero0N.csv
+plus2N,2.0,1.0,0.12,0,1,1.300000000000001,2.547854631985007,9.910112402683996,0.7056887866668224,1,1,actuator_push_baseline_plus2N.csv
+minus2N,-2.0,1.0,0.12,0,1,1.300000000000001,2.5478546319850035,9.910112402683989,0.7056887866668224,1,1,actuator_push_baseline_minus2N.csv
+plus4N,4.0,1.0,0.12,0,1,2.0999999999999903,13.86611059492358,68.2272606303639,0.852839983226764,1,1,actuator_push_baseline_plus4N.csv
+minus4N,-4.0,1.0,0.12,0,1,2.0999999999999903,13.866110594923612,68.22726063036401,0.8528399832267647,1,1,actuator_push_baseline_minus4N.csv
+plus6N,6.0,1.0,0.12,1,0,nan,32.50586098537852,163.43887208356054,0.9444216564912339,0,0,actuator_push_baseline_plus6N.csv
+minus6N,-6.0,1.0,0.12,1,0,nan,32.505860985378504,163.4388720835604,0.9444216564912347,0,0,actuator_push_baseline_minus6N.csv

@@ -1,0 +1,88 @@
+% Generated from reporting/generate_overleaf_evidence_snippets.py.
+% Source summary: \path{/home/zhijian/biped_fddp_project/results/logs/ppt_kpi_c0_c1_c2_evaluation_summary.yaml}
+% Source table: \path{/home/zhijian/biped_fddp_project/results/logs/ppt_kpi_c0_c1_c2_evaluation_table.csv}
+
+\section{C2 Contact-Phase Synchronisation}
+The current C2 layer is no longer only future work. It has been implemented as
+a C2 contact-phase mechanism and contact-event phase synchronisation wrapper around the C1 FIR-QP-MPC
+correction layer. In the current double-support CoM-shift reference, C2 gives
+the same pitch-recovery behaviour as C1 because the reference contains no
+scheduled contact transitions. A separate scripted MuJoCo contact-switching
+mechanism test validates the event-matching path: C2 matched 2/2 scheduled contact events, with a
+maximum absolute phase offset of approximately
+\SI{35.0}{\milli\second}.
+This should be described as contact-phase mechanism validation, not as FDDP
+walking-gait validation.
+
+\section{Hardware Runtime Export}
+The project now includes a MuJoCo-free hardware-side runtime at
+\path{hardware/controller_runtime/controller_runtime.py} and an exported
+controller package at \path{hardware/deploy/controller_package.json}. The
+runtime exposes C0, C1, and C2 as position-command controllers for the six
+ST3215 joints. The current loadability check covers controllers C0, C1, C2
+in the backward, forward directions. All generated commands are finite and no joint
+limit violation is reported in the current runtime smoke test. This remains a
+software loadability result; it is not yet real hardware validation.
+
+\section{Stage 8 Scripted Alternating-Step Locomotion Preview}
+The project now includes a conservative Stage 8 scripted alternating-step
+locomotion preview. It is designed to exercise the left/right contact-transition
+pipeline before a full FDDP walking reference is available. The reference
+contains two scripted swing phases and scheduled left/right liftoff-touchdown
+events. In the current MuJoCo run, the preview matched 4/4 scheduled contact events,
+reported a pitch RMS of \SI{0.334}{\degree},
+and produced approximately \SI{13.6}{\milli\metre}
+of forward displacement over \SI{2.35}{\second}.
+The maximum phase offset was \SI{48.3}{\milli\second}.
+This result should be reported as scripted alternating-contact locomotion
+plumbing, not as final FDDP walking validation.
+
+\begin{table}[htbp]
+\centering
+\caption{Current C0/C1/C2 pitch-disturbance and runtime evidence.}
+\label{tab:c0_c1_c2_current_evidence}
+\begin{tabular}{@{}lllllll@{}}
+\toprule
+Controller & Direction & IAE (deg s) & Improvement & Settling (s) & Max corr. (deg) & Median solve (us) \\
+\midrule
+C0 & forward & 0.2710 & -- & 0.248 & 0.000 & -- \\
+C1 & forward & 0.2474 & 8.7\% & 0.166 & 0.711 & 711.3 \\
+C2 & forward & 0.2474 & 8.7\% & 0.166 & 0.711 & 677.2 \\
+C0 & backward & 0.2681 & -- & 0.246 & 0.000 & -- \\
+C1 & backward & 0.2295 & 14.4\% & 0.166 & 0.669 & 677.6 \\
+C2 & backward & 0.2295 & 14.4\% & 0.166 & 0.669 & 747.2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Current Figure Assets to Import}
+The following generated figures can replace the placeholder boxes currently in
+the Overleaf draft:
+\begin{itemize}
+    \item \path{results/figures/c2_phase_sync_forward_pitch_comparison.png}
+    \item \path{results/figures/c2_phase_sync_backward_pitch_comparison.png}
+    \item \path{results/figures/c2_phase_sync_forward_contacts_phase.png}
+    \item \path{results/figures/c2_phase_sync_backward_contacts_phase.png}
+    \item \path{results/figures/c2_contact_switching_demo_contacts.png}
+    \item \path{results/figures/c2_contact_switching_demo_phase_offset.png}
+    \item \path{results/figures/c2_contact_switching_demo_joint_retiming.png}
+    \item \path{results/figures/c1_runtime_benchmark_forward_timing.png}
+    \item \path{results/figures/fddp_com_shift_mujoco_replay_forward_body.png}
+    \item \path{results/figures/fddp_com_shift_mujoco_replay_backward_body.png}
+    \item \path{results/figures/stage8_scripted_alternating_step_contacts.png}
+    \item \path{results/figures/stage8_scripted_alternating_step_phase_offset.png}
+    \item \path{results/figures/stage8_scripted_alternating_step_body.png}
+\end{itemize}
+
+\section{Remaining Metrics Required by the Unchanged Title}
+The title can remain unchanged, but the following metrics are still missing
+from the current project state and should either be produced by the walking and
+hardware stages or explicitly bounded in the thesis:
+\begin{itemize}
+    \item walking duration over 10/30/60 s
+    \item forward velocity error and step-length error from a walking gait
+    \item ZMP margin from force/CoP estimation
+    \item mechanical CoT from torque or current logs
+    \item battery voltage drop and real servo fault events
+    \item real hardware success rate
+\end{itemize}

@@ -1,0 +1,41 @@
+stage: multistep_fddp_c1_pulse_fir_identification
+reference_npz: /home/zhijian/biped_fddp_project/transfer/trajectories/fddp_multistep_10step_ref.npz
+tau_ref_usage: analysis_only
+pulse:
+  time_s: 0.4
+  width_s: 0.02
+  alpha_rad: 0.017453292519943295
+  G:
+  - 0.27
+  - 0.062
+  - -0.228
+  - 0.27
+  - 0.062
+  - -0.228
+sample_time_s: 0.02
+fir_coefficients_rad_per_rad:
+- 1.1927080055488187e-14
+- 8.74652537402467e-15
+- -0.02096805741819508
+- -0.03295872985376767
+- -0.013886829445257657
+- 0.008774587458203363
+- 0.02341846544479185
+- 0.027437138628739775
+- 0.02233766156978618
+- 0.011331436528763627
+- -0.0020036027106310234
+- -0.014539488242267693
+- -0.02403694746099076
+- -0.029287430388306987
+- -0.03004580388912168
+- -0.0268367280810052
+- -0.02070183337802632
+- -0.01293716631221102
+- -0.004855477611556412
+- 0.002403895569248092
+- 0.008004600041521703
+- 0.011478009448111925
+- 0.012726552409027647
+reused_implementation: /home/zhijian/biped_fddp_project/mpc/16_validate_fddp_two_step_c1_fir_qp.py
+command_reference_advance_s: 0.03

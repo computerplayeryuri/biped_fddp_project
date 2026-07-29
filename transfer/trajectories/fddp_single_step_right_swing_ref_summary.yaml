@@ -1,0 +1,49 @@
+stage: fddp_single_step_right_swing
+task: one right-foot swing with left-foot single support
+coordinate_convention:
+  forward_axis: +Y
+  vertical_axis: +Z
+  pitch_axis: +X
+claim_boundary: FDDP nominal planning evidence only; tau_ref is analysis output and
+  is not a hardware torque command.
+exported_nominal_trajectory: true
+diagnostics:
+  max_shooting_gap_norm: 0.0
+  rms_shooting_gap_norm: 0.0
+  max_active_support_translation_error_m: 8.155742918315815e-06
+  max_active_support_rotation_error_rad: 3.1487487251865575e-07
+  landing_translation_error_m: 1.0267850512843577e-07
+  landing_rotation_error_rad: 3.1487487251865575e-07
+  min_swing_clearance_m: 0.01999913588045462
+  min_joint_limit_margin_rad: 0.011957481412440227
+  achieved_forward_com_displacement_m: 0.004597870445022612
+  solver_return_success: false
+  solver_iterations: 500
+  solver_stop_criterion: 0.000993020395649586
+  solver_cost: 0.3661698474547557
+acceptance:
+  passed: true
+  failures: []
+  diagnostics:
+    max_shooting_gap_norm: 0.0
+    max_active_support_translation_error_m: 8.155742918315815e-06
+    max_active_support_rotation_error_rad: 3.1487487251865575e-07
+    landing_translation_error_m: 1.0267850512843577e-07
+    landing_rotation_error_rad: 3.1487487251865575e-07
+    min_swing_clearance_m: 0.01999913588045462
+    min_joint_limit_margin_rad: 0.011957481412440227
+    achieved_forward_com_displacement_m: 0.004597870445022612
+  thresholds:
+    max_shooting_gap_norm: 1.0e-07
+    max_active_support_translation_error_m: 0.0005
+    max_active_support_rotation_error_rad: 0.008726646259971648
+    max_landing_translation_error_m: 0.001
+    max_landing_rotation_error_rad: 0.017453292519943295
+    min_swing_clearance_m: 0.01
+    min_joint_limit_margin_rad: 0.01
+    min_forward_com_displacement_m: 0.002
+outputs:
+  trajectory_npz: /home/zhijian/biped_fddp_project/transfer/trajectories/fddp_single_step_right_swing_ref.npz
+  diagnostic_yaml: /home/zhijian/biped_fddp_project/results/logs/fddp_single_step_right_swing_diagnostics.yaml
+  diagnostic_csv: /home/zhijian/biped_fddp_project/results/logs/fddp_single_step_right_swing_diagnostics.csv
+  figure: /home/zhijian/biped_fddp_project/results/figures/fddp_single_step_right_swing_com_clearance.png

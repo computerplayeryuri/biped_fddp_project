@@ -1,0 +1,16 @@
+scenario,category,fault,time_s,reason,previous_state,next_state,recovery_outcome,uncaught_exception,error,command_finite,command_within_limits,command_rate_bounded,maximum_abs_command_rad
+stale_pitch,measurement,STALE_MEASUREMENT,0.0,STALE_MEASUREMENT,NORMAL,DEGRADED,fault_contained,False,,True,True,True,0.0
+nan_pitch,measurement,NAN_MEASUREMENT,0.02,NAN_MEASUREMENT,NORMAL,SAFE_HOLD,safe_hold_command_required,False,,True,True,True,0.0
+inf_pitch,measurement,INF_MEASUREMENT,0.04,INF_MEASUREMENT,NORMAL,SAFE_HOLD,safe_hold_command_required,False,,True,True,True,0.0
+contact_stuck_on,contact_sensor,STUCK_CONTACT,0.06,STUCK_CONTACT,NORMAL,DEGRADED,fault_contained,False,,True,True,True,0.0
+contact_stuck_off,contact_sensor,STUCK_CONTACT,0.08,STUCK_CONTACT,NORMAL,DEGRADED,fault_contained,False,,True,True,True,0.0
+missing_contact_event,contact_event,MISSING_CONTACT_EVENT,0.1,MISSING_CONTACT_EVENT,NORMAL,DEGRADED,fault_contained,False,,True,True,True,0.0
+out_of_order_contact_event,contact_event,OUT_OF_ORDER_CONTACT_EVENT,0.12,OUT_OF_ORDER_CONTACT_EVENT,NORMAL,DEGRADED,fault_contained,False,,True,True,True,0.0
+invalid_qp,online_controller,INVALID_QP,0.14,INVALID_QP,NORMAL,FALLBACK,c0_fallback_required,False,,True,True,True,0.0
+deadline_miss,timing,DEADLINE_MISS,0.16,DEADLINE_MISS,NORMAL,DEGRADED,fault_contained,False,,True,True,True,0.0
+command_saturation,command,COMMAND_SATURATION,0.18,COMMAND_SATURATION,NORMAL,DEGRADED,fault_contained,False,,True,True,True,0.0
+rate_saturation,command,RATE_SATURATION,0.2,RATE_SATURATION,NORMAL,DEGRADED,fault_contained,False,,True,True,True,0.0
+actuator_delay,actuator,ACTUATOR_DELAY,0.22,ACTUATOR_DELAY,NORMAL,DEGRADED,fault_contained,False,,True,True,True,0.0
+missing_reference,startup_integrity,MISSING_REFERENCE,0.24,MISSING_REFERENCE,NORMAL,FAILED,startup_rejected,False,,True,True,True,0.0
+truncated_reference,startup_integrity,TRUNCATED_REFERENCE,0.26,TRUNCATED_REFERENCE,NORMAL,FAILED,startup_rejected,False,,True,True,True,0.0
+invalid_reference_schema,startup_integrity,INVALID_REFERENCE_SCHEMA,0.28,INVALID_REFERENCE_SCHEMA,NORMAL,FAILED,startup_rejected,False,,True,True,True,0.0

@@ -1,0 +1,17 @@
+stage: two_step_fddp_c1_fir_qp
+candidate:
+  name: balanced
+  q: 1500.0
+  r: 20.0
+  slew: 25.0
+reference_npz: /home/zhijian/biped_fddp_project/transfer/trajectories/fddp_two_step_alternating_ref.npz
+tau_ref_usage: analysis_only
+metrics:
+  peak_abs_error_deg: 2.4420015617211437
+  iae_deg_s: 0.3784772580278848
+  max_abs_alpha_deg: 2.683029301374581
+  min_contacts: 2
+  min_torso_height_m: 0.2816718418461873
+outputs:
+  csv: /home/zhijian/biped_fddp_project/results/logs/fddp_two_step_c1_fir_qp.csv
+  figure: /home/zhijian/biped_fddp_project/results/figures/fddp_two_step_c0_c1_pitch.png

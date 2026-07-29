@@ -1,0 +1,13 @@
+scenario,event_index,event_kind,reference_time_s,observed_time_s,input_timing_error_s,match_status,phase_offset_ms,matched_count,skipped_count
+observed_late_30ms,0,left_liftoff,0.2,0.23,0.03,matched,-20.0,1,0
+observed_late_30ms,1,left_touchdown,0.45,0.48,0.03,matched,-27.49999999999998,2,0
+observed_late_30ms,2,right_liftoff,0.7,0.73,0.03,matched,-29.375000000000014,3,0
+observed_late_30ms,3,right_touchdown,0.95,0.98,0.03,matched,-29.84375000000002,4,0
+observed_early_25ms,0,left_liftoff,0.2,0.17500000000000002,-0.025,matched,18.749999999999996,1,0
+observed_early_25ms,1,left_touchdown,0.45,0.425,-0.025,matched,23.437500000000014,2,0
+observed_early_25ms,2,right_liftoff,0.7,0.6749999999999999,-0.025,matched,24.60937500000002,3,0
+observed_early_25ms,3,right_touchdown,0.95,0.9249999999999999,-0.025,matched,24.90234375000002,4,0
+mixed_jitter,0,left_liftoff,0.2,0.22,0.02,matched,-14.999999999999993,1,0
+mixed_jitter,1,left_touchdown,0.45,0.435,-0.015,matched,5.000000000000008,2,0
+mixed_jitter,2,right_liftoff,0.7,0.71,0.01,matched,-6.250000000000005,3,0
+mixed_jitter,3,right_touchdown,0.95,0.945,-0.005,matched,2.1875000000000018,4,0

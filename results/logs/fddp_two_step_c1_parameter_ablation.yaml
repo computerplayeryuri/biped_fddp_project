@@ -1,0 +1,150 @@
+stage: two_step_fddp_c1_one_factor_parameter_ablation
+reference_npz: /home/zhijian/biped_fddp_project/transfer/trajectories/fddp_two_step_alternating_ref.npz
+tau_ref_usage: analysis_only
+disturbance:
+  time_s: 0.4
+  root_pitch_deg: 2.0
+  root_pitch_rate_rad_s: 0.25
+method: balanced plus one-factor q/r/slew-penalty low/high variants
+acceptance:
+  min_contacts: 2
+  min_height_ratio: 0.65
+  min_iae_improvement_ratio: 0.02
+  max_peak_increase_ratio: 0.05
+  max_abs_alpha_deg: 5.0
+c0_metrics:
+  iae_deg_s: 0.43038357638788777
+  peak_abs_error_deg: 2.3787974417896196
+candidate_results:
+- candidate: balanced
+  q: 1500.0
+  r: 20.0
+  slew: 25.0
+  iae_deg_s: 0.3784772580278848
+  peak_abs_error_deg: 2.4420015617211437
+  max_abs_alpha_deg: 2.683029301374581
+  min_contacts: 2
+  initial_torso_height_m: 0.288
+  min_torso_height_m: 0.2816718418461873
+  iae_improvement_ratio: 0.1206047842151436
+  peak_increase_ratio: 0.026569777998405063
+  contact_pass: true
+  height_pass: true
+  command_pass: true
+  performance_pass: true
+  acceptance_passed: true
+- candidate: q_low
+  q: 800.0
+  r: 20.0
+  slew: 25.0
+  iae_deg_s: 0.3941406713775915
+  peak_abs_error_deg: 2.4420015617211406
+  max_abs_alpha_deg: 2.5019106652845404
+  min_contacts: 2
+  initial_torso_height_m: 0.288
+  min_torso_height_m: 0.2816916051898776
+  iae_improvement_ratio: 0.08421070644580535
+  peak_increase_ratio: 0.026569777998403755
+  contact_pass: true
+  height_pass: true
+  command_pass: true
+  performance_pass: true
+  acceptance_passed: true
+- candidate: q_high
+  q: 2500.0
+  r: 20.0
+  slew: 25.0
+  iae_deg_s: 0.3904542733516655
+  peak_abs_error_deg: 2.4420015617211437
+  max_abs_alpha_deg: 3.0000000000000155
+  min_contacts: 2
+  initial_torso_height_m: 0.288
+  min_torso_height_m: 0.28164785969597256
+  iae_improvement_ratio: 0.0927760844671163
+  peak_increase_ratio: 0.026569777998405063
+  contact_pass: true
+  height_pass: true
+  command_pass: true
+  performance_pass: true
+  acceptance_passed: true
+- candidate: r_low
+  q: 1500.0
+  r: 10.0
+  slew: 25.0
+  iae_deg_s: 0.401753770702749
+  peak_abs_error_deg: 2.44200156172115
+  max_abs_alpha_deg: 3.0000000000000115
+  min_contacts: 2
+  initial_torso_height_m: 0.288
+  min_torso_height_m: 0.28164343594297614
+  iae_improvement_ratio: 0.06652160364812776
+  peak_increase_ratio: 0.026569777998407675
+  contact_pass: true
+  height_pass: true
+  command_pass: true
+  performance_pass: true
+  acceptance_passed: true
+- candidate: r_high
+  q: 1500.0
+  r: 50.0
+  slew: 25.0
+  iae_deg_s: 0.40587619914959283
+  peak_abs_error_deg: 2.442001561721139
+  max_abs_alpha_deg: 2.252709339451422
+  min_contacts: 2
+  initial_torso_height_m: 0.288
+  min_torso_height_m: 0.2817004665210391
+  iae_improvement_ratio: 0.05694310513421498
+  peak_increase_ratio: 0.02656977799840301
+  contact_pass: true
+  height_pass: true
+  command_pass: true
+  performance_pass: true
+  acceptance_passed: true
+- candidate: slew_penalty_low
+  q: 1500.0
+  r: 20.0
+  slew: 12.0
+  iae_deg_s: 0.36878380461535065
+  peak_abs_error_deg: 2.4420015617211406
+  max_abs_alpha_deg: 3.0000000000000018
+  min_contacts: 2
+  initial_torso_height_m: 0.288
+  min_torso_height_m: 0.28167461825740264
+  iae_improvement_ratio: 0.14312760791090148
+  peak_increase_ratio: 0.026569777998403755
+  contact_pass: true
+  height_pass: true
+  command_pass: true
+  performance_pass: true
+  acceptance_passed: true
+- candidate: slew_penalty_high
+  q: 1500.0
+  r: 20.0
+  slew: 80.0
+  iae_deg_s: 0.38762519026977654
+  peak_abs_error_deg: 2.442001561721142
+  max_abs_alpha_deg: 2.9411993473670877
+  min_contacts: 2
+  initial_torso_height_m: 0.288
+  min_torso_height_m: 0.28167313914009157
+  iae_improvement_ratio: 0.0993494837255936
+  peak_increase_ratio: 0.026569777998404317
+  contact_pass: true
+  height_pass: true
+  command_pass: true
+  performance_pass: true
+  acceptance_passed: true
+best_by_acceptance_then_iae: slew_penalty_low
+passing_candidates:
+- balanced
+- q_low
+- q_high
+- r_low
+- r_high
+- slew_penalty_low
+- slew_penalty_high
+outputs:
+  table_csv: /home/zhijian/biped_fddp_project/results/logs/fddp_two_step_c1_parameter_ablation.csv
+  trace_csv: /home/zhijian/biped_fddp_project/results/logs/fddp_two_step_c1_parameter_ablation_traces.csv
+  figure: /home/zhijian/biped_fddp_project/results/figures/fddp_two_step_c1_parameter_ablation.png

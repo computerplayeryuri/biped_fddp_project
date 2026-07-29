@@ -1,0 +1,136 @@
+stage: C1_QP0_MuJoCo_pitch_authority_and_reference_alignment
+purpose: Identify the signed root-pitch response to the FDDP-guided joint correction
+  distribution and export the C0 MuJoCo nominal baseline.
+directions:
+  forward:
+    direction: forward
+    reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz
+    baseline_alignment:
+      baseline_root_pitch_at_pulse_rad: -0.01814884701274606
+      baseline_root_pitch_at_pulse_deg: -1.039852336858961
+      baseline_root_pitch_rate_at_pulse_rad_s: -0.26694118244607545
+      note: This C0 MuJoCo baseline trajectory, rather than the raw Pinocchio free-flyer
+        pitch, must be used as the fixed-phase pitch reference for the MuJoCo QP-MPC
+        validation.
+    pulse:
+      start_time_s: 0.4
+      duration_s: 0.1
+      alpha_pulse_deg: 2.0
+      joint_distribution_G_rad_per_rad:
+      - 0.27
+      - 0.062
+      - -0.228
+      - 0.27
+      - 0.062
+      - -0.228
+    identified_authority:
+      peak_signed_authority_rad_per_rad: -0.13927941827025836
+      peak_response_time_s: 0.6480000000000005
+      sign_of_positive_alpha_effect: -1
+      recommended_alpha_sign_for_positive_pitch_error: 1
+      recommendation: Positive alpha decreases measured root pitch; use positive alpha
+        for a positive pitch error.
+      probe_values:
+        40ms:
+          time_s: 0.44
+          signed_pitch_authority_rad_per_rad: -0.027080514220076984
+          plus_pitch_change_deg: -0.054161037854110194
+          minus_pitch_change_deg: 0.05416101902619774
+        80ms:
+          time_s: 0.48000000000000004
+          signed_pitch_authority_rad_per_rad: -0.026373980562214298
+          plus_pitch_change_deg: -0.05274700149330324
+          minus_pitch_change_deg: 0.05274892075555395
+        120ms:
+          time_s: 0.52
+          signed_pitch_authority_rad_per_rad: 0.026090809184503367
+          plus_pitch_change_deg: 0.052185768556740834
+          minus_pitch_change_deg: -0.05217746818127264
+        160ms:
+          time_s: 0.56
+          signed_pitch_authority_rad_per_rad: 0.05483794209972424
+          plus_pitch_change_deg: 0.10466707343950059
+          minus_pitch_change_deg: -0.11468469495939637
+        240ms:
+          time_s: 0.64
+          signed_pitch_authority_rad_per_rad: -0.1360693555596781
+          plus_pitch_change_deg: -0.2851896473513848
+          minus_pitch_change_deg: 0.25908777488732776
+    integrity:
+      baseline_min_contacts: 8
+      plus_min_contacts: 8
+      minus_min_contacts: 4
+      finite_authority: true
+      nonzero_authority: true
+    outputs:
+      baseline_csv: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_forward.csv
+      plus_pulse_csv: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_plus_pulse_forward.csv
+      minus_pulse_csv: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_minus_pulse_forward.csv
+      pulse_plot: /home/zhijian/biped_fddp_project/results/figures/c1_qp0_forward_pulse_response.png
+      authority_plot: /home/zhijian/biped_fddp_project/results/figures/c1_qp0_forward_authority.png
+  backward:
+    direction: backward
+    reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+    baseline_alignment:
+      baseline_root_pitch_at_pulse_rad: 0.018148727099584514
+      baseline_root_pitch_at_pulse_deg: 1.0398454663408965
+      baseline_root_pitch_rate_at_pulse_rad_s: 0.2669387092003179
+      note: This C0 MuJoCo baseline trajectory, rather than the raw Pinocchio free-flyer
+        pitch, must be used as the fixed-phase pitch reference for the MuJoCo QP-MPC
+        validation.
+    pulse:
+      start_time_s: 0.4
+      duration_s: 0.1
+      alpha_pulse_deg: 2.0
+      joint_distribution_G_rad_per_rad:
+      - 0.27
+      - 0.062
+      - -0.228
+      - 0.27
+      - 0.062
+      - -0.228
+    identified_authority:
+      peak_signed_authority_rad_per_rad: -0.1392793775568263
+      peak_response_time_s: 0.6480000000000005
+      sign_of_positive_alpha_effect: -1
+      recommended_alpha_sign_for_positive_pitch_error: 1
+      recommendation: Positive alpha decreases measured root pitch; use positive alpha
+        for a positive pitch error.
+      probe_values:
+        40ms:
+          time_s: 0.44
+          signed_pitch_authority_rad_per_rad: -0.027080514218703083
+          plus_pitch_change_deg: -0.054161019029906866
+          minus_pitch_change_deg: 0.05416103784490547
+        80ms:
+          time_s: 0.48000000000000004
+          signed_pitch_authority_rad_per_rad: -0.02637398046155133
+          plus_pitch_change_deg: -0.05274892062830592
+          minus_pitch_change_deg: 0.05274700121789941
+        120ms:
+          time_s: 0.52
+          signed_pitch_authority_rad_per_rad: 0.02609080920270737
+          plus_pitch_change_deg: 0.05217746818077091
+          minus_pitch_change_deg: -0.05218576863005858
+        160ms:
+          time_s: 0.56
+          signed_pitch_authority_rad_per_rad: 0.054837950219163004
+          plus_pitch_change_deg: 0.11468472878565851
+          minus_pitch_change_deg: -0.1046670720909935
+        240ms:
+          time_s: 0.64
+          signed_pitch_authority_rad_per_rad: -0.13606928336623617
+          plus_pitch_change_deg: -0.25908748618472327
+          minus_pitch_change_deg: 0.2851896472802215
+    integrity:
+      baseline_min_contacts: 8
+      plus_min_contacts: 4
+      minus_min_contacts: 8
+      finite_authority: true
+      nonzero_authority: true
+    outputs:
+      baseline_csv: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_backward.csv
+      plus_pulse_csv: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_plus_pulse_backward.csv
+      minus_pulse_csv: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_minus_pulse_backward.csv
+      pulse_plot: /home/zhijian/biped_fddp_project/results/figures/c1_qp0_backward_pulse_response.png
+      authority_plot: /home/zhijian/biped_fddp_project/results/figures/c1_qp0_backward_authority.png

@@ -1,0 +1,154 @@
+<mujoco model="biped_6pitch_planar_v1">
+  <!--
+    Stage-3 planar MuJoCo model generated from the current URDF.
+    Coordinate convention:
+      +X = robot right, +Y = forward, +Z = upward.
+      All six leg joints rotate around +X (pitch).
+    This is intentionally a collision-simple model: only the two feet collide with the ground.
+    Other components retain mass/inertia proxies but do not self-collide.
+  -->
+  <compiler angle="radian" coordinate="local" inertiafromgeom="false"/>
+  <option timestep="0.002" gravity="0 0 -9.81" integrator="implicitfast" cone="elliptic"/>
+  <size njmax="200" nconmax="100"/>
+
+  <default>
+    <joint damping="0.02" armature="0.0002"/>
+    <geom density="0" friction="0.8 0.01 0.001" solref="0.01 1" solimp="0.9 0.95 0.001"/>
+    <position kp="18" dampratio="1" forcelimited="true" forcerange="-2 2"/>
+  </default>
+
+  <asset>
+    <material name="purple" rgba="0.45 0.20 0.75 1"/>
+    <material name="red"    rgba="0.85 0.10 0.10 1"/>
+    <material name="blue"   rgba="0.10 0.35 0.90 1"/>
+    <material name="grey"   rgba="0.18 0.18 0.18 1"/>
+    <material name="orange" rgba="0.95 0.55 0.10 1"/>
+    <material name="ground" rgba="0.82 0.82 0.82 1"/>
+  </asset>
+
+  <worldbody>
+    <geom name="floor" type="plane" size="2 2 0.1" material="ground" friction="0.8 0.01 0.001"/>
+
+    <!-- Hip plate centre is z=0.288 m, matching the zero-pose chain in the URDF. -->
+    <body name="hip_plate_link" pos="0 0 0.288">
+      <!-- Planar floating base: allow Y translation, Z translation and X pitch only. -->
+      <joint name="root_forward_y" type="slide" axis="0 1 0"/>
+      <joint name="root_vertical_z" type="slide" axis="0 0 1"/>
+      <joint name="root_pitch_x" type="hinge" axis="1 0 0" damping="0.05"/>
+      <inertial pos="0 0 0" mass="0.065" diaginertia="4.59820833e-05 0.000156677083 0.000202388333"/>
+      <geom name="hip_plate_geom" type="box" size="0.085 0.046 0.0025" material="purple" contype="0" conaffinity="0"/>
+
+      <!-- Lumped on-board electronics and battery mass. -->
+      <body name="electronics_lump_link" pos="0 0 0.03">
+        <inertial pos="0 0 0" mass="0.2583" diaginertia="0.0001434426 0.0003479301 0.0004154325"/>
+        <geom name="electronics_geom" type="box" size="0.060 0.035 0.021" material="orange" contype="0" conaffinity="0"/>
+      </body>
+
+      <!-- LEFT LEG: x=-0.0525 m -->
+      <body name="left_hip_motor_link" pos="-0.0525 0 -0.045">
+        <inertial pos="0 0 0" mass="0.055" diaginertia="8.41082917e-06 1.49785167e-05 1.21601792e-05"/>
+        <geom name="left_hip_motor_geom" type="box" size="0.0226 0.01235 0.0175" material="red" contype="0" conaffinity="0"/>
+
+        <body name="left_thigh_bracket_link" pos="0 0 0">
+          <joint name="left_hip_pitch_joint" type="hinge" axis="1 0 0" range="-0.55 0.55"/>
+          <inertial pos="0 0 -0.05" mass="0.048" diaginertia="4.36e-05 4.7056e-05 1.0656e-05"/>
+          <geom name="left_thigh_geom" type="box" pos="0 0 -0.05" size="0.021 0.015 0.05" material="blue" contype="0" conaffinity="0"/>
+
+          <body name="left_knee_motor_link" pos="0 0 -0.1">
+            <inertial pos="0 0 0" mass="0.055" diaginertia="8.41082917e-06 1.49785167e-05 1.21601792e-05"/>
+            <geom name="left_knee_motor_geom" type="box" size="0.0226 0.01235 0.0175" material="red" contype="0" conaffinity="0"/>
+
+            <body name="left_shank_bracket_link" pos="0 0 0">
+              <joint name="left_knee_pitch_joint" type="hinge" axis="1 0 0" range="-1.20 0.10"/>
+              <inertial pos="0 0 -0.05" mass="0.048" diaginertia="4.36e-05 4.7056e-05 1.0656e-05"/>
+              <geom name="left_shank_geom" type="box" pos="0 0 -0.05" size="0.021 0.015 0.05" material="blue" contype="0" conaffinity="0"/>
+
+              <body name="left_ankle_motor_link" pos="0 0 -0.1">
+                <inertial pos="0 0 0" mass="0.055" diaginertia="8.41082917e-06 1.49785167e-05 1.21601792e-05"/>
+                <geom name="left_ankle_motor_geom" type="box" size="0.0226 0.01235 0.0175" material="red" contype="0" conaffinity="0"/>
+
+                <body name="left_foot_link" pos="0 0 0">
+                  <joint name="left_ankle_pitch_joint" type="hinge" axis="1 0 0" range="-0.45 0.45"/>
+                  <!-- foot mass includes the 4 contact switches from the URDF lump -->
+                  <inertial pos="0 0 -0.04" mass="0.0992" diaginertia="0.00015455 0.00005328 0.00020685"/>
+                  <geom name="left_foot_geom" type="box" pos="0 0 -0.04" size="0.0425 0.0725 0.003" material="grey" contype="1" conaffinity="1" friction="0.8 0.01 0.001"/>
+                  <site name="left_toe_site"  type="box" pos="0 0.068 -0.043" size="0.043 0.008 0.004" rgba="0 1 0 0.25"/>
+                  <site name="left_heel_site" type="box" pos="0 -0.068 -0.043" size="0.043 0.008 0.004" rgba="0 0 1 0.25"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- RIGHT LEG: x=+0.0525 m -->
+      <body name="right_hip_motor_link" pos="0.0525 0 -0.045">
+        <inertial pos="0 0 0" mass="0.055" diaginertia="8.41082917e-06 1.49785167e-05 1.21601792e-05"/>
+        <geom name="right_hip_motor_geom" type="box" size="0.0226 0.01235 0.0175" material="red" contype="0" conaffinity="0"/>
+
+        <body name="right_thigh_bracket_link" pos="0 0 0">
+          <joint name="right_hip_pitch_joint" type="hinge" axis="1 0 0" range="-0.55 0.55"/>
+          <inertial pos="0 0 -0.05" mass="0.048" diaginertia="4.36e-05 4.7056e-05 1.0656e-05"/>
+          <geom name="right_thigh_geom" type="box" pos="0 0 -0.05" size="0.021 0.015 0.05" material="blue" contype="0" conaffinity="0"/>
+
+          <body name="right_knee_motor_link" pos="0 0 -0.1">
+            <inertial pos="0 0 0" mass="0.055" diaginertia="8.41082917e-06 1.49785167e-05 1.21601792e-05"/>
+            <geom name="right_knee_motor_geom" type="box" size="0.0226 0.01235 0.0175" material="red" contype="0" conaffinity="0"/>
+
+            <body name="right_shank_bracket_link" pos="0 0 0">
+              <joint name="right_knee_pitch_joint" type="hinge" axis="1 0 0" range="-1.20 0.10"/>
+              <inertial pos="0 0 -0.05" mass="0.048" diaginertia="4.36e-05 4.7056e-05 1.0656e-05"/>
+              <geom name="right_shank_geom" type="box" pos="0 0 -0.05" size="0.021 0.015 0.05" material="blue" contype="0" conaffinity="0"/>
+
+              <body name="right_ankle_motor_link" pos="0 0 -0.1">
+                <inertial pos="0 0 0" mass="0.055" diaginertia="8.41082917e-06 1.49785167e-05 1.21601792e-05"/>
+                <geom name="right_ankle_motor_geom" type="box" size="0.0226 0.01235 0.0175" material="red" contype="0" conaffinity="0"/>
+
+                <body name="right_foot_link" pos="0 0 0">
+                  <joint name="right_ankle_pitch_joint" type="hinge" axis="1 0 0" range="-0.45 0.45"/>
+                  <inertial pos="0 0 -0.04" mass="0.0992" diaginertia="0.00015455 0.00005328 0.00020685"/>
+                  <geom name="right_foot_geom" type="box" pos="0 0 -0.04" size="0.0425 0.0725 0.003" material="grey" contype="1" conaffinity="1" friction="0.8 0.01 0.001"/>
+                  <site name="right_toe_site"  type="box" pos="0 0.068 -0.043" size="0.043 0.008 0.004" rgba="0 1 0 0.25"/>
+                  <site name="right_heel_site" type="box" pos="0 -0.068 -0.043" size="0.043 0.008 0.004" rgba="0 0 1 0.25"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <position name="left_hip_servo"   joint="left_hip_pitch_joint"   ctrlrange="-0.55 0.55"/>
+    <position name="left_knee_servo"  joint="left_knee_pitch_joint"  ctrlrange="-1.20 0.10"/>
+    <position name="left_ankle_servo" joint="left_ankle_pitch_joint" ctrlrange="-0.45 0.45"/>
+    <position name="right_hip_servo"   joint="right_hip_pitch_joint"   ctrlrange="-0.55 0.55"/>
+    <position name="right_knee_servo"  joint="right_knee_pitch_joint"  ctrlrange="-1.20 0.10"/>
+    <position name="right_ankle_servo" joint="right_ankle_pitch_joint" ctrlrange="-0.45 0.45"/>
+  </actuator>
+
+  <sensor>
+    <jointpos name="left_hip_q" joint="left_hip_pitch_joint"/>
+    <jointpos name="left_knee_q" joint="left_knee_pitch_joint"/>
+    <jointpos name="left_ankle_q" joint="left_ankle_pitch_joint"/>
+    <jointpos name="right_hip_q" joint="right_hip_pitch_joint"/>
+    <jointpos name="right_knee_q" joint="right_knee_pitch_joint"/>
+    <jointpos name="right_ankle_q" joint="right_ankle_pitch_joint"/>
+    <jointvel name="left_hip_dq" joint="left_hip_pitch_joint"/>
+    <jointvel name="left_knee_dq" joint="left_knee_pitch_joint"/>
+    <jointvel name="left_ankle_dq" joint="left_ankle_pitch_joint"/>
+    <jointvel name="right_hip_dq" joint="right_hip_pitch_joint"/>
+    <jointvel name="right_knee_dq" joint="right_knee_pitch_joint"/>
+    <jointvel name="right_ankle_dq" joint="right_ankle_pitch_joint"/>
+    <touch name="left_toe_touch" site="left_toe_site"/>
+    <touch name="left_heel_touch" site="left_heel_site"/>
+    <touch name="right_toe_touch" site="right_toe_site"/>
+    <touch name="right_heel_touch" site="right_heel_site"/>
+  </sensor>
+
+  <keyframe>
+    <!-- qpos order: root_Y, root_Z, root_pitch, six leg joints -->
+    <key name="standing" qpos="0 0 0 0 0 0 0 0 0" ctrl="0 0 0 0 0 0"/>
+  </keyframe>
+</mujoco>

@@ -1,0 +1,73 @@
+schema_version: fddp-multistep-config-v1
+claim_boundary: simulation_only
+command_interface: q_cmd=q_ref+delta_q
+tau_ref_hardware_usage: analysis_only
+
+planning:
+  dt_s: 0.010
+  final_step_count: 10
+  final_horizon_nodes: 1000
+  ds_nodes: 20
+  ss_nodes: 70
+  step_forward_y_m: 0.010
+  swing_clearance_z_m: 0.020
+  thresholds:
+    solver_stop: 0.0000001
+    shooting_gap_norm: 0.0000001
+    active_support_translation_error_m: 0.0005
+    active_support_rotation_error_rad: 0.008726646259971648
+    landing_translation_error_m: 0.001
+    landing_rotation_error_rad: 0.017453292519943295
+    swing_clearance_m: 0.010
+    joint_limit_margin_rad: 0.010
+    forward_displacement_m: 0.040
+    duration_s: 10.0
+
+contact:
+  friction_coefficient: 0.80
+  minimum_normal_force_n: -0.00001
+  maximum_friction_utilisation: 0.90
+  minimum_cop_margin_m: 0.002
+  maximum_tangential_speed_m_s: 0.001
+
+replay:
+  maximum_abs_pitch_deg: 15.0
+  maximum_joint_rmse_deg: 4.0
+  minimum_height_fraction: 0.65
+  minimum_event_match_ratio: 0.90
+
+controller:
+  period_s: 0.020
+  maximum_alpha_deg: 5.0
+  maximum_foothold_offset_m: 0.015
+  fir_qp_candidate:
+    name: r_low
+    q: 1500.0
+    r: 10.0
+    slew: 25.0
+  recovery_fir_qp_candidate:
+    name: recovery_fast_30seed
+    q: 2500.0
+    r: 5.0
+    slew: 10.0
+  recovery_activation_pitch_deg: 3.0
+  phase_sync_max_offset_s: 0.100
+  phase_sync_match_window_s: 0.220
+  phase_sync_max_step_s: 0.040
+  phase_sync_correction_gain: 0.75
+  c1_minimum_iae_improvement_fraction: 0.10
+  c1_maximum_peak_ratio: 1.05
+  c2_maximum_iae_to_c1_ratio: 1.02
+  c2_maximum_peak_to_c1_ratio: 1.05
+  c2_minimum_contact_timing_improvement_fraction: 0.30
+
+robustness:
+  seed_count: 30
+  critical_minimum_success_rate: 0.90
+  aggregate_minimum_success_rate: 0.95
+  confidence: 0.95
+
+timing:
+  updates_per_final_mode: 100000
+  p99_limit_s: 0.005
+  maximum_limit_s: 0.020

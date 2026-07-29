@@ -1,0 +1,160 @@
+stage: 7C_dynamic_initialisation_audit
+purpose: Compare the kinematic warm-start with zero controls against quasi-static
+  controls and a dynamically rolled-out seed.
+model:
+  urdf: /home/zhijian/biped_fddp_project/model/biped_v1.urdf
+  nq: 13
+  nv: 12
+  nu: 6
+discretisation:
+  dt_s: 0.01
+  horizon_nodes: 120
+directions:
+  forward:
+    warmstart_source: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_warmstart.npz
+    warmstart_us_is_zero: true
+    gain_cases:
+      zero:
+        contact_gains_Kp_Kd:
+        - 0.0
+        - 0.0
+        zero_control:
+          cost: 0.0012882104645207306
+          shooting_gaps:
+            max_gap_norm: 0.24014171829287062
+            rms_gap_norm: 0.1547663390552041
+            first_gap_norm: 4.2517783496275453e-17
+            last_gap_norm: 4.315261260539302e-06
+        quasi_static:
+          available: true
+          cost_on_kinematic_warmstart: 0.0012888603891088272
+          shooting_gaps_on_kinematic_warmstart:
+            max_gap_norm: 2.1073168230410255
+            rms_gap_norm: 1.3215043725011464
+            first_gap_norm: 4.2517783496275453e-17
+            last_gap_norm: 1.0516952447613638e-09
+          max_abs_control: 0.030681325189993353
+          rms_control: 0.013436316749931067
+        rollout_from_quasi_static_controls:
+          cost: .nan
+          shooting_gaps:
+            max_gap_norm: .nan
+            rms_gap_norm: .nan
+            first_gap_norm: 0.0
+            last_gap_norm: .nan
+          achieved_peak_shift_y_m: .nan
+          peak_abs_com_y_tracking_error_m: .nan
+          final_com_y_return_error_m: .nan
+          max_left_translation_error_m: 3.7422233788494056e+29
+          max_right_translation_error_m: 3.7422233788494056e+29
+          max_left_rotation_error_rad: 1.0351790617422438
+          max_right_rotation_error_rad: 3.0991872359940613
+      moderate:
+        contact_gains_Kp_Kd:
+        - 400.0
+        - 40.0
+        zero_control:
+          cost: 0.0012882104645207306
+          shooting_gaps:
+            max_gap_norm: 0.24012949975475553
+            rms_gap_norm: 0.15475843981077855
+            first_gap_norm: 4.2517783496275453e-17
+            last_gap_norm: 1.103052533897508e-05
+        quasi_static:
+          available: true
+          cost_on_kinematic_warmstart: 0.0012888603891088272
+          shooting_gaps_on_kinematic_warmstart:
+            max_gap_norm: 2.1073137528267725
+            rms_gap_norm: 1.3215024143559249
+            first_gap_norm: 4.2517783496275453e-17
+            last_gap_norm: 1.0392093674539435e-05
+          max_abs_control: 0.030681325189993353
+          rms_control: 0.013436316749931067
+        rollout_from_quasi_static_controls:
+          cost: .nan
+          shooting_gaps:
+            max_gap_norm: .nan
+            rms_gap_norm: .nan
+            first_gap_norm: 0.0
+            last_gap_norm: .nan
+          achieved_peak_shift_y_m: .nan
+          peak_abs_com_y_tracking_error_m: .nan
+          final_com_y_return_error_m: .nan
+          max_left_translation_error_m: 4.745307887099891e+38
+          max_right_translation_error_m: 4.745307887099891e+38
+          max_left_rotation_error_rad: 2.3458257740818813
+          max_right_rotation_error_rad: 3.0302164132175524
+  backward:
+    warmstart_source: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_warmstart.npz
+    warmstart_us_is_zero: true
+    gain_cases:
+      zero:
+        contact_gains_Kp_Kd:
+        - 0.0
+        - 0.0
+        zero_control:
+          cost: 0.0012882104645207295
+          shooting_gaps:
+            max_gap_norm: 0.24014171829285771
+            rms_gap_norm: 0.15446843861848986
+            first_gap_norm: 4.2517783496275453e-17
+            last_gap_norm: 6.636371207442366e-06
+        quasi_static:
+          available: true
+          cost_on_kinematic_warmstart: 0.0012888603891088259
+          shooting_gaps_on_kinematic_warmstart:
+            max_gap_norm: 2.1073168230407857
+            rms_gap_norm: 1.3181464791211135
+            first_gap_norm: 4.2517783496275453e-17
+            last_gap_norm: 9.164039592605162e-05
+          max_abs_control: 0.03068132518998999
+          rms_control: 0.013436316749929822
+        rollout_from_quasi_static_controls:
+          cost: 9802.54755330188
+          shooting_gaps:
+            max_gap_norm: 0.0
+            rms_gap_norm: 0.0
+            first_gap_norm: 0.0
+            last_gap_norm: 0.0
+          achieved_peak_shift_y_m: -6.160918995123978e-05
+          peak_abs_com_y_tracking_error_m: 0.448634813943022
+          final_com_y_return_error_m: 0.448634813943022
+          max_left_translation_error_m: 0.6344717886443875
+          max_right_translation_error_m: 0.7883463945091768
+          max_left_rotation_error_rad: 3.0097035639731254e-14
+          max_right_rotation_error_rad: 3.135940810178636
+      moderate:
+        contact_gains_Kp_Kd:
+        - 400.0
+        - 40.0
+        zero_control:
+          cost: 0.0012882104645207295
+          shooting_gaps:
+            max_gap_norm: 0.24012949975474335
+            rms_gap_norm: 0.1544605867115276
+            first_gap_norm: 4.2517783496275453e-17
+            last_gap_norm: 1.2665698749290003e-05
+        quasi_static:
+          available: true
+          cost_on_kinematic_warmstart: 0.0012888603891088259
+          shooting_gaps_on_kinematic_warmstart:
+            max_gap_norm: 2.1073137528265327
+            rms_gap_norm: 1.3181445404187564
+            first_gap_norm: 4.2517783496275453e-17
+            last_gap_norm: 9.220700830075508e-05
+          max_abs_control: 0.03068132518998999
+          rms_control: 0.013436316749929822
+        rollout_from_quasi_static_controls:
+          cost: 10975.729277452032
+          shooting_gaps:
+            max_gap_norm: 0.0
+            rms_gap_norm: 0.0
+            first_gap_norm: 0.0
+            last_gap_norm: 0.0
+          achieved_peak_shift_y_m: -0.146403161894546
+          peak_abs_com_y_tracking_error_m: 0.14638360633899045
+          final_com_y_return_error_m: 0.020716353251038624
+          max_left_translation_error_m: 0.05455662103514981
+          max_right_translation_error_m: 0.24817341597817444
+          max_left_rotation_error_rad: 2.997826439274746e-15
+          max_right_rotation_error_rad: 2.0633700574325924

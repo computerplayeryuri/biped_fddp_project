@@ -1,0 +1,165 @@
+{
+  "package_name": "biped_fddp_c0_c1_c2_hardware_controller_package",
+  "generated_for": "PC/ROS2-side ST3215 joint-position command bridge",
+  "command_type": "joint_position_rad",
+  "torque_command_allowed": false,
+  "control_update_period_s": 0.02,
+  "joint_order": [
+    "left_hip_pitch_joint",
+    "left_knee_pitch_joint",
+    "left_ankle_pitch_joint",
+    "right_hip_pitch_joint",
+    "right_knee_pitch_joint",
+    "right_ankle_pitch_joint"
+  ],
+  "joint_limits_rad": {
+    "left_hip_pitch_joint": [
+      -0.55,
+      0.55
+    ],
+    "left_knee_pitch_joint": [
+      -1.2,
+      0.1
+    ],
+    "left_ankle_pitch_joint": [
+      -0.45,
+      0.45
+    ],
+    "right_hip_pitch_joint": [
+      -0.55,
+      0.55
+    ],
+    "right_knee_pitch_joint": [
+      -1.2,
+      0.1
+    ],
+    "right_ankle_pitch_joint": [
+      -0.45,
+      0.45
+    ]
+  },
+  "actuator_model": {
+    "physics_timestep_s": 0.002,
+    "control_timestep_s": 0.02,
+    "servo_delay_s": 0.02,
+    "servo_time_constant_s": 0.04,
+    "safe_speed_rad_s": 2.0,
+    "max_reference_correction_rad": 0.05236,
+    "max_reference_change_per_cycle_rad": 0.00873
+  },
+  "controllers": {
+    "C0": {
+      "enabled": true,
+      "uses_reference": true,
+      "uses_fir_qp": false,
+      "uses_contact_phase_sync": false
+    },
+    "C1": {
+      "enabled": true,
+      "uses_reference": true,
+      "uses_fir_qp": true,
+      "uses_contact_phase_sync": false,
+      "candidate": {
+        "name": "balanced",
+        "q": 1500.0,
+        "r": 20.0,
+        "slew": 25.0
+      },
+      "G_rad_per_rad": [
+        0.27,
+        0.062,
+        -0.228,
+        0.27,
+        0.062,
+        -0.228
+      ]
+    },
+    "C2": {
+      "enabled": true,
+      "uses_reference": true,
+      "uses_fir_qp": true,
+      "uses_contact_phase_sync": true,
+      "candidate": {
+        "name": "balanced",
+        "q": 1500.0,
+        "r": 20.0,
+        "slew": 25.0
+      },
+      "G_rad_per_rad": [
+        0.27,
+        0.062,
+        -0.228,
+        0.27,
+        0.062,
+        -0.228
+      ]
+    }
+  },
+  "fir_identification": {
+    "forward": {
+      "coefficients_rad_per_rad": [
+        0.0007445358339875578,
+        -0.027643165141767068,
+        -0.01633190892812062,
+        0.013125950141283602,
+        0.03698061813654483,
+        0.020703967299705597,
+        0.0011480286546924662,
+        -0.017403870220158376,
+        -0.024034816738382626,
+        -0.019930687127644744,
+        -0.04221116935058844,
+        -0.032306897498573704,
+        -0.015668951540027422,
+        0.003202228967590742,
+        0.03199533591127948
+      ],
+      "source": "/home/zhijian/biped_fddp_project/results/logs/c1_qp1_fir_identification.yaml"
+    },
+    "backward": {
+      "coefficients_rad_per_rad": [
+        0.0007445313698188063,
+        -0.027643152709116794,
+        -0.016331899842086498,
+        0.013125927431524175,
+        0.03698060913416299,
+        0.020703973047130193,
+        0.0011480532579894612,
+        -0.01740384371794061,
+        -0.024034744615800817,
+        -0.019930652430555976,
+        -0.042211185839983456,
+        -0.03230693417051039,
+        -0.015668990814760142,
+        0.003202225781385894,
+        0.03199533986221262
+      ],
+      "source": "/home/zhijian/biped_fddp_project/results/logs/c1_qp1_fir_identification.yaml"
+    }
+  },
+  "references": {
+    "forward": {
+      "source_npz": "/home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz",
+      "export_csv": "/home/zhijian/biped_fddp_project/hardware/deploy/trajectory_forward_q_ref.csv",
+      "samples": 121,
+      "duration_s": 1.2
+    },
+    "backward": {
+      "source_npz": "/home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz",
+      "export_csv": "/home/zhijian/biped_fddp_project/hardware/deploy/trajectory_backward_q_ref.csv",
+      "samples": 121,
+      "duration_s": 1.2
+    }
+  },
+  "runtime": {
+    "python_module": "hardware.controller_runtime",
+    "factory": "make_controller(controller_name, direction)",
+    "manifest": "/home/zhijian/biped_fddp_project/hardware/controller_package.yaml"
+  },
+  "safety_notes": [
+    "Verify servo ID mapping and zero offsets before enabling motor power.",
+    "Start with C0 at low speed; only enable C1/C2 after encoder, IMU and contact switch logs are stable.",
+    "Use emergency stop and communication timeout in the hardware bridge.",
+    "Do not send FDDP tau_ref to ST3215 servos; send q_cmd only."
+  ]
+}

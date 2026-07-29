@@ -1,0 +1,500 @@
+schema_version: fddp-multistep-replay-v1
+stage: fddp_multistep_mujoco_nominal_position_replay
+purpose: MuJoCo position-command replay of the independently promoted multi-step FDDP
+  nominal; not hardware walking.
+claim_boundary: simulation_only
+run_kind: full
+smoke_steps: null
+reference_duration_s: 10.0
+control_source: q_ref_position_proxy_only
+tau_ref_sent_to_ctrl: false
+tau_ref_usage: analysis_only_never_sent_to_ctrl
+inputs:
+  reference_npz: /home/zhijian/biped_fddp_project/transfer/trajectories/fddp_multistep_10step_ref.npz
+  mujoco_xml: /home/zhijian/biped_fddp_project/model/biped_planar.xml
+  reference_schema_version: fddp-multistep-v1
+  reference_acceptance_state: planning_and_contact_accepted
+  mujoco_timestep_s: 0.002
+actuator_proxy:
+  command_delay_s: 0.004
+  first_order_time_constant_s: 0.008
+  maximum_command_speed_rad_per_s: 20.0
+  command_reference_advance_s: 0.03
+contact_monitor:
+  event_match_tolerance_s: 0.08
+  penetration_depth_threshold_m: 0.003
+  maximum_unintended_flight_s: 0.02
+  maximum_sustained_penetration_s: 0.02
+metrics:
+  finite: true
+  fall_detected: false
+  max_joint_rmse_deg: 1.1244549011647973
+  max_abs_torso_pitch_deg: 9.478542960657526
+  minimum_height_fraction: 0.9789227203629539
+  maximum_unintended_flight_s: 0.0
+  maximum_sustained_penetration_s: 0.0
+  event_match_ratio: 1.0
+  event_order_valid: true
+  all_event_kinds_present: true
+  initial_torso_height_m: 0.288
+  minimum_torso_height_m: 0.2819297434645307
+  minimum_global_contact_count: 2
+  maximum_penetration_depth_m: 0.0002454767707726238
+  scheduled_contact_events: 20
+  observed_contact_events: 20
+  matched_contact_events: 20
+  skipped_contact_events: 0
+  extra_observed_contact_events: 0
+  mujoco_final_com_y_shift_m: 0.09952384189315298
+  fddp_final_com_y_shift_m: 0.05000036161042075
+joint_rmse_deg:
+  left_hip_pitch_joint: 0.9209333232821317
+  left_knee_pitch_joint: 0.6672149939061713
+  left_ankle_pitch_joint: 0.5508518677147217
+  right_hip_pitch_joint: 1.1244549011647973
+  right_knee_pitch_joint: 0.5253943530613041
+  right_ankle_pitch_joint: 0.5624609486914125
+scheduled_events:
+- time_s: 0.2
+  kind: left_liftoff
+  index: 20
+  cycle_id: 0
+  source: left_contact_active
+- time_s: 0.9
+  kind: left_touchdown
+  index: 90
+  cycle_id: 0
+  source: left_contact_active
+- time_s: 1.1
+  kind: right_liftoff
+  index: 110
+  cycle_id: 0
+  source: right_contact_active
+- time_s: 1.8
+  kind: right_touchdown
+  index: 180
+  cycle_id: 0
+  source: right_contact_active
+- time_s: 2.2
+  kind: left_liftoff
+  index: 220
+  cycle_id: 1
+  source: left_contact_active
+- time_s: 2.9
+  kind: left_touchdown
+  index: 290
+  cycle_id: 1
+  source: left_contact_active
+- time_s: 3.1
+  kind: right_liftoff
+  index: 310
+  cycle_id: 1
+  source: right_contact_active
+- time_s: 3.8000000000000003
+  kind: right_touchdown
+  index: 380
+  cycle_id: 1
+  source: right_contact_active
+- time_s: 4.2
+  kind: left_liftoff
+  index: 420
+  cycle_id: 2
+  source: left_contact_active
+- time_s: 4.9
+  kind: left_touchdown
+  index: 490
+  cycle_id: 2
+  source: left_contact_active
+- time_s: 5.1000000000000005
+  kind: right_liftoff
+  index: 510
+  cycle_id: 2
+  source: right_contact_active
+- time_s: 5.8
+  kind: right_touchdown
+  index: 580
+  cycle_id: 2
+  source: right_contact_active
+- time_s: 6.2
+  kind: left_liftoff
+  index: 620
+  cycle_id: 3
+  source: left_contact_active
+- time_s: 6.9
+  kind: left_touchdown
+  index: 690
+  cycle_id: 3
+  source: left_contact_active
+- time_s: 7.1000000000000005
+  kind: right_liftoff
+  index: 710
+  cycle_id: 3
+  source: right_contact_active
+- time_s: 7.8
+  kind: right_touchdown
+  index: 780
+  cycle_id: 3
+  source: right_contact_active
+- time_s: 8.2
+  kind: left_liftoff
+  index: 820
+  cycle_id: 4
+  source: left_contact_active
+- time_s: 8.9
+  kind: left_touchdown
+  index: 890
+  cycle_id: 4
+  source: left_contact_active
+- time_s: 9.1
+  kind: right_liftoff
+  index: 910
+  cycle_id: 4
+  source: right_contact_active
+- time_s: 9.8
+  kind: right_touchdown
+  index: 980
+  cycle_id: 4
+  source: right_contact_active
+observed_events:
+- time_s: 0.25200000000000017
+  kind: left_liftoff
+- time_s: 0.8460000000000006
+  kind: left_touchdown
+- time_s: 1.1720000000000008
+  kind: right_liftoff
+- time_s: 1.7440000000000013
+  kind: right_touchdown
+- time_s: 2.265999999999972
+  kind: left_liftoff
+- time_s: 2.845999999999908
+  kind: left_touchdown
+- time_s: 3.173999999999872
+  kind: right_liftoff
+- time_s: 3.7439999999998093
+  kind: right_touchdown
+- time_s: 4.267999999999752
+  kind: left_liftoff
+- time_s: 4.845999999999688
+  kind: left_touchdown
+- time_s: 5.171999999999652
+  kind: right_liftoff
+- time_s: 5.743999999999589
+  kind: right_touchdown
+- time_s: 6.267999999999532
+  kind: left_liftoff
+- time_s: 6.845999999999468
+  kind: left_touchdown
+- time_s: 7.173999999999432
+  kind: right_liftoff
+- time_s: 7.743999999999369
+  kind: right_touchdown
+- time_s: 8.26799999999943
+  kind: left_liftoff
+- time_s: 8.845999999999623
+  kind: left_touchdown
+- time_s: 9.173999999999733
+  kind: right_liftoff
+- time_s: 9.743999999999923
+  kind: right_touchdown
+event_matching:
+  scheduled_count: 20
+  observed_count: 20
+  matched_count: 20
+  skipped_count: 0
+  extra_observed_count: 0
+  match_ratio: 1.0
+  event_order_valid: true
+  all_event_kinds_present: true
+  matched:
+  - scheduled_index: 0
+    observed_index: 0
+    scheduled_event:
+      time_s: 0.2
+      kind: left_liftoff
+      index: 20
+      cycle_id: 0
+      source: left_contact_active
+    observed_event:
+      time_s: 0.25200000000000017
+      kind: left_liftoff
+    timing_error_s: 0.05200000000000016
+  - scheduled_index: 1
+    observed_index: 1
+    scheduled_event:
+      time_s: 0.9
+      kind: left_touchdown
+      index: 90
+      cycle_id: 0
+      source: left_contact_active
+    observed_event:
+      time_s: 0.8460000000000006
+      kind: left_touchdown
+    timing_error_s: -0.05399999999999938
+  - scheduled_index: 2
+    observed_index: 2
+    scheduled_event:
+      time_s: 1.1
+      kind: right_liftoff
+      index: 110
+      cycle_id: 0
+      source: right_contact_active
+    observed_event:
+      time_s: 1.1720000000000008
+      kind: right_liftoff
+    timing_error_s: 0.07200000000000073
+  - scheduled_index: 3
+    observed_index: 3
+    scheduled_event:
+      time_s: 1.8
+      kind: right_touchdown
+      index: 180
+      cycle_id: 0
+      source: right_contact_active
+    observed_event:
+      time_s: 1.7440000000000013
+      kind: right_touchdown
+    timing_error_s: -0.05599999999999872
+  - scheduled_index: 4
+    observed_index: 4
+    scheduled_event:
+      time_s: 2.2
+      kind: left_liftoff
+      index: 220
+      cycle_id: 1
+      source: left_contact_active
+    observed_event:
+      time_s: 2.265999999999972
+      kind: left_liftoff
+    timing_error_s: 0.06599999999997186
+  - scheduled_index: 5
+    observed_index: 5
+    scheduled_event:
+      time_s: 2.9
+      kind: left_touchdown
+      index: 290
+      cycle_id: 1
+      source: left_contact_active
+    observed_event:
+      time_s: 2.845999999999908
+      kind: left_touchdown
+    timing_error_s: -0.05400000000009175
+  - scheduled_index: 6
+    observed_index: 6
+    scheduled_event:
+      time_s: 3.1
+      kind: right_liftoff
+      index: 310
+      cycle_id: 1
+      source: right_contact_active
+    observed_event:
+      time_s: 3.173999999999872
+      kind: right_liftoff
+    timing_error_s: 0.07399999999987195
+  - scheduled_index: 7
+    observed_index: 7
+    scheduled_event:
+      time_s: 3.8000000000000003
+      kind: right_touchdown
+      index: 380
+      cycle_id: 1
+      source: right_contact_active
+    observed_event:
+      time_s: 3.7439999999998093
+      kind: right_touchdown
+    timing_error_s: -0.05600000000019101
+  - scheduled_index: 8
+    observed_index: 8
+    scheduled_event:
+      time_s: 4.2
+      kind: left_liftoff
+      index: 420
+      cycle_id: 2
+      source: left_contact_active
+    observed_event:
+      time_s: 4.267999999999752
+      kind: left_liftoff
+    timing_error_s: 0.06799999999975181
+  - scheduled_index: 9
+    observed_index: 9
+    scheduled_event:
+      time_s: 4.9
+      kind: left_touchdown
+      index: 490
+      cycle_id: 2
+      source: left_contact_active
+    observed_event:
+      time_s: 4.845999999999688
+      kind: left_touchdown
+    timing_error_s: -0.05400000000031202
+  - scheduled_index: 10
+    observed_index: 10
+    scheduled_event:
+      time_s: 5.1000000000000005
+      kind: right_liftoff
+      index: 510
+      cycle_id: 2
+      source: right_contact_active
+    observed_event:
+      time_s: 5.171999999999652
+      kind: right_liftoff
+    timing_error_s: 0.0719999999996519
+  - scheduled_index: 11
+    observed_index: 11
+    scheduled_event:
+      time_s: 5.8
+      kind: right_touchdown
+      index: 580
+      cycle_id: 2
+      source: right_contact_active
+    observed_event:
+      time_s: 5.743999999999589
+      kind: right_touchdown
+    timing_error_s: -0.05600000000041039
+  - scheduled_index: 12
+    observed_index: 12
+    scheduled_event:
+      time_s: 6.2
+      kind: left_liftoff
+      index: 620
+      cycle_id: 3
+      source: left_contact_active
+    observed_event:
+      time_s: 6.267999999999532
+      kind: left_liftoff
+    timing_error_s: 0.06799999999953155
+  - scheduled_index: 13
+    observed_index: 13
+    scheduled_event:
+      time_s: 6.9
+      kind: left_touchdown
+      index: 690
+      cycle_id: 3
+      source: left_contact_active
+    observed_event:
+      time_s: 6.845999999999468
+      kind: left_touchdown
+    timing_error_s: -0.05400000000053229
+  - scheduled_index: 14
+    observed_index: 14
+    scheduled_event:
+      time_s: 7.1000000000000005
+      kind: right_liftoff
+      index: 710
+      cycle_id: 3
+      source: right_contact_active
+    observed_event:
+      time_s: 7.173999999999432
+      kind: right_liftoff
+    timing_error_s: 0.07399999999943141
+  - scheduled_index: 15
+    observed_index: 15
+    scheduled_event:
+      time_s: 7.8
+      kind: right_touchdown
+      index: 780
+      cycle_id: 3
+      source: right_contact_active
+    observed_event:
+      time_s: 7.743999999999369
+      kind: right_touchdown
+    timing_error_s: -0.056000000000630656
+  - scheduled_index: 16
+    observed_index: 16
+    scheduled_event:
+      time_s: 8.2
+      kind: left_liftoff
+      index: 820
+      cycle_id: 4
+      source: left_contact_active
+    observed_event:
+      time_s: 8.26799999999943
+      kind: left_liftoff
+    timing_error_s: 0.06799999999943118
+  - scheduled_index: 17
+    observed_index: 17
+    scheduled_event:
+      time_s: 8.9
+      kind: left_touchdown
+      index: 890
+      cycle_id: 4
+      source: left_contact_active
+    observed_event:
+      time_s: 8.845999999999623
+      kind: left_touchdown
+    timing_error_s: -0.05400000000037686
+  - scheduled_index: 18
+    observed_index: 18
+    scheduled_event:
+      time_s: 9.1
+      kind: right_liftoff
+      index: 910
+      cycle_id: 4
+      source: right_contact_active
+    observed_event:
+      time_s: 9.173999999999733
+      kind: right_liftoff
+    timing_error_s: 0.07399999999973339
+  - scheduled_index: 19
+    observed_index: 19
+    scheduled_event:
+      time_s: 9.8
+      kind: right_touchdown
+      index: 980
+      cycle_id: 4
+      source: right_contact_active
+    observed_event:
+      time_s: 9.743999999999923
+      kind: right_touchdown
+    timing_error_s: -0.05600000000007732
+  skipped: []
+  extra_observed: []
+acceptance:
+  passed: true
+  checks:
+    finite: true
+    fall_detected: true
+    max_joint_rmse_deg: true
+    max_abs_torso_pitch_deg: true
+    minimum_height_fraction: true
+    maximum_unintended_flight_s: true
+    maximum_sustained_penetration_s: true
+    event_match_ratio: true
+    event_order_valid: true
+    all_event_kinds_present: true
+  failures: []
+  thresholds:
+    maximum_abs_pitch_deg: 15.0
+    maximum_joint_rmse_deg: 4.0
+    minimum_height_fraction: 0.65
+    minimum_event_match_ratio: 0.9
+    maximum_unintended_flight_s: 0.02
+    penetration_depth_threshold_m: 0.003
+    maximum_sustained_penetration_s: 0.02
+  diagnostics:
+    finite: true
+    fall_detected: false
+    max_joint_rmse_deg: 1.1244549011647973
+    max_abs_torso_pitch_deg: 9.478542960657526
+    minimum_height_fraction: 0.9789227203629539
+    maximum_unintended_flight_s: 0.0
+    maximum_sustained_penetration_s: 0.0
+    event_match_ratio: 1.0
+    event_order_valid: true
+    all_event_kinds_present: true
+    initial_torso_height_m: 0.288
+    minimum_torso_height_m: 0.2819297434645307
+    minimum_global_contact_count: 2
+    maximum_penetration_depth_m: 0.0002454767707726238
+    scheduled_contact_events: 20
+    observed_contact_events: 20
+    matched_contact_events: 20
+    skipped_contact_events: 0
+    extra_observed_contact_events: 0
+    mujoco_final_com_y_shift_m: 0.09952384189315298
+    fddp_final_com_y_shift_m: 0.05000036161042075
+integrity_passed: true
+failures: []
+outputs:
+  csv: /home/zhijian/biped_fddp_project/results/logs/fddp_multistep_nominal_replay.csv
+  yaml: /home/zhijian/biped_fddp_project/results/logs/fddp_multistep_nominal_replay.yaml
+  figure: /home/zhijian/biped_fddp_project/results/figures/fddp_multistep_nominal_replay.png

@@ -1,0 +1,45 @@
+stage: E5_event_layer_c1_vs_c2
+limitation: Event-layer injection only; not terrain dynamics.
+results:
+- mode: C1_fixed_phase
+  scenario: early_touchdown_30ms
+  matched_event_ratio: 0.0
+  max_abs_phase_offset_ms: 0.0
+  max_abs_reference_time_error_ms: 0.0
+- mode: C1_fixed_phase
+  scenario: late_touchdown_30ms
+  matched_event_ratio: 0.0
+  max_abs_phase_offset_ms: 0.0
+  max_abs_reference_time_error_ms: 0.0
+- mode: C1_fixed_phase
+  scenario: sensor_delay_30ms
+  matched_event_ratio: 0.0
+  max_abs_phase_offset_ms: 0.0
+  max_abs_reference_time_error_ms: 0.0
+- mode: C1_fixed_phase
+  scenario: short_contact_loss_40ms
+  matched_event_ratio: 0.0
+  max_abs_phase_offset_ms: 0.0
+  max_abs_reference_time_error_ms: 0.0
+- mode: C2_phase_sync
+  scenario: early_touchdown_30ms
+  matched_event_ratio: 1.0
+  max_abs_phase_offset_ms: 20.0
+  max_abs_reference_time_error_ms: 20.0
+- mode: C2_phase_sync
+  scenario: late_touchdown_30ms
+  matched_event_ratio: 1.0
+  max_abs_phase_offset_ms: 20.0
+  max_abs_reference_time_error_ms: 20.0
+- mode: C2_phase_sync
+  scenario: sensor_delay_30ms
+  matched_event_ratio: 1.0
+  max_abs_phase_offset_ms: 20.0
+  max_abs_reference_time_error_ms: 20.0
+- mode: C2_phase_sync
+  scenario: short_contact_loss_40ms
+  matched_event_ratio: 1.0
+  max_abs_phase_offset_ms: 20.0
+  max_abs_reference_time_error_ms: 20.0
+outputs:
+  csv: /home/zhijian/biped_fddp_project/results/logs/e5_c1_c2_contact_mismatch.csv

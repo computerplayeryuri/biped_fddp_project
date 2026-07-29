@@ -1,0 +1,34 @@
+stage: C2_synthetic_phase_synchronizer_logic_validation
+scope_note: Synthetic event timing validation only; not a walking or hardware validation.
+reference_events:
+- time_s: 0.2
+  kind: left_liftoff
+- time_s: 0.45
+  kind: left_touchdown
+- time_s: 0.7
+  kind: right_liftoff
+- time_s: 0.95
+  kind: right_touchdown
+scenario_summary:
+  mixed_jitter:
+    events: 4
+    matched_events: 4
+    final_phase_offset_ms: 2.1875000000000018
+    max_abs_phase_offset_ms: 14.999999999999993
+  observed_early_25ms:
+    events: 4
+    matched_events: 4
+    final_phase_offset_ms: 24.90234375000002
+    max_abs_phase_offset_ms: 24.90234375000002
+  observed_late_30ms:
+    events: 4
+    matched_events: 4
+    final_phase_offset_ms: -29.84375000000002
+    max_abs_phase_offset_ms: 29.84375000000002
+acceptance:
+  all_events_matched: true
+  phase_offset_bound_respected: true
+  max_phase_offset_s: 0.06
+outputs:
+  csv: /home/zhijian/biped_fddp_project/results/logs/c2_phase_sync_synthetic_event_validation.csv
+  figure: /home/zhijian/biped_fddp_project/results/figures/c2_phase_sync_synthetic_event_validation.png

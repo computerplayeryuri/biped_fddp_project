@@ -1,0 +1,141 @@
+stage: C1A_v2_fixed_time_phase_fddp_mpc_pitch_recovery
+purpose: Validate horizon-level root-pitch recovery using fixed-time-phase nonlinear
+  FDDP-MPC.
+scope_note: One-shot planner validation only; not yet repeated online MuJoCo MPC or
+  C2 event phase synchronisation.
+inputs:
+  urdf: /home/zhijian/biped_fddp_project/model/biped_v1.urdf
+  c0_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+  direction: backward
+  phase_index: 40
+  phase_time_s: 0.4
+  prediction_horizon_nodes: 30
+  prediction_horizon_s: 0.3
+contact_dynamics:
+  type: two 6D flat-foot contacts
+  JMinvJt_damping: 1.0e-08
+  baumgarte_gains_Kp_Kd:
+  - 0.0
+  - 0.0
+injected_disturbance:
+  root_pitch_deg: 2.0
+  root_pitch_rate_rad_s: 0.25
+state_activation_weights:
+  running:
+  - 5.0
+  - 5.0
+  - 5.0
+  - 2500.0
+  - 20.0
+  - 20.0
+  - 10.0
+  - 10.0
+  - 10.0
+  - 10.0
+  - 10.0
+  - 10.0
+  - 2.0
+  - 2.0
+  - 2.0
+  - 1200.0
+  - 10.0
+  - 10.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  terminal:
+  - 30.0
+  - 30.0
+  - 30.0
+  - 30000.0
+  - 100.0
+  - 100.0
+  - 100.0
+  - 100.0
+  - 100.0
+  - 100.0
+  - 100.0
+  - 100.0
+  - 20.0
+  - 20.0
+  - 20.0
+  - 8000.0
+  - 50.0
+  - 50.0
+  - 5.0
+  - 5.0
+  - 5.0
+  - 5.0
+  - 5.0
+  - 5.0
+  root_pitch_tangent_index: 3
+  root_pitch_rate_tangent_index: 15
+solver:
+  name: SolverFDDP
+  max_iterations: 250
+  return_success: false
+  stop_criterion: 0.0004372089201604378
+  threshold: 1.0e-07
+  accepted_convergence: false
+  wall_clock_solve_time_ms: 488.44923700016807
+  initial_cost: 0.3945527803543455
+  final_cost: 8.03006101541449
+  initial_shooting_gaps:
+    max_gap_norm: 0.2645967918632616
+    rms_gap_norm: 0.04830854384900259
+    first_gap_norm: 0.2645967918632616
+    last_gap_norm: 0.0
+  final_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+recovery_metrics:
+  nominal_current_root_pitch_deg: 1.7660830983370428
+  disturbed_current_root_pitch_deg: 3.766083098337043
+  initial_pitch_error_deg: 2.0000000000000004
+  nominal_terminal_root_pitch_deg: 2.3668252044622364
+  mpc_terminal_root_pitch_deg: 2.6725811777042923
+  terminal_pitch_error_deg: 0.3057559732420559
+  pitch_error_reduction_ratio: 0.8471220133789721
+  nominal_terminal_pitch_rate_rad_s: 0.0012200367185341142
+  mpc_terminal_pitch_rate_rad_s: 0.0009306670612972828
+  terminal_pitch_rate_error_rad_s: -0.0002893696572368314
+position_command_candidate:
+  definition: q_cmd_next = q_plan[1], the next desired position command for the actuator
+    layer.
+  q_nominal_next_rad:
+  - 0.008476426341180439
+  - -0.00839597422410835
+  - -0.032665824040888955
+  - 0.008475485881785219
+  - -0.008394093544750111
+  - -0.03266676426110653
+  q_cmd_next_rad:
+  - 0.015818801254431417
+  - -0.0073083010435785415
+  - -0.037515295804418806
+  - 0.01585940925098684
+  - -0.00738951698623923
+  - -0.0374746878129438
+  delta_q_cmd_rad:
+  - 0.007342374913250979
+  - 0.001087673180529809
+  - -0.0048494717635298515
+  - 0.007383923369201621
+  - 0.0010045765585108817
+  - -0.004807923551837269
+  max_abs_delta_q_cmd_deg: 0.42306764530327207
+joint_limits:
+  minimum_lower_margin_rad: 0.33292781434990626
+  minimum_upper_margin_rad: 0.09850250857109176
+  minimum_margin_rad: 0.09850250857109176
+  within_position_limits: true
+  has_safety_margin: true
+integrity_passed: false
+failures:
+- FDDP MPC solve did not meet convergence criterion
+next_step: Inspect terminal recovery metrics and retune before C1-B.

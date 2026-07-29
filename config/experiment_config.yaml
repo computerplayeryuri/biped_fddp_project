@@ -1,0 +1,5 @@
+standing_duration_s: 10.0
+fall_pitch_deg: 30.0
+fall_hip_height_m: 0.12
+control_frequency_hz: 50
+viewer_realtime: true

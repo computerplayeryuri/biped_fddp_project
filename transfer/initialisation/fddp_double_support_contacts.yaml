@@ -1,0 +1,63 @@
+model:
+  urdf: /home/zhijian/biped_fddp_project/model/biped_v1.urdf
+  nq: 13
+  nv: 12
+  nu: 6
+standing_root_pose:
+  translation_m:
+  - 0.0
+  - 0.0
+  - 0.28500000000000003
+  quaternion_xyzw:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+support_contacts:
+  left:
+    frame: left_foot_contact_fixed
+    translation_m:
+    - -0.0525
+    - 0.0
+    - 3.469446951953614e-17
+    rotation_row_major:
+    - 1.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 1.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 1.0
+  right:
+    frame: right_foot_contact_fixed
+    translation_m:
+    - 0.0525
+    - 0.0
+    - 3.469446951953614e-17
+    rotation_row_major:
+    - 1.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 1.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 1.0
+neutral_joint_reference_rad:
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+com_world_m:
+- 0.0
+- 0.0
+- 0.16572722046565108
+notes:
+- Both contact frames are placed on z=0 for the FDDP standing initialisation.
+- This is an ideal rigid double-support contact assumption for the first FDDP task.
+- This file is not yet a walking contact schedule.

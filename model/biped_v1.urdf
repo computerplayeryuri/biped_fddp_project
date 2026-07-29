@@ -1,0 +1,364 @@
+<?xml version="1.0"?>
+<robot name="biped_6pitch_st3215_electronics_lumped">
+  <!--
+  Simplified 6-pitch biped URDF based on the 170×92×5 mm hip plate,
+  105 mm hip-axis spacing, 100 mm thigh/shank pitch-axis distances, and 145×85×6 mm feet.
+  Catalogue-based mobile electronics mass is lumped into electronics_lump_link.
+  Charger and LiPo safety sack are external equipment and are intentionally excluded.
+  Replace estimated bracket masses with scale measurements before final FDDP/MPC identification.
+  -->
+  <material name="purple"><color rgba="0.45 0.20 0.75 1"/></material>
+  <material name="red"><color rgba="0.85 0.10 0.10 1"/></material>
+  <material name="blue"><color rgba="0.10 0.35 0.90 1"/></material>
+  <material name="grey"><color rgba="0.18 0.18 0.18 1"/></material>
+  <material name="orange"><color rgba="0.95 0.55 0.10 0.85"/></material>
+  <link name="hip_plate_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.065"/>
+      <inertia ixx="4.59820833e-05" ixy="0" ixz="0" iyy="0.000156677083" iyz="0" izz="0.000202388333"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.17 0.092 0.005"/></geometry>
+      <material name="purple"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.17 0.092 0.005"/></geometry>
+    </collision>
+  </link>
+  <link name="electronics_lump_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.2583"/>
+      <inertia ixx="0.0001434426" ixy="0" ixz="0" iyy="0.0003479301" iyz="0" izz="0.0004154325"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.12 0.07 0.042"/></geometry>
+      <material name="orange"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.12 0.07 0.042"/></geometry>
+    </collision>
+  </link>
+  <joint name="electronics_lump_fixed" type="fixed">
+    <parent link="hip_plate_link"/>
+    <child link="electronics_lump_link"/>
+    <origin xyz="0 0 0.03" rpy="0 0 0"/>
+  </joint>
+  <link name="left_hip_motor_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.055"/>
+      <inertia ixx="8.41082917e-06" ixy="0" ixz="0" iyy="1.49785167e-05" iyz="0" izz="1.21601792e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.0452 0.0247 0.035"/></geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.0452 0.0247 0.035"/></geometry>
+    </collision>
+  </link>
+  <joint name="left_hip_motor_mount" type="fixed">
+    <parent link="hip_plate_link"/>
+    <child link="left_hip_motor_link"/>
+    <origin xyz="-0.0525 0 -0.045" rpy="0 0 0"/>
+  </joint>
+  <link name="left_thigh_bracket_link">
+    <inertial>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <mass value="0.048"/>
+      <inertia ixx="4.36e-05" ixy="0" ixz="0" iyy="4.7056e-05" iyz="0" izz="1.0656e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <geometry><box size="0.042 0.03 0.1"/></geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <geometry><box size="0.042 0.03 0.1"/></geometry>
+    </collision>
+  </link>
+  <joint name="left_hip_pitch_joint" type="revolute">
+    <parent link="left_hip_motor_link"/>
+    <child link="left_thigh_bracket_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.55" upper="0.55" effort="2.94" velocity="4.712"/>
+    <dynamics damping="0.02" friction="0.01"/>
+  </joint>
+  <link name="left_knee_motor_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.055"/>
+      <inertia ixx="8.41082917e-06" ixy="0" ixz="0" iyy="1.49785167e-05" iyz="0" izz="1.21601792e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.0452 0.0247 0.035"/></geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.0452 0.0247 0.035"/></geometry>
+    </collision>
+  </link>
+  <joint name="left_knee_motor_mount" type="fixed">
+    <parent link="left_thigh_bracket_link"/>
+    <child link="left_knee_motor_link"/>
+    <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+  </joint>
+  <link name="left_shank_bracket_link">
+    <inertial>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <mass value="0.048"/>
+      <inertia ixx="4.36e-05" ixy="0" ixz="0" iyy="4.7056e-05" iyz="0" izz="1.0656e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <geometry><box size="0.042 0.03 0.1"/></geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <geometry><box size="0.042 0.03 0.1"/></geometry>
+    </collision>
+  </link>
+  <joint name="left_knee_pitch_joint" type="revolute">
+    <parent link="left_knee_motor_link"/>
+    <child link="left_shank_bracket_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-1.2" upper="0.1" effort="2.94" velocity="4.712"/>
+    <dynamics damping="0.02" friction="0.01"/>
+  </joint>
+  <link name="left_ankle_motor_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.055"/>
+      <inertia ixx="8.41082917e-06" ixy="0" ixz="0" iyy="1.49785167e-05" iyz="0" izz="1.21601792e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.0452 0.0247 0.035"/></geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.0452 0.0247 0.035"/></geometry>
+    </collision>
+  </link>
+  <joint name="left_ankle_motor_mount" type="fixed">
+    <parent link="left_shank_bracket_link"/>
+    <child link="left_ankle_motor_link"/>
+    <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+  </joint>
+  <link name="left_foot_link">
+    <inertial>
+      <origin xyz="0 0 -0.04" rpy="0 0 0"/>
+      <mass value="0.087"/>
+      <inertia ixx="0.00015269225" ixy="0" ixz="0" iyy="5.264225e-05" iyz="0" izz="0.0002048125"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -0.04" rpy="0 0 0"/>
+      <geometry><box size="0.085 0.145 0.006"/></geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.04" rpy="0 0 0"/>
+      <geometry><box size="0.085 0.145 0.006"/></geometry>
+    </collision>
+  </link>
+  <joint name="left_ankle_pitch_joint" type="revolute">
+    <parent link="left_ankle_motor_link"/>
+    <child link="left_foot_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.45" upper="0.45" effort="2.94" velocity="4.712"/>
+    <dynamics damping="0.02" friction="0.01"/>
+  </joint>
+  <link name="left_foot_contact_lump">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.0122"/>
+      <inertia ixx="1.85541667e-06" ixy="0" ixz="0" iyy="6.35416667e-07" iyz="0" izz="2.03333333e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.02 0.04 0.015"/></geometry>
+      <material name="orange"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.02 0.04 0.015"/></geometry>
+    </collision>
+  </link>
+  <joint name="left_foot_contact_fixed" type="fixed">
+    <parent link="left_foot_link"/>
+    <child link="left_foot_contact_lump"/>
+    <origin xyz="0 0 -0.04" rpy="0 0 0"/>
+  </joint>
+  <link name="right_hip_motor_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.055"/>
+      <inertia ixx="8.41082917e-06" ixy="0" ixz="0" iyy="1.49785167e-05" iyz="0" izz="1.21601792e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.0452 0.0247 0.035"/></geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.0452 0.0247 0.035"/></geometry>
+    </collision>
+  </link>
+  <joint name="right_hip_motor_mount" type="fixed">
+    <parent link="hip_plate_link"/>
+    <child link="right_hip_motor_link"/>
+    <origin xyz="0.0525 0 -0.045" rpy="0 0 0"/>
+  </joint>
+  <link name="right_thigh_bracket_link">
+    <inertial>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <mass value="0.048"/>
+      <inertia ixx="4.36e-05" ixy="0" ixz="0" iyy="4.7056e-05" iyz="0" izz="1.0656e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <geometry><box size="0.042 0.03 0.1"/></geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <geometry><box size="0.042 0.03 0.1"/></geometry>
+    </collision>
+  </link>
+  <joint name="right_hip_pitch_joint" type="revolute">
+    <parent link="right_hip_motor_link"/>
+    <child link="right_thigh_bracket_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.55" upper="0.55" effort="2.94" velocity="4.712"/>
+    <dynamics damping="0.02" friction="0.01"/>
+  </joint>
+  <link name="right_knee_motor_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.055"/>
+      <inertia ixx="8.41082917e-06" ixy="0" ixz="0" iyy="1.49785167e-05" iyz="0" izz="1.21601792e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.0452 0.0247 0.035"/></geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.0452 0.0247 0.035"/></geometry>
+    </collision>
+  </link>
+  <joint name="right_knee_motor_mount" type="fixed">
+    <parent link="right_thigh_bracket_link"/>
+    <child link="right_knee_motor_link"/>
+    <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+  </joint>
+  <link name="right_shank_bracket_link">
+    <inertial>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <mass value="0.048"/>
+      <inertia ixx="4.36e-05" ixy="0" ixz="0" iyy="4.7056e-05" iyz="0" izz="1.0656e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <geometry><box size="0.042 0.03 0.1"/></geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <geometry><box size="0.042 0.03 0.1"/></geometry>
+    </collision>
+  </link>
+  <joint name="right_knee_pitch_joint" type="revolute">
+    <parent link="right_knee_motor_link"/>
+    <child link="right_shank_bracket_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-1.2" upper="0.1" effort="2.94" velocity="4.712"/>
+    <dynamics damping="0.02" friction="0.01"/>
+  </joint>
+  <link name="right_ankle_motor_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.055"/>
+      <inertia ixx="8.41082917e-06" ixy="0" ixz="0" iyy="1.49785167e-05" iyz="0" izz="1.21601792e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.0452 0.0247 0.035"/></geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.0452 0.0247 0.035"/></geometry>
+    </collision>
+  </link>
+  <joint name="right_ankle_motor_mount" type="fixed">
+    <parent link="right_shank_bracket_link"/>
+    <child link="right_ankle_motor_link"/>
+    <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+  </joint>
+  <link name="right_foot_link">
+    <inertial>
+      <origin xyz="0 0 -0.04" rpy="0 0 0"/>
+      <mass value="0.087"/>
+      <inertia ixx="0.00015269225" ixy="0" ixz="0" iyy="5.264225e-05" iyz="0" izz="0.0002048125"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -0.04" rpy="0 0 0"/>
+      <geometry><box size="0.085 0.145 0.006"/></geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.04" rpy="0 0 0"/>
+      <geometry><box size="0.085 0.145 0.006"/></geometry>
+    </collision>
+  </link>
+  <joint name="right_ankle_pitch_joint" type="revolute">
+    <parent link="right_ankle_motor_link"/>
+    <child link="right_foot_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.45" upper="0.45" effort="2.94" velocity="4.712"/>
+    <dynamics damping="0.02" friction="0.01"/>
+  </joint>
+  <link name="right_foot_contact_lump">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.0122"/>
+      <inertia ixx="1.85541667e-06" ixy="0" ixz="0" iyy="6.35416667e-07" iyz="0" izz="2.03333333e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.02 0.04 0.015"/></geometry>
+      <material name="orange"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.02 0.04 0.015"/></geometry>
+    </collision>
+  </link>
+  <joint name="right_foot_contact_fixed" type="fixed">
+    <parent link="right_foot_link"/>
+    <child link="right_foot_contact_lump"/>
+    <origin xyz="0 0 -0.04" rpy="0 0 0"/>
+  </joint>
+</robot>

@@ -1,0 +1,14 @@
+test_family,controller,direction,pass,iae_deg_s,iae_improvement_vs_C0,settling_time_s,peak_abs_pitch_error_deg,min_contacts,max_joint_correction_deg,median_qp_solve_time_us,max_qp_solve_time_us,deadline_miss_rate,matched_events,scheduled_events,max_abs_phase_offset_ms,left_contact_was_lost,left_contact_was_restored,runtime_s,stdout_tail,stderr,finite_commands,joint_limit_violation,rate_limit_active_seen,max_abs_command_rad,runtime_module
+pitch_disturbance_fddp_reference,C0,forward,True,0.27099987504941403,,0.24800000000000044,2.2648421178258498,4.0,0.0,,,0.0,,,,,,,,,,,,,
+pitch_disturbance_fddp_reference,C1,forward,True,0.24740359425382905,0.08707118699328716,0.16600000000000037,2.264842117825846,4.0,0.7112347183484434,711.304,1393.132,0.0,,,,,,,,,,,,,
+pitch_disturbance_fddp_reference,C2,forward,True,0.24740359425382905,0.08707118699328716,0.16600000000000037,2.264842117825846,4.0,0.7112347183484434,677.198,1184.595,0.0,,,,,,,,,,,,,
+pitch_disturbance_fddp_reference,C0,backward,True,0.2681021162056502,,0.24600000000000044,2.2467298541972407,4.0,0.0,,,0.0,,,,,,,,,,,,,
+pitch_disturbance_fddp_reference,C1,backward,True,0.22949238686762422,0.14401128153874793,0.16600000000000037,2.24672985419724,4.0,0.668957134520207,677.574,1161.952,0.0,,,,,,,,,,,,,
+pitch_disturbance_fddp_reference,C2,backward,True,0.22949238686762422,0.14401128153874793,0.16600000000000037,2.24672985419724,4.0,0.668957134520207,747.21,1457.392,0.0,,,,,,,,,,,,,
+contact_switching_mechanism,C2,scripted_left_lift_touchdown,True,,,,,,,,,,2.0,2.0,35.00000000000023,True,True,2.1007369000000153,"['Observed liftoff: 0.3800000000000003', 'Observed touchdown: 1.0560000000000007', 'Matched events: 2/2', 'Max abs phase offset: 35.000 ms', 'Saved summary: /home/zhijian/biped_fddp_project/results/logs/c2_contact_switching_demo_summary.yaml']",,,,,,
+hardware_runtime_loadability,C0,forward,True,,,,,,,,,,,,,,,,,,True,False,False,0.02709889904934481,hardware.controller_runtime
+hardware_runtime_loadability,C0,backward,True,,,,,,,,,,,,,,,,,,True,False,False,0.027098296490022718,hardware.controller_runtime
+hardware_runtime_loadability,C1,forward,True,,,,,,,,,,,,,,,,,,True,False,False,0.019776547971616182,hardware.controller_runtime
+hardware_runtime_loadability,C1,backward,True,,,,,,,,,,,,,,,,,,True,False,False,0.019775994849587784,hardware.controller_runtime
+hardware_runtime_loadability,C2,forward,True,,,,,,,,,,,,,,,,,,True,False,False,0.019776547971616182,hardware.controller_runtime
+hardware_runtime_loadability,C2,backward,True,,,,,,,,,,,,,,,,,,True,False,False,0.019775994849587784,hardware.controller_runtime

@@ -1,0 +1,10 @@
+stage: two_step_fddp_c1_ar_fit
+order: 3
+sample_time_s: 0.01
+coefficients:
+- 1.8311719034364107
+- -0.8632470354497146
+- -0.019208649139406748
+spectral_radius: 0.9500878880434162
+stabilized: false
+rmse_deg: 0.14583864725339196

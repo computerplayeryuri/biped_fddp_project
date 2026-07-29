@@ -1,0 +1,155 @@
+category,item,urdf_value,mjcf_value,status,note
+body_mass,hip_plate_link,0.065,0.065,matched,kg
+inertial_origin,hip_plate_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,"COM in body/link frame, m"
+inertia_tensor,hip_plate_link,"[[4.59820833e-05,0.0,0.0],[0.0,0.000156677083,0.0],[0.0,0.0,0.000202388333]]","[[4.59820833e-05,0.0,0.0],[0.0,0.000156677083,0.0],[0.0,0.0,0.000202388333]]",matched,kg m^2; MJCF foot values rounded
+standing_base_origin,hip_plate_link,"[0.0,0.0,0.28800000000000003]","[0.0,0.0,0.288]",matched,MJCF floating-base zero pose places the URDF foot bottom on z=0
+visual_geometry_size,hip_plate_link,"[0.17,0.092,0.005]","[0.17,0.092,0.005]",matched,URDF full box size vs twice MJCF half-size
+visual_geometry_origin,hip_plate_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,geometry origin in owning link/body frame
+collision_enablement,hip_plate_link,true,0,deliberate_simplification,feet collide in both; non-foot MJCF collision is intentionally disabled
+body_mass,electronics_lump_link,0.2583,0.2583,matched,kg
+inertial_origin,electronics_lump_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,"COM in body/link frame, m"
+inertia_tensor,electronics_lump_link,"[[0.0001434426,0.0,0.0],[0.0,0.0003479301,0.0],[0.0,0.0,0.0004154325]]","[[0.0001434426,0.0,0.0],[0.0,0.0003479301,0.0],[0.0,0.0,0.0004154325]]",matched,kg m^2; MJCF foot values rounded
+body_origin,electronics_lump_link,"[0.0,0.0,0.03]","[0.0,0.0,0.03]",matched,URDF parent-to-joint/child transform vs MJCF local body pos
+visual_geometry_size,electronics_lump_link,"[0.12,0.07,0.042]","[0.12,0.07,0.042]",matched,URDF full box size vs twice MJCF half-size
+visual_geometry_origin,electronics_lump_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,geometry origin in owning link/body frame
+collision_enablement,electronics_lump_link,true,0,deliberate_simplification,feet collide in both; non-foot MJCF collision is intentionally disabled
+body_mass,left_hip_motor_link,0.055,0.055,matched,kg
+inertial_origin,left_hip_motor_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,"COM in body/link frame, m"
+inertia_tensor,left_hip_motor_link,"[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]","[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]",matched,kg m^2; MJCF foot values rounded
+body_origin,left_hip_motor_link,"[-0.0525,0.0,-0.045]","[-0.0525,0.0,-0.045]",matched,URDF parent-to-joint/child transform vs MJCF local body pos
+visual_geometry_size,left_hip_motor_link,"[0.0452,0.0247,0.035]","[0.0452,0.0247,0.035]",matched,URDF full box size vs twice MJCF half-size
+visual_geometry_origin,left_hip_motor_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,geometry origin in owning link/body frame
+collision_enablement,left_hip_motor_link,true,0,deliberate_simplification,feet collide in both; non-foot MJCF collision is intentionally disabled
+body_mass,left_thigh_bracket_link,0.048,0.048,matched,kg
+inertial_origin,left_thigh_bracket_link,"[0.0,0.0,-0.05]","[0.0,0.0,-0.05]",matched,"COM in body/link frame, m"
+inertia_tensor,left_thigh_bracket_link,"[[4.36e-05,0.0,0.0],[0.0,4.7056e-05,0.0],[0.0,0.0,1.0656e-05]]","[[4.36e-05,0.0,0.0],[0.0,4.7056e-05,0.0],[0.0,0.0,1.0656e-05]]",matched,kg m^2; MJCF foot values rounded
+body_origin,left_thigh_bracket_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,URDF parent-to-joint/child transform vs MJCF local body pos
+visual_geometry_size,left_thigh_bracket_link,"[0.042,0.03,0.1]","[0.042,0.03,0.1]",matched,URDF full box size vs twice MJCF half-size
+visual_geometry_origin,left_thigh_bracket_link,"[0.0,0.0,-0.05]","[0.0,0.0,-0.05]",matched,geometry origin in owning link/body frame
+collision_enablement,left_thigh_bracket_link,true,0,deliberate_simplification,feet collide in both; non-foot MJCF collision is intentionally disabled
+body_mass,left_knee_motor_link,0.055,0.055,matched,kg
+inertial_origin,left_knee_motor_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,"COM in body/link frame, m"
+inertia_tensor,left_knee_motor_link,"[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]","[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]",matched,kg m^2; MJCF foot values rounded
+body_origin,left_knee_motor_link,"[0.0,0.0,-0.1]","[0.0,0.0,-0.1]",matched,URDF parent-to-joint/child transform vs MJCF local body pos
+visual_geometry_size,left_knee_motor_link,"[0.0452,0.0247,0.035]","[0.0452,0.0247,0.035]",matched,URDF full box size vs twice MJCF half-size
+visual_geometry_origin,left_knee_motor_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,geometry origin in owning link/body frame
+collision_enablement,left_knee_motor_link,true,0,deliberate_simplification,feet collide in both; non-foot MJCF collision is intentionally disabled
+body_mass,left_shank_bracket_link,0.048,0.048,matched,kg
+inertial_origin,left_shank_bracket_link,"[0.0,0.0,-0.05]","[0.0,0.0,-0.05]",matched,"COM in body/link frame, m"
+inertia_tensor,left_shank_bracket_link,"[[4.36e-05,0.0,0.0],[0.0,4.7056e-05,0.0],[0.0,0.0,1.0656e-05]]","[[4.36e-05,0.0,0.0],[0.0,4.7056e-05,0.0],[0.0,0.0,1.0656e-05]]",matched,kg m^2; MJCF foot values rounded
+body_origin,left_shank_bracket_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,URDF parent-to-joint/child transform vs MJCF local body pos
+visual_geometry_size,left_shank_bracket_link,"[0.042,0.03,0.1]","[0.042,0.03,0.1]",matched,URDF full box size vs twice MJCF half-size
+visual_geometry_origin,left_shank_bracket_link,"[0.0,0.0,-0.05]","[0.0,0.0,-0.05]",matched,geometry origin in owning link/body frame
+collision_enablement,left_shank_bracket_link,true,0,deliberate_simplification,feet collide in both; non-foot MJCF collision is intentionally disabled
+body_mass,left_ankle_motor_link,0.055,0.055,matched,kg
+inertial_origin,left_ankle_motor_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,"COM in body/link frame, m"
+inertia_tensor,left_ankle_motor_link,"[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]","[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]",matched,kg m^2; MJCF foot values rounded
+body_origin,left_ankle_motor_link,"[0.0,0.0,-0.1]","[0.0,0.0,-0.1]",matched,URDF parent-to-joint/child transform vs MJCF local body pos
+visual_geometry_size,left_ankle_motor_link,"[0.0452,0.0247,0.035]","[0.0452,0.0247,0.035]",matched,URDF full box size vs twice MJCF half-size
+visual_geometry_origin,left_ankle_motor_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,geometry origin in owning link/body frame
+collision_enablement,left_ankle_motor_link,true,0,deliberate_simplification,feet collide in both; non-foot MJCF collision is intentionally disabled
+body_mass,left_foot_link,0.0992,0.0992,matched,kg
+inertial_origin,left_foot_link,"[0.0,0.0,-0.04]","[0.0,0.0,-0.04]",matched,"COM in body/link frame, m"
+inertia_tensor,left_foot_link,"[[0.00015454766667000002,0.0,0.0],[0.0,5.3277666667e-05,0.0],[0.0,0.0,0.00020684583333]]","[[0.00015455,0.0,0.0],[0.0,5.328e-05,0.0],[0.0,0.0,0.00020685]]",matched,kg m^2; MJCF foot values rounded
+body_origin,left_foot_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,URDF parent-to-joint/child transform vs MJCF local body pos
+visual_geometry_size,left_foot_link,"[0.085,0.145,0.006]","[0.085,0.145,0.006]",matched,URDF full box size vs twice MJCF half-size
+visual_geometry_origin,left_foot_link,"[0.0,0.0,-0.04]","[0.0,0.0,-0.04]",matched,geometry origin in owning link/body frame
+collision_enablement,left_foot_link,true,1,matched,feet collide in both; non-foot MJCF collision is intentionally disabled
+rigid_body_folding,left_foot_link,"[""left_foot_link"",""left_foot_contact_lump""]","""left_foot_link""",rigid_body_folded,contact-lump mass/COM/inertia folded into foot; its separate geometry is omitted
+body_mass,right_hip_motor_link,0.055,0.055,matched,kg
+inertial_origin,right_hip_motor_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,"COM in body/link frame, m"
+inertia_tensor,right_hip_motor_link,"[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]","[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]",matched,kg m^2; MJCF foot values rounded
+body_origin,right_hip_motor_link,"[0.0525,0.0,-0.045]","[0.0525,0.0,-0.045]",matched,URDF parent-to-joint/child transform vs MJCF local body pos
+visual_geometry_size,right_hip_motor_link,"[0.0452,0.0247,0.035]","[0.0452,0.0247,0.035]",matched,URDF full box size vs twice MJCF half-size
+visual_geometry_origin,right_hip_motor_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,geometry origin in owning link/body frame
+collision_enablement,right_hip_motor_link,true,0,deliberate_simplification,feet collide in both; non-foot MJCF collision is intentionally disabled
+body_mass,right_thigh_bracket_link,0.048,0.048,matched,kg
+inertial_origin,right_thigh_bracket_link,"[0.0,0.0,-0.05]","[0.0,0.0,-0.05]",matched,"COM in body/link frame, m"
+inertia_tensor,right_thigh_bracket_link,"[[4.36e-05,0.0,0.0],[0.0,4.7056e-05,0.0],[0.0,0.0,1.0656e-05]]","[[4.36e-05,0.0,0.0],[0.0,4.7056e-05,0.0],[0.0,0.0,1.0656e-05]]",matched,kg m^2; MJCF foot values rounded
+body_origin,right_thigh_bracket_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,URDF parent-to-joint/child transform vs MJCF local body pos
+visual_geometry_size,right_thigh_bracket_link,"[0.042,0.03,0.1]","[0.042,0.03,0.1]",matched,URDF full box size vs twice MJCF half-size
+visual_geometry_origin,right_thigh_bracket_link,"[0.0,0.0,-0.05]","[0.0,0.0,-0.05]",matched,geometry origin in owning link/body frame
+collision_enablement,right_thigh_bracket_link,true,0,deliberate_simplification,feet collide in both; non-foot MJCF collision is intentionally disabled
+body_mass,right_knee_motor_link,0.055,0.055,matched,kg
+inertial_origin,right_knee_motor_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,"COM in body/link frame, m"
+inertia_tensor,right_knee_motor_link,"[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]","[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]",matched,kg m^2; MJCF foot values rounded
+body_origin,right_knee_motor_link,"[0.0,0.0,-0.1]","[0.0,0.0,-0.1]",matched,URDF parent-to-joint/child transform vs MJCF local body pos
+visual_geometry_size,right_knee_motor_link,"[0.0452,0.0247,0.035]","[0.0452,0.0247,0.035]",matched,URDF full box size vs twice MJCF half-size
+visual_geometry_origin,right_knee_motor_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,geometry origin in owning link/body frame
+collision_enablement,right_knee_motor_link,true,0,deliberate_simplification,feet collide in both; non-foot MJCF collision is intentionally disabled
+body_mass,right_shank_bracket_link,0.048,0.048,matched,kg
+inertial_origin,right_shank_bracket_link,"[0.0,0.0,-0.05]","[0.0,0.0,-0.05]",matched,"COM in body/link frame, m"
+inertia_tensor,right_shank_bracket_link,"[[4.36e-05,0.0,0.0],[0.0,4.7056e-05,0.0],[0.0,0.0,1.0656e-05]]","[[4.36e-05,0.0,0.0],[0.0,4.7056e-05,0.0],[0.0,0.0,1.0656e-05]]",matched,kg m^2; MJCF foot values rounded
+body_origin,right_shank_bracket_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,URDF parent-to-joint/child transform vs MJCF local body pos
+visual_geometry_size,right_shank_bracket_link,"[0.042,0.03,0.1]","[0.042,0.03,0.1]",matched,URDF full box size vs twice MJCF half-size
+visual_geometry_origin,right_shank_bracket_link,"[0.0,0.0,-0.05]","[0.0,0.0,-0.05]",matched,geometry origin in owning link/body frame
+collision_enablement,right_shank_bracket_link,true,0,deliberate_simplification,feet collide in both; non-foot MJCF collision is intentionally disabled
+body_mass,right_ankle_motor_link,0.055,0.055,matched,kg
+inertial_origin,right_ankle_motor_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,"COM in body/link frame, m"
+inertia_tensor,right_ankle_motor_link,"[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]","[[8.41082917e-06,0.0,0.0],[0.0,1.49785167e-05,0.0],[0.0,0.0,1.21601792e-05]]",matched,kg m^2; MJCF foot values rounded
+body_origin,right_ankle_motor_link,"[0.0,0.0,-0.1]","[0.0,0.0,-0.1]",matched,URDF parent-to-joint/child transform vs MJCF local body pos
+visual_geometry_size,right_ankle_motor_link,"[0.0452,0.0247,0.035]","[0.0452,0.0247,0.035]",matched,URDF full box size vs twice MJCF half-size
+visual_geometry_origin,right_ankle_motor_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,geometry origin in owning link/body frame
+collision_enablement,right_ankle_motor_link,true,0,deliberate_simplification,feet collide in both; non-foot MJCF collision is intentionally disabled
+body_mass,right_foot_link,0.0992,0.0992,matched,kg
+inertial_origin,right_foot_link,"[0.0,0.0,-0.04]","[0.0,0.0,-0.04]",matched,"COM in body/link frame, m"
+inertia_tensor,right_foot_link,"[[0.00015454766667000002,0.0,0.0],[0.0,5.3277666667e-05,0.0],[0.0,0.0,0.00020684583333]]","[[0.00015455,0.0,0.0],[0.0,5.328e-05,0.0],[0.0,0.0,0.00020685]]",matched,kg m^2; MJCF foot values rounded
+body_origin,right_foot_link,"[0.0,0.0,0.0]","[0.0,0.0,0.0]",matched,URDF parent-to-joint/child transform vs MJCF local body pos
+visual_geometry_size,right_foot_link,"[0.085,0.145,0.006]","[0.085,0.145,0.006]",matched,URDF full box size vs twice MJCF half-size
+visual_geometry_origin,right_foot_link,"[0.0,0.0,-0.04]","[0.0,0.0,-0.04]",matched,geometry origin in owning link/body frame
+collision_enablement,right_foot_link,true,1,matched,feet collide in both; non-foot MJCF collision is intentionally disabled
+rigid_body_folding,right_foot_link,"[""right_foot_link"",""right_foot_contact_lump""]","""right_foot_link""",rigid_body_folded,contact-lump mass/COM/inertia folded into foot; its separate geometry is omitted
+total_mass,all mapped bodies,1.0437000000000003,1.0437000000000003,matched,kg
+joint_axis,left_hip_pitch_joint,"[1.0,0.0,0.0]","[1.0,0.0,0.0]",matched,axis expressed in joint/child frame
+joint_limit,left_hip_pitch_joint,"[-0.55,0.55]","[-0.55,0.55]",matched,rad
+joint_damping,left_hip_pitch_joint,0.02,0.02,matched,N m s/rad proxy parameter
+joint_passive_friction,left_hip_pitch_joint,0.01,0.0,deliberate_mismatch,URDF Coulomb friction is not represented in current MJCF
+actuator_effort,left_hip_pitch_joint,2.94,"[-2.0,2.0]",deliberate_mismatch,URDF effort 2.94 N m; MJCF position actuator is capped at +/-2 N m
+actuator_position_range,left_hip_pitch_joint,"[-0.55,0.55]","[-0.55,0.55]",matched,"position-command range, rad"
+actuator_velocity,left_hip_pitch_joint,4.712,8.0,deliberate_mismatch,URDF velocity limit vs replay proxy command slew limit
+joint_axis,left_knee_pitch_joint,"[1.0,0.0,0.0]","[1.0,0.0,0.0]",matched,axis expressed in joint/child frame
+joint_limit,left_knee_pitch_joint,"[-1.2,0.1]","[-1.2,0.1]",matched,rad
+joint_damping,left_knee_pitch_joint,0.02,0.02,matched,N m s/rad proxy parameter
+joint_passive_friction,left_knee_pitch_joint,0.01,0.0,deliberate_mismatch,URDF Coulomb friction is not represented in current MJCF
+actuator_effort,left_knee_pitch_joint,2.94,"[-2.0,2.0]",deliberate_mismatch,URDF effort 2.94 N m; MJCF position actuator is capped at +/-2 N m
+actuator_position_range,left_knee_pitch_joint,"[-1.2,0.1]","[-1.2,0.1]",matched,"position-command range, rad"
+actuator_velocity,left_knee_pitch_joint,4.712,8.0,deliberate_mismatch,URDF velocity limit vs replay proxy command slew limit
+joint_axis,left_ankle_pitch_joint,"[1.0,0.0,0.0]","[1.0,0.0,0.0]",matched,axis expressed in joint/child frame
+joint_limit,left_ankle_pitch_joint,"[-0.45,0.45]","[-0.45,0.45]",matched,rad
+joint_damping,left_ankle_pitch_joint,0.02,0.02,matched,N m s/rad proxy parameter
+joint_passive_friction,left_ankle_pitch_joint,0.01,0.0,deliberate_mismatch,URDF Coulomb friction is not represented in current MJCF
+actuator_effort,left_ankle_pitch_joint,2.94,"[-2.0,2.0]",deliberate_mismatch,URDF effort 2.94 N m; MJCF position actuator is capped at +/-2 N m
+actuator_position_range,left_ankle_pitch_joint,"[-0.45,0.45]","[-0.45,0.45]",matched,"position-command range, rad"
+actuator_velocity,left_ankle_pitch_joint,4.712,8.0,deliberate_mismatch,URDF velocity limit vs replay proxy command slew limit
+joint_axis,right_hip_pitch_joint,"[1.0,0.0,0.0]","[1.0,0.0,0.0]",matched,axis expressed in joint/child frame
+joint_limit,right_hip_pitch_joint,"[-0.55,0.55]","[-0.55,0.55]",matched,rad
+joint_damping,right_hip_pitch_joint,0.02,0.02,matched,N m s/rad proxy parameter
+joint_passive_friction,right_hip_pitch_joint,0.01,0.0,deliberate_mismatch,URDF Coulomb friction is not represented in current MJCF
+actuator_effort,right_hip_pitch_joint,2.94,"[-2.0,2.0]",deliberate_mismatch,URDF effort 2.94 N m; MJCF position actuator is capped at +/-2 N m
+actuator_position_range,right_hip_pitch_joint,"[-0.55,0.55]","[-0.55,0.55]",matched,"position-command range, rad"
+actuator_velocity,right_hip_pitch_joint,4.712,8.0,deliberate_mismatch,URDF velocity limit vs replay proxy command slew limit
+joint_axis,right_knee_pitch_joint,"[1.0,0.0,0.0]","[1.0,0.0,0.0]",matched,axis expressed in joint/child frame
+joint_limit,right_knee_pitch_joint,"[-1.2,0.1]","[-1.2,0.1]",matched,rad
+joint_damping,right_knee_pitch_joint,0.02,0.02,matched,N m s/rad proxy parameter
+joint_passive_friction,right_knee_pitch_joint,0.01,0.0,deliberate_mismatch,URDF Coulomb friction is not represented in current MJCF
+actuator_effort,right_knee_pitch_joint,2.94,"[-2.0,2.0]",deliberate_mismatch,URDF effort 2.94 N m; MJCF position actuator is capped at +/-2 N m
+actuator_position_range,right_knee_pitch_joint,"[-1.2,0.1]","[-1.2,0.1]",matched,"position-command range, rad"
+actuator_velocity,right_knee_pitch_joint,4.712,8.0,deliberate_mismatch,URDF velocity limit vs replay proxy command slew limit
+joint_axis,right_ankle_pitch_joint,"[1.0,0.0,0.0]","[1.0,0.0,0.0]",matched,axis expressed in joint/child frame
+joint_limit,right_ankle_pitch_joint,"[-0.45,0.45]","[-0.45,0.45]",matched,rad
+joint_damping,right_ankle_pitch_joint,0.02,0.02,matched,N m s/rad proxy parameter
+joint_passive_friction,right_ankle_pitch_joint,0.01,0.0,deliberate_mismatch,URDF Coulomb friction is not represented in current MJCF
+actuator_effort,right_ankle_pitch_joint,2.94,"[-2.0,2.0]",deliberate_mismatch,URDF effort 2.94 N m; MJCF position actuator is capped at +/-2 N m
+actuator_position_range,right_ankle_pitch_joint,"[-0.45,0.45]","[-0.45,0.45]",matched,"position-command range, rad"
+actuator_velocity,right_ankle_pitch_joint,4.712,8.0,deliberate_mismatch,URDF velocity limit vs replay proxy command slew limit
+actuator_semantics,six leg joints,"""no URDF transmission/driver block""","{""type"":""MJCF position"",""delay_s"":0.02,""time_constant_s"":0.03,""speed_rad_s"":8.0}",consumer_specific,replay q_cmd proxy is not a calibrated hardware actuator model
+root_dofs,planar floating base,"""not represented as URDF joints""","{""forward"":[0,1,0],""vertical"":[0,0,1],""pitch"":[1,0,0]}",consumer_specific,"MJCF adds +Y, +Z and +X planar root coordinates"
+contact_parameters,foot-ground contact,"""unspecified in URDF""","{""friction"":[0.8,0.01,0.001],""solref"":[0.01,1.0],""solimp"":[0.9,0.95,0.001]}",mjcf_only_uncalibrated,MuJoCo-only simulation parameters; not hardware-calibrated
+contact_site_geometry,left_toe_site,"{""foot_forward_half_m"":0.0725,""foot_bottom_z_m"":-0.043000000000000003}","[0.0,0.068,-0.043]",matched,toe/heel site lies within footprint and on the foot bottom plane
+contact_sensor,left_toe_touch,"""no URDF sensor block""","""left_toe_touch""",mjcf_only_runtime_feature,natural-contact C2 uses this MuJoCo touch sensor
+contact_site_geometry,left_heel_site,"{""foot_forward_half_m"":0.0725,""foot_bottom_z_m"":-0.043000000000000003}","[0.0,-0.068,-0.043]",matched,toe/heel site lies within footprint and on the foot bottom plane
+contact_sensor,left_heel_touch,"""no URDF sensor block""","""left_heel_touch""",mjcf_only_runtime_feature,natural-contact C2 uses this MuJoCo touch sensor
+contact_site_geometry,right_toe_site,"{""foot_forward_half_m"":0.0725,""foot_bottom_z_m"":-0.043000000000000003}","[0.0,0.068,-0.043]",matched,toe/heel site lies within footprint and on the foot bottom plane
+contact_sensor,right_toe_touch,"""no URDF sensor block""","""right_toe_touch""",mjcf_only_runtime_feature,natural-contact C2 uses this MuJoCo touch sensor
+contact_site_geometry,right_heel_site,"{""foot_forward_half_m"":0.0725,""foot_bottom_z_m"":-0.043000000000000003}","[0.0,-0.068,-0.043]",matched,toe/heel site lies within footprint and on the foot bottom plane
+contact_sensor,right_heel_touch,"""no URDF sensor block""","""right_heel_touch""",mjcf_only_runtime_feature,natural-contact C2 uses this MuJoCo touch sensor

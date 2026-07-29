@@ -1,0 +1,153 @@
+stage: C1_fixed_phase_reduced_order_QP_MPC_closed_loop_MuJoCo
+purpose: Compare C0 FDDP-reference-only replay against C1 fixed-phase reduced-order
+  QP-MPC position correction under identical root-pitch disturbance.
+scope_note: QP-MPC is the high-frequency online correction layer. Full nonlinear FDDP
+  remains the offline nominal trajectory generator. C2 contact-event phase synchronisation
+  is not active.
+architecture:
+  nominal_reference: C0 FDDP q_ref/dq_ref/state_ref
+  online_state:
+  - root_pitch
+  - root_pitch_rate
+  qp_output: alpha_0
+  joint_position_command: q_cmd = q_ref + G_correction * alpha_0
+  qp_update_period_s: 0.02
+  qp_prediction_horizon_s: 0.2
+  joint_distribution_G_rad_per_rad:
+  - 0.27
+  - 0.062
+  - -0.228
+  - 0.27
+  - 0.062
+  - -0.228
+reduced_pitch_model:
+  state: '[pitch_error_rad, pitch_rate_error_rad_s]'
+  A:
+  - - 1.0
+    - 0.02
+  - - 0.0
+    - 0.85
+  B:
+  - - 0.0
+  - - -0.24
+  note: Local reduced-order prediction model for the online QP correction; full nonlinear
+    contact dynamics are retained in the offline FDDP trajectory.
+disturbance:
+  time_s: 0.4
+  root_pitch_deg: 2.0
+  root_pitch_rate_rad_s: 0.25
+directions:
+  forward:
+    C0:
+      case: c0_reference_only
+      direction: forward
+      reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz
+      disturbance:
+        time_s: 0.4
+        root_pitch_deg: 2.0
+        root_pitch_rate_rad_s: 0.25
+      pitch_tracking:
+        initial_error_deg_after_disturbance: 0.7262533181227249
+        peak_abs_error_deg_after_disturbance: 2.8937204459023405
+        final_error_deg: 0.10780907727251075
+        settling_time_to_0p5deg_s: 0.6600000000000007
+      stability:
+        initial_torso_height_m: 0.288
+        minimum_torso_height_m: 0.28724193331765274
+        min_global_contact_count: 4
+      qp_metrics:
+        update_period_s: null
+        median_solve_time_us: null
+        max_solve_time_us: null
+        max_abs_joint_correction_deg: 0.0
+      csv: /home/zhijian/biped_fddp_project/results/logs/c0_reference_only_forward_pitch_disturbance.csv
+    C1_QP_MPC:
+      case: c1_qp_mpc
+      direction: forward
+      reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz
+      disturbance:
+        time_s: 0.4
+        root_pitch_deg: 2.0
+        root_pitch_rate_rad_s: 0.25
+      pitch_tracking:
+        initial_error_deg_after_disturbance: 0.8129519769028489
+        peak_abs_error_deg_after_disturbance: 2.8838575906870125
+        final_error_deg: 0.13948130110665657
+        settling_time_to_0p5deg_s: 0.6040000000000006
+      stability:
+        initial_torso_height_m: 0.288
+        minimum_torso_height_m: 0.28724022869092314
+        min_global_contact_count: 4
+      qp_metrics:
+        update_period_s: 0.02
+        median_solve_time_us: 377.332
+        max_solve_time_us: 3911.889
+        max_abs_joint_correction_deg: 1.35
+      csv: /home/zhijian/biped_fddp_project/results/logs/c1_qp_mpc_forward_pitch_disturbance.csv
+    comparison:
+      absolute_final_pitch_error_C0_deg: 0.10780907727251075
+      absolute_final_pitch_error_C1_deg: 0.13948130110665657
+      final_pitch_error_improvement_ratio: -0.2937806781713513
+      C1_stability_pass: true
+      C1_improves_C0_by_at_least_10_percent: false
+      integrity_passed: false
+    plots:
+      pitch_comparison: /home/zhijian/biped_fddp_project/results/figures/c1_qp_mpc_forward_pitch_comparison.png
+      joint_corrections: /home/zhijian/biped_fddp_project/results/figures/c1_qp_mpc_forward_joint_corrections.png
+  backward:
+    C0:
+      case: c0_reference_only
+      direction: backward
+      reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+      disturbance:
+        time_s: 0.4
+        root_pitch_deg: 2.0
+        root_pitch_rate_rad_s: 0.25
+      pitch_tracking:
+        initial_error_deg_after_disturbance: -0.726237631996145
+        peak_abs_error_deg_after_disturbance: 1.6376101422062124
+        final_error_deg: -0.11666887339791389
+        settling_time_to_0p5deg_s: 0.6620000000000007
+      stability:
+        initial_torso_height_m: 0.288
+        minimum_torso_height_m: 0.28754293918368007
+        min_global_contact_count: 4
+      qp_metrics:
+        update_period_s: null
+        median_solve_time_us: null
+        max_solve_time_us: null
+        max_abs_joint_correction_deg: 0.0
+      csv: /home/zhijian/biped_fddp_project/results/logs/c0_reference_only_backward_pitch_disturbance.csv
+    C1_QP_MPC:
+      case: c1_qp_mpc
+      direction: backward
+      reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+      disturbance:
+        time_s: 0.4
+        root_pitch_deg: 2.0
+        root_pitch_rate_rad_s: 0.25
+      pitch_tracking:
+        initial_error_deg_after_disturbance: -0.8129323133279447
+        peak_abs_error_deg_after_disturbance: 1.7009482210847167
+        final_error_deg: -0.6524280573361623
+        settling_time_to_0p5deg_s: null
+      stability:
+        initial_torso_height_m: 0.288
+        minimum_torso_height_m: 0.2873234305509102
+        min_global_contact_count: 4
+      qp_metrics:
+        update_period_s: 0.02
+        median_solve_time_us: 340.878
+        max_solve_time_us: 548.371
+        max_abs_joint_correction_deg: 1.35
+      csv: /home/zhijian/biped_fddp_project/results/logs/c1_qp_mpc_backward_pitch_disturbance.csv
+    comparison:
+      absolute_final_pitch_error_C0_deg: 0.11666887339791389
+      absolute_final_pitch_error_C1_deg: 0.6524280573361623
+      final_pitch_error_improvement_ratio: -4.592134717123514
+      C1_stability_pass: true
+      C1_improves_C0_by_at_least_10_percent: false
+      integrity_passed: false
+    plots:
+      pitch_comparison: /home/zhijian/biped_fddp_project/results/figures/c1_qp_mpc_backward_pitch_comparison.png
+      joint_corrections: /home/zhijian/biped_fddp_project/results/figures/c1_qp_mpc_backward_joint_corrections.png

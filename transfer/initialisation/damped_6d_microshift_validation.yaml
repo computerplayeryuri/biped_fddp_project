@@ -1,0 +1,58 @@
+stage: 7C_damped_6d_contact_fddp_microshift_validation
+purpose: "Validate the corrected damped 6D-contact FDDP formulation on a +0.5 mm CoM_y\
+  \ shift before any full \xB16 mm continuation run."
+model:
+  urdf: /home/zhijian/biped_fddp_project/model/biped_v1.urdf
+  nq: 13
+  nv: 12
+  ndx: 24
+  nu: 6
+contact_dynamics:
+  type: two 6D flat-foot contacts
+  JMinvJt_damping: 1.0e-08
+  baumgarte_gains_Kp_Kd:
+  - 0.0
+  - 0.0
+  reference_mode: exact world foot poses at x0
+task:
+  direction: forward
+  target_peak_shift_y_m: 0.0005
+  warmstart_source: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_warmstart.npz
+  warmstart_scale_ratio: 0.08333333333333333
+solver:
+  name: SolverFDDP
+  max_iterations: 250
+  return_success: true
+  stop_criterion: 5.651526329706128e-11
+  threshold: 1.0e-07
+  accepted_convergence: true
+  initial_cost: 1.2521559836720444e-06
+  final_cost: 3.7186185374546003e-07
+  initial_shooting_gaps:
+    max_gap_norm: 0.013810526253072693
+    rms_gap_norm: 0.008442424035145843
+    first_gap_norm: 5.119604284158818e-10
+    last_gap_norm: 3.596054668173849e-07
+  final_shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+result:
+  achieved_peak_shift_y_m: 0.0005032259391951657
+  peak_abs_com_y_tracking_error_m: 3.975282563908932e-06
+  final_com_y_return_error_m: 1.568098007015272e-07
+  max_left_translation_error_m: 2.156338867514724e-08
+  max_right_translation_error_m: 2.1563392286811313e-08
+  max_left_rotation_error_rad: 8.504858033089815e-12
+  max_right_rotation_error_rad: 8.39196955651556e-12
+  joint_limits:
+    minimum_lower_margin_rad: 0.449977515131773
+    minimum_upper_margin_rad: 0.09910920365925387
+    minimum_margin_rad: 0.09910920365925387
+    within_position_limits: true
+    has_safety_margin: true
+integrity_passed: true
+failures: []
+next_step: Use the identical damped 6D contact model and warmstart-tracking cost formulation
+  in a full amplitude continuation.

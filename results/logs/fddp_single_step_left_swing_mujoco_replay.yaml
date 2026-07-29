@@ -1,0 +1,26 @@
+stage: single_step_left_swing_mujoco_position_command_replay
+purpose: MuJoCo position-command replay, not hardware walking
+inputs:
+  reference_npz: /home/zhijian/biped_fddp_project/transfer/trajectories/fddp_single_step_left_swing_ref.npz
+  mujoco_xml: /home/zhijian/biped_fddp_project/model/biped_planar.xml
+  tau_ref_usage: analysis_only_never_sent_to_ctrl
+metrics:
+  max_joint_rmse_deg: 3.961814140941858
+  max_abs_torso_pitch_deg: 7.207304947083727
+  min_torso_height_m: 0.287514115541989
+  initial_torso_height_m: 0.288
+  min_global_contact_count: 4
+  mujoco_achieved_com_y_shift_m: 0.008243760802232103
+  fddp_com_y_shift_m: 0.004710276592845731
+joint_rmse_deg:
+  left_hip_pitch_joint: 2.3242550945035663
+  left_knee_pitch_joint: 3.961814140941858
+  left_ankle_pitch_joint: 1.15920722265911
+  right_hip_pitch_joint: 0.9198726073180482
+  right_knee_pitch_joint: 0.538574634340204
+  right_ankle_pitch_joint: 0.4450160112930351
+integrity_passed: true
+failures: []
+outputs:
+  csv: /home/zhijian/biped_fddp_project/results/logs/fddp_single_step_left_swing_mujoco_replay.csv
+  figure: /home/zhijian/biped_fddp_project/results/figures/fddp_single_step_left_swing_mujoco_replay.png

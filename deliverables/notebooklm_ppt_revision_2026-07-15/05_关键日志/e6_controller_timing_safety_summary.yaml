@@ -1,0 +1,65 @@
+stage: E6_online_timing_and_available_safety
+results:
+- controller_run: C1_forward
+  source_csv: /home/zhijian/biped_fddp_project/results/logs/c1_qp2_balanced_forward.csv
+  controller_period_s: 0.02
+  update_count: 61
+  p50_qp_solve_time_us: 679.828
+  p95_qp_solve_time_us: 809.436
+  max_qp_solve_time_us: 1507.705
+  deadline_miss_count: 0
+  max_abs_joint_correction_rad: 0.0124133875896748
+  position_clip_available: false
+  speed_clip_available: false
+  increment_clip_available: false
+  fallback_available: false
+  note: Current C1/C2 logs contain applied corrections but not explicit clip or fallback
+    counters.
+- controller_run: C1_backward
+  source_csv: /home/zhijian/biped_fddp_project/results/logs/c1_qp2_balanced_backward.csv
+  controller_period_s: 0.02
+  update_count: 61
+  p50_qp_solve_time_us: 702.078
+  p95_qp_solve_time_us: 1082.478
+  max_qp_solve_time_us: 1385.772
+  deadline_miss_count: 0
+  max_abs_joint_correction_rad: 0.0116755045520842
+  position_clip_available: false
+  speed_clip_available: false
+  increment_clip_available: false
+  fallback_available: false
+  note: Current C1/C2 logs contain applied corrections but not explicit clip or fallback
+    counters.
+- controller_run: C2_forward
+  source_csv: /home/zhijian/biped_fddp_project/results/logs/c2_phase_sync_forward.csv
+  controller_period_s: 0.02
+  update_count: 61
+  p50_qp_solve_time_us: 640.68
+  p95_qp_solve_time_us: 772.651
+  max_qp_solve_time_us: 932.861
+  deadline_miss_count: 0
+  max_abs_joint_correction_rad: 0.0124133875896748
+  position_clip_available: false
+  speed_clip_available: false
+  increment_clip_available: false
+  fallback_available: false
+  note: Current C1/C2 logs contain applied corrections but not explicit clip or fallback
+    counters.
+- controller_run: C2_backward
+  source_csv: /home/zhijian/biped_fddp_project/results/logs/c2_phase_sync_backward.csv
+  controller_period_s: 0.02
+  update_count: 61
+  p50_qp_solve_time_us: 658.416
+  p95_qp_solve_time_us: 753.813
+  max_qp_solve_time_us: 899.218
+  deadline_miss_count: 0
+  max_abs_joint_correction_rad: 0.0116755045520842
+  position_clip_available: false
+  speed_clip_available: false
+  increment_clip_available: false
+  fallback_available: false
+  note: Current C1/C2 logs contain applied corrections but not explicit clip or fallback
+    counters.
+outputs:
+  csv: /home/zhijian/biped_fddp_project/results/logs/e6_controller_timing_safety.csv
+  figure: /home/zhijian/biped_fddp_project/results/figures/e6_controller_timing_distribution.png

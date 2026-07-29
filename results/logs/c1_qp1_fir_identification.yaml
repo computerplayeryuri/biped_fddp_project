@@ -1,0 +1,110 @@
+stage: C1_QP1_empirical_FIR_identification
+purpose: Identify a discrete-time FIR model from alpha correction to MuJoCo root-pitch
+  deviation using the C1-QP0 calibration pulses.
+directions:
+  forward:
+    direction: forward
+    sample_time_s: 0.02
+    fir_length: 15
+    fir_coefficients_rad_per_rad:
+    - 0.0007445358339875578
+    - -0.027643165141767068
+    - -0.01633190892812062
+    - 0.013125950141283602
+    - 0.03698061813654483
+    - 0.020703967299705597
+    - 0.0011480286546924662
+    - -0.017403870220158376
+    - -0.024034816738382626
+    - -0.019930687127644744
+    - -0.04221116935058844
+    - -0.032306897498573704
+    - -0.015668951540027422
+    - 0.003202228967590742
+    - 0.03199533591127948
+    step_response_cumsum:
+    - 0.0007445358339875578
+    - -0.02689862930777951
+    - -0.04323053823590013
+    - -0.03010458809461653
+    - 0.006876030041928299
+    - 0.027579997341633897
+    - 0.028728025996326362
+    - 0.011324155776167986
+    - -0.01271066096221464
+    - -0.032641348089859384
+    - -0.07485251744044782
+    - -0.10715941493902154
+    - -0.12282836647904896
+    - -0.11962613751145822
+    - -0.08763080160017873
+    fit_metrics:
+      plus_pulse_rmse_rad: 0.00023927028346610636
+      plus_pulse_rmse_deg: 0.013709177405506737
+      minus_pulse_rmse_rad: 0.00026049643802253885
+      minus_pulse_rmse_deg: 0.0149253464768827
+    identified_features:
+      peak_impulse_value_rad_per_rad: -0.04221116935058844
+      peak_impulse_time_s: 0.2
+      effective_delay_s: 0.02
+      dc_gain_sum_h: -0.08763080160017873
+      note: Use this FIR kernel in the lifted QP prediction model for C1-QP v2. If
+        coefficients change sign, the online model must retain the full FIR sequence
+        rather than collapsing it to a single gain.
+    outputs:
+      fit_plot: /home/zhijian/biped_fddp_project/results/figures/c1_qp1_fir_fit_forward.png
+      impulse_plot: /home/zhijian/biped_fddp_project/results/figures/c1_qp1_impulse_forward.png
+      step_plot: /home/zhijian/biped_fddp_project/results/figures/c1_qp1_step_forward.png
+  backward:
+    direction: backward
+    sample_time_s: 0.02
+    fir_length: 15
+    fir_coefficients_rad_per_rad:
+    - 0.0007445313698188063
+    - -0.027643152709116794
+    - -0.016331899842086498
+    - 0.013125927431524175
+    - 0.03698060913416299
+    - 0.020703973047130193
+    - 0.0011480532579894612
+    - -0.01740384371794061
+    - -0.024034744615800817
+    - -0.019930652430555976
+    - -0.042211185839983456
+    - -0.03230693417051039
+    - -0.015668990814760142
+    - 0.003202225781385894
+    - 0.03199533986221262
+    step_response_cumsum:
+    - 0.0007445313698188063
+    - -0.026898621339297987
+    - -0.043230521181384485
+    - -0.03010459374986031
+    - 0.006876015384302679
+    - 0.027579988431432872
+    - 0.028728041689422334
+    - 0.011324197971481726
+    - -0.01271054664431909
+    - -0.03264119907487507
+    - -0.07485238491485852
+    - -0.10715931908536891
+    - -0.12282830990012905
+    - -0.11962608411874316
+    - -0.08763074425653054
+    fit_metrics:
+      plus_pulse_rmse_rad: 0.00026049751325044084
+      plus_pulse_rmse_deg: 0.0149254080829035
+      minus_pulse_rmse_rad: 0.0002392712166788977
+      minus_pulse_rmse_deg: 0.013709230874661067
+    identified_features:
+      peak_impulse_value_rad_per_rad: -0.042211185839983456
+      peak_impulse_time_s: 0.2
+      effective_delay_s: 0.02
+      dc_gain_sum_h: -0.08763074425653054
+      note: Use this FIR kernel in the lifted QP prediction model for C1-QP v2. If
+        coefficients change sign, the online model must retain the full FIR sequence
+        rather than collapsing it to a single gain.
+    outputs:
+      fit_plot: /home/zhijian/biped_fddp_project/results/figures/c1_qp1_fir_fit_backward.png
+      impulse_plot: /home/zhijian/biped_fddp_project/results/figures/c1_qp1_impulse_backward.png
+      step_plot: /home/zhijian/biped_fddp_project/results/figures/c1_qp1_step_backward.png

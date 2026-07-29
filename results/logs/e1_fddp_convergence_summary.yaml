@@ -1,0 +1,9 @@
+stage: E1_fddp_convergence_and_feasibility
+record_count: 48
+directions:
+- backward
+- forward
+outputs:
+  iteration_csv: /home/zhijian/biped_fddp_project/results/logs/e1_fddp_convergence_iterations.csv
+  cost_and_gap_figure: /home/zhijian/biped_fddp_project/results/figures/e1_fddp_cost_and_gap.png
+  iteration_time_figure: /home/zhijian/biped_fddp_project/results/figures/e1_fddp_iteration_time.png

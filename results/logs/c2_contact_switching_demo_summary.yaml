@@ -1,0 +1,70 @@
+stage: C2_mujoco_contact_switching_mechanism_demo
+scope_note: Scripted joint-position contact-switching mechanism validation only; not
+  FDDP walking, not hardware validation.
+scripted_reference:
+  duration_s: 1.35
+  lift_start_s: 0.25
+  lift_full_s: 0.45
+  lower_start_s: 0.78
+  liftoff_event_reference_s: 0.36
+  touchdown_reference_s: 1.0
+  maximum_left_hip_deg: 25.0
+  maximum_left_knee_deg: -54.0
+  maximum_left_ankle_deg: 25.0
+expected_events:
+- time_s: 0.36
+  kind: left_liftoff
+  source: scripted_reference
+- time_s: 1.0
+  kind: left_touchdown
+  source: scripted_reference
+observed_events:
+- &id001
+  time_s: 0.3800000000000003
+  kind: left_liftoff
+- &id002
+  time_s: 1.0560000000000007
+  kind: left_touchdown
+matched_event_records:
+- status: matched
+  observed_event: *id001
+  reference_event:
+    time_s: 0.36
+    kind: left_liftoff
+    source: scripted_reference
+  timing_error_s: 0.020000000000000295
+  old_offset_s: 0.0
+  new_offset_s: -0.015000000000000221
+- status: matched
+  observed_event: *id002
+  reference_event:
+    time_s: 1.0
+    kind: left_touchdown
+    source: scripted_reference
+  timing_error_s: 0.04100000000000059
+  old_offset_s: -0.015000000000000221
+  new_offset_s: -0.035000000000000225
+skipped_event_records: []
+metrics:
+  observed_left_liftoff_s: 0.3800000000000003
+  observed_left_touchdown_s: 1.0560000000000007
+  matched_events: 2
+  scheduled_events: 2
+  max_abs_phase_offset_ms: 35.00000000000023
+  final_phase_offset_ms: -35.00000000000023
+  min_contacts: 4
+  min_torso_height_m: 0.28783085648712836
+  left_contact_was_lost: true
+  left_contact_was_restored: true
+outputs:
+  fixed_clock_csv: /home/zhijian/biped_fddp_project/results/logs/c2_contact_switching_demo_fixed_clock.csv
+  phase_sync_csv: /home/zhijian/biped_fddp_project/results/logs/c2_contact_switching_demo_phase_sync.csv
+  contacts_plot: /home/zhijian/biped_fddp_project/results/figures/c2_contact_switching_demo_contacts.png
+  phase_offset_plot: /home/zhijian/biped_fddp_project/results/figures/c2_contact_switching_demo_phase_offset.png
+  joint_retiming_plot: /home/zhijian/biped_fddp_project/results/figures/c2_contact_switching_demo_joint_retiming.png
+acceptance:
+  left_liftoff_detected: true
+  left_touchdown_detected: true
+  all_expected_events_matched: true
+  phase_offset_bound_respected: true
+  support_contact_retained: true

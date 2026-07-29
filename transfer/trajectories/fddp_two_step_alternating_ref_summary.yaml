@@ -1,0 +1,51 @@
+stage: fddp_two_step_alternating
+task: fixed DS-left-SS-DS-right-SS-DS two-step feasibility experiment
+coordinate_convention:
+  forward_axis: +Y
+  vertical_axis: +Z
+  pitch_axis: +X
+claim_boundary: Simulation FDDP planning evidence only; tau_ref is analysis output
+  and is not a hardware torque command or a hardware walking claim.
+exported_nominal_trajectory: true
+diagnostics:
+  max_shooting_gap_norm: 0.0
+  rms_shooting_gap_norm: 0.0
+  max_active_support_translation_error_m: 1.573187608502526e-05
+  max_active_support_rotation_error_rad: 3.357818785636708e-06
+  first_landing_translation_error_m: 1.3204770503250437e-05
+  first_landing_rotation_error_rad: 1.5010619946554658e-06
+  second_landing_translation_error_m: 4.5975499291266404e-08
+  second_landing_rotation_error_rad: 3.357818778526123e-06
+  min_left_swing_clearance_m: 0.019999231908267093
+  min_right_swing_clearance_m: 0.01999848055160216
+  min_joint_limit_margin_rad: 0.011992051978489182
+  achieved_forward_com_displacement_m: 0.008118002095244463
+  solver_return_success: true
+  solver_iterations: 166
+  solver_stop_criterion: 2.8386213767280727e-08
+  solver_cost: 0.5577499723210804
+acceptance:
+  passed: true
+  failures: []
+  diagnostics:
+    max_shooting_gap_norm: 0.0
+    rms_shooting_gap_norm: 0.0
+    max_active_support_translation_error_m: 1.573187608502526e-05
+    max_active_support_rotation_error_rad: 3.357818785636708e-06
+    first_landing_translation_error_m: 1.3204770503250437e-05
+    first_landing_rotation_error_rad: 1.5010619946554658e-06
+    second_landing_translation_error_m: 4.5975499291266404e-08
+    second_landing_rotation_error_rad: 3.357818778526123e-06
+    min_left_swing_clearance_m: 0.019999231908267093
+    min_right_swing_clearance_m: 0.01999848055160216
+    min_joint_limit_margin_rad: 0.011992051978489182
+    achieved_forward_com_displacement_m: 0.008118002095244463
+    solver_return_success: true
+    solver_iterations: 166
+    solver_stop_criterion: 2.8386213767280727e-08
+    solver_cost: 0.5577499723210804
+outputs:
+  trajectory_npz: /home/zhijian/biped_fddp_project/transfer/trajectories/fddp_two_step_alternating_ref.npz
+  diagnostic_yaml: /home/zhijian/biped_fddp_project/results/logs/fddp_two_step_alternating_diagnostics.yaml
+  diagnostic_csv: /home/zhijian/biped_fddp_project/results/logs/fddp_two_step_alternating_diagnostics.csv
+  figure: /home/zhijian/biped_fddp_project/results/figures/fddp_two_step_alternating_com_clearance.png

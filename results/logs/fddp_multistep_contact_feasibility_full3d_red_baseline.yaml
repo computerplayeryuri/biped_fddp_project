@@ -1,0 +1,69 @@
+schema_version: fddp-contact-feasibility-v1
+passed: false
+planning_candidate_sha256: c7e06b2bc454e478aa70fdad190e172271b94589cdd7e5cf9616bca0dc30208e
+planning_candidate_acceptance: planning_accepted_contact_pending
+friction_contract_passed: true
+friction_contract_error: null
+planning_friction_coefficient: 0.8
+mjcf_friction_coefficients:
+  left: 0.8
+  right: 0.8
+sole_offset_from_ankle_local_m:
+- 0.0
+- 0.0
+- -0.043000000000000003
+contact_frame_offsets_from_ankle_local_m:
+  left:
+  - 0.0
+  - 0.0
+  - -0.04
+  right:
+  - 0.0
+  - 0.0
+  - -0.04
+contact_to_sole_offsets_local_m:
+  left:
+  - 0.0
+  - 0.0
+  - -0.0030000000000000027
+  right:
+  - 0.0
+  - 0.0
+  - -0.0030000000000000027
+foot_polygon_xy_m:
+- - -0.0425
+  - -0.0725
+- - 0.0425
+  - -0.0725
+- - 0.0425
+  - 0.0725
+- - -0.0425
+  - 0.0725
+thresholds:
+  friction_coefficient: 0.8
+  minimum_normal_force_n: -1.0e-05
+  maximum_friction_utilisation: 0.9
+  minimum_cop_margin_m: 0.002
+  maximum_tangential_speed_m_s: 0.001
+metrics:
+  accepted: false
+  active_contact_row_count: 1300
+  violation_count: 1253
+  minimum_normal_force_n: -525053.4751324016
+  maximum_friction_utilisation: 2.5454076999677135
+  minimum_cop_margin_m: -1.0279383932983743
+  maximum_tangential_speed_m_s: 0.0
+violation_counts:
+  unilateral_violation: 286
+  friction_violation: 291
+  cop_violation: 1253
+  slip_violation: 0
+promotion: null
+final_reference_created: false
+outputs:
+  csv: /home/zhijian/biped_fddp_project/results/logs/fddp_multistep_contact_feasibility.csv
+  yaml: /home/zhijian/biped_fddp_project/results/logs/fddp_multistep_contact_feasibility.yaml
+  figure: /home/zhijian/biped_fddp_project/results/figures/fddp_multistep_contact_feasibility.png
+claim_boundary: planning candidate retained; contact feasibility failed; no final
+  nominal
+tau_ref_hardware_usage: analysis_only

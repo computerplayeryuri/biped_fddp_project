@@ -1,0 +1,26 @@
+Overleaf evidence update manifest
+=================================
+
+Generated from:
+/home/zhijian/biped_fddp_project/results/logs/ppt_kpi_c0_c1_c2_evaluation_summary.yaml
+/home/zhijian/biped_fddp_project/results/logs/ppt_kpi_c0_c1_c2_evaluation_table.csv
+
+Figures:
+results/figures/c2_phase_sync_forward_pitch_comparison.png
+results/figures/c2_phase_sync_backward_pitch_comparison.png
+results/figures/c2_phase_sync_forward_contacts_phase.png
+results/figures/c2_phase_sync_backward_contacts_phase.png
+results/figures/c2_contact_switching_demo_contacts.png
+results/figures/c2_contact_switching_demo_phase_offset.png
+results/figures/c2_contact_switching_demo_joint_retiming.png
+results/figures/c1_runtime_benchmark_forward_timing.png
+results/figures/fddp_com_shift_mujoco_replay_forward_body.png
+results/figures/fddp_com_shift_mujoco_replay_backward_body.png
+results/figures/stage8_scripted_alternating_step_contacts.png
+results/figures/stage8_scripted_alternating_step_phase_offset.png
+results/figures/stage8_scripted_alternating_step_body.png
+
+Videos:
+results/videos/c2_contact_switching_demo.gif
+results/videos/fddp_forward_com_shift_replay.gif
+results/videos/scripted_alternating_step_preview.gif

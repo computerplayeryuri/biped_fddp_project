@@ -1,0 +1,501 @@
+stage: PPT_KPI_C0_C1_C2_controller_evaluation
+ppt_kpi_source: Presentation.pptx slides 13-18 and 22
+scope_note: Current FDDP reference is double-support CoM shift, not walking. Walking
+  velocity, step length, ZMP margin, CoT and battery voltage KPIs are defined for
+  future tests but are not fully measurable from the current logs.
+tested_kpi_families:
+  stability:
+  - fall flag
+  - min contacts
+  - peak/RMS pitch error
+  - settling time
+  tracking:
+  - pitch tracking IAE
+  - final pitch error
+  - joint correction magnitude
+  real_time:
+  - QP solve time
+  - deadline miss rate
+  - 50 Hz update
+  effort:
+  - alpha RMS
+  - squared alpha
+  - max joint correction
+  robustness:
+  - matched forward/backward pitch disturbance
+  - C2 contact timing demo
+  hardware_feasibility:
+  - runtime loadability
+  - finite q_cmd
+  - joint-limit check
+  - rate limiting
+not_yet_measured_from_current_project_state:
+- walking duration over 10/30/60 s
+- forward velocity error and step-length error from a walking gait
+- ZMP margin from force/CoP estimation
+- mechanical CoT from torque or current logs
+- battery voltage drop and real servo fault events
+- real hardware success rate
+pass_by_controller:
+  C0:
+    all_applicable_tests_passed: true
+    tests:
+    - test_family: pitch_disturbance_fddp_reference
+      direction: forward
+      pass: true
+    - test_family: pitch_disturbance_fddp_reference
+      direction: backward
+      pass: true
+    - test_family: hardware_runtime_loadability
+      direction: forward
+      pass: true
+    - test_family: hardware_runtime_loadability
+      direction: backward
+      pass: true
+  C1:
+    all_applicable_tests_passed: true
+    tests:
+    - test_family: pitch_disturbance_fddp_reference
+      direction: forward
+      pass: true
+    - test_family: pitch_disturbance_fddp_reference
+      direction: backward
+      pass: true
+    - test_family: hardware_runtime_loadability
+      direction: forward
+      pass: true
+    - test_family: hardware_runtime_loadability
+      direction: backward
+      pass: true
+  C2:
+    all_applicable_tests_passed: true
+    tests:
+    - test_family: pitch_disturbance_fddp_reference
+      direction: forward
+      pass: true
+    - test_family: pitch_disturbance_fddp_reference
+      direction: backward
+      pass: true
+    - test_family: contact_switching_mechanism
+      direction: scripted_left_lift_touchdown
+      pass: true
+    - test_family: hardware_runtime_loadability
+      direction: forward
+      pass: true
+    - test_family: hardware_runtime_loadability
+      direction: backward
+      pass: true
+pitch_disturbance_details:
+  forward:
+    C0:
+      metrics:
+        candidate: C0
+        direction: forward
+        fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz
+        mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_forward.csv
+        pitch:
+          iae_deg_s: 0.27099987504941403
+          peak_abs_error_deg: 2.2648421178258498
+          final_abs_error_deg: 0.009805976206992608
+          settling_time_to_0p5deg_s: 0.24800000000000044
+        stability:
+          initial_torso_height_m: 0.288
+          minimum_torso_height_m: 0.28724193331765274
+          min_contacts: 4
+        command:
+          max_abs_joint_correction_deg: 0.0
+          median_qp_solve_time_us: null
+          max_qp_solve_time_us: null
+      kpis:
+        stability:
+          fall_detected: false
+          min_contacts: 4
+          peak_abs_pitch_error_deg: 2.2648421178258498
+          pitch_error_rms_deg: 0.6445897868457071
+          settling_time_to_0p5deg_s: 0.24800000000000044
+          iae_deg_s: 0.27099987504941403
+        tracking:
+          pitch_tracking_iae_deg_s: 0.27099987504941403
+          final_abs_pitch_error_deg: 0.009805976206992608
+          joint_angle_rmse_source: not_logged_in_current_C1_dataframe; command correction
+            and pitch tracking are logged
+        real_time:
+          control_frequency_hz: 50.0
+          median_qp_solve_time_us: null
+          max_qp_solve_time_us: null
+          deadline_miss_rate: 0.0
+          solver_success_rate: 1.0
+        effort:
+          max_abs_joint_correction_deg: 0.0
+          alpha_rms_deg: 0.0
+          squared_alpha_deg2_sum: 0.0
+      comparison_vs_C0: null
+      pass: true
+    C1:
+      metrics:
+        candidate: balanced
+        direction: forward
+        fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz
+        mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_forward.csv
+        pitch:
+          iae_deg_s: 0.24740359425382905
+          peak_abs_error_deg: 2.264842117825846
+          final_abs_error_deg: 0.001458894467888447
+          settling_time_to_0p5deg_s: 0.16600000000000037
+        stability:
+          initial_torso_height_m: 0.288
+          minimum_torso_height_m: 0.28735884794438527
+          min_contacts: 4
+        command:
+          max_abs_joint_correction_deg: 0.7112347183484434
+          median_qp_solve_time_us: 711.304
+          max_qp_solve_time_us: 1393.132
+      kpis:
+        stability:
+          fall_detected: false
+          min_contacts: 4
+          peak_abs_pitch_error_deg: 2.264842117825846
+          pitch_error_rms_deg: 0.6344397305553969
+          settling_time_to_0p5deg_s: 0.16600000000000037
+          iae_deg_s: 0.24740359425382905
+        tracking:
+          pitch_tracking_iae_deg_s: 0.24740359425382905
+          final_abs_pitch_error_deg: 0.001458894467888447
+          joint_angle_rmse_source: not_logged_in_current_C1_dataframe; command correction
+            and pitch tracking are logged
+        real_time:
+          control_frequency_hz: 50.0
+          median_qp_solve_time_us: 711.304
+          max_qp_solve_time_us: 1393.132
+          deadline_miss_rate: 0.0
+          solver_success_rate: 1.0
+        effort:
+          max_abs_joint_correction_deg: 0.7112347183484434
+          alpha_rms_deg: 0.6497648226668641
+          squared_alpha_deg2_sum: 253.7387891899561
+      comparison_vs_C0:
+        iae_improvement_ratio: 0.08707118699328716
+        peak_error_increase_ratio: -1.5686363525467073e-15
+        final_abs_error_increase_deg: -0.00834708173910416
+        stability_pass: true
+        performance_pass: true
+        integrity_passed: true
+      pass: true
+    C2:
+      metrics:
+        candidate: balanced
+        direction: forward
+        fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz
+        mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_forward.csv
+        pitch:
+          iae_deg_s: 0.24740359425382905
+          peak_abs_error_deg: 2.264842117825846
+          final_abs_error_deg: 0.001458894467888447
+          settling_time_to_0p5deg_s: 0.16600000000000037
+        stability:
+          initial_torso_height_m: 0.288
+          minimum_torso_height_m: 0.28735884794438527
+          min_contacts: 4
+        command:
+          max_abs_joint_correction_deg: 0.7112347183484434
+          median_qp_solve_time_us: 677.198
+          max_qp_solve_time_us: 1184.595
+        phase_sync:
+          active: false
+          scheduled_contact_events: 0
+          matched_contact_events: 0
+          skipped_contact_events: 0
+          max_abs_phase_offset_ms: 0.0
+          reference_events: []
+          event_records: []
+          configuration:
+            touch_threshold_N: 0.25
+            debounce_s: 0.01
+            match_window_s: 0.12
+            max_phase_offset_s: 0.06
+            max_phase_step_s: 0.02
+            correction_gain: 0.75
+        AR:
+          coefficients:
+          - 1.1120152454049033
+          - -0.052213681591909825
+          - -0.4841399350984797
+          - 0.10076433983151382
+          spectral_radius: 0.8663307515015981
+          stabilized: false
+          fit_rmse_deg: 0.030452352418247446
+          source: /home/zhijian/biped_fddp_project/results/logs/c0_reference_only_forward_pitch_disturbance.csv
+      kpis:
+        stability:
+          fall_detected: false
+          min_contacts: 4
+          peak_abs_pitch_error_deg: 2.264842117825846
+          pitch_error_rms_deg: 0.6344397305553969
+          settling_time_to_0p5deg_s: 0.16600000000000037
+          iae_deg_s: 0.24740359425382905
+        tracking:
+          pitch_tracking_iae_deg_s: 0.24740359425382905
+          final_abs_pitch_error_deg: 0.001458894467888447
+          joint_angle_rmse_source: not_logged_in_current_C1_dataframe; command correction
+            and pitch tracking are logged
+        real_time:
+          control_frequency_hz: 50.0
+          median_qp_solve_time_us: 677.198
+          max_qp_solve_time_us: 1184.595
+          deadline_miss_rate: 0.0
+          solver_success_rate: 1.0
+        effort:
+          max_abs_joint_correction_deg: 0.7112347183484434
+          alpha_rms_deg: 0.6497648226668641
+          squared_alpha_deg2_sum: 253.7387891899561
+      comparison_vs_C0:
+        iae_improvement_ratio: 0.08707118699328716
+        peak_error_increase_ratio: -1.5686363525467073e-15
+        final_abs_error_increase_deg: -0.00834708173910416
+        stability_pass: true
+        performance_pass: true
+        integrity_passed: true
+      pass: true
+  backward:
+    C0:
+      metrics:
+        candidate: C0
+        direction: backward
+        fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+        mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_backward.csv
+        pitch:
+          iae_deg_s: 0.2681021162056502
+          peak_abs_error_deg: 2.2467298541972407
+          final_abs_error_deg: 0.000941741227896728
+          settling_time_to_0p5deg_s: 0.24600000000000044
+        stability:
+          initial_torso_height_m: 0.288
+          minimum_torso_height_m: 0.28754293918368007
+          min_contacts: 4
+        command:
+          max_abs_joint_correction_deg: 0.0
+          median_qp_solve_time_us: null
+          max_qp_solve_time_us: null
+      kpis:
+        stability:
+          fall_detected: false
+          min_contacts: 4
+          peak_abs_pitch_error_deg: 2.2467298541972407
+          pitch_error_rms_deg: 0.6380096239796516
+          settling_time_to_0p5deg_s: 0.24600000000000044
+          iae_deg_s: 0.2681021162056502
+        tracking:
+          pitch_tracking_iae_deg_s: 0.2681021162056502
+          final_abs_pitch_error_deg: 0.000941741227896728
+          joint_angle_rmse_source: not_logged_in_current_C1_dataframe; command correction
+            and pitch tracking are logged
+        real_time:
+          control_frequency_hz: 50.0
+          median_qp_solve_time_us: null
+          max_qp_solve_time_us: null
+          deadline_miss_rate: 0.0
+          solver_success_rate: 1.0
+        effort:
+          max_abs_joint_correction_deg: 0.0
+          alpha_rms_deg: 0.0
+          squared_alpha_deg2_sum: 0.0
+      comparison_vs_C0: null
+      pass: true
+    C1:
+      metrics:
+        candidate: balanced
+        direction: backward
+        fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+        mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_backward.csv
+        pitch:
+          iae_deg_s: 0.22949238686762422
+          peak_abs_error_deg: 2.24672985419724
+          final_abs_error_deg: 0.007872812532935819
+          settling_time_to_0p5deg_s: 0.16600000000000037
+        stability:
+          initial_torso_height_m: 0.288
+          minimum_torso_height_m: 0.28754932797017446
+          min_contacts: 4
+        command:
+          max_abs_joint_correction_deg: 0.668957134520207
+          median_qp_solve_time_us: 677.574
+          max_qp_solve_time_us: 1161.952
+      kpis:
+        stability:
+          fall_detected: false
+          min_contacts: 4
+          peak_abs_pitch_error_deg: 2.24672985419724
+          pitch_error_rms_deg: 0.6147358051578279
+          settling_time_to_0p5deg_s: 0.16600000000000037
+          iae_deg_s: 0.22949238686762422
+        tracking:
+          pitch_tracking_iae_deg_s: 0.22949238686762422
+          final_abs_pitch_error_deg: 0.007872812532935819
+          joint_angle_rmse_source: not_logged_in_current_C1_dataframe; command correction
+            and pitch tracking are logged
+        real_time:
+          control_frequency_hz: 50.0
+          median_qp_solve_time_us: 677.574
+          max_qp_solve_time_us: 1161.952
+          deadline_miss_rate: 0.0
+          solver_success_rate: 1.0
+        effort:
+          max_abs_joint_correction_deg: 0.668957134520207
+          alpha_rms_deg: 0.6028401950928192
+          squared_alpha_deg2_sum: 218.41319679254852
+      comparison_vs_C0:
+        iae_improvement_ratio: 0.14401128153874793
+        peak_error_increase_ratio: -3.953205224210066e-16
+        final_abs_error_increase_deg: 0.006931071305039091
+        stability_pass: true
+        performance_pass: true
+        integrity_passed: true
+      pass: true
+    C2:
+      metrics:
+        candidate: balanced
+        direction: backward
+        fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+        mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_backward.csv
+        pitch:
+          iae_deg_s: 0.22949238686762422
+          peak_abs_error_deg: 2.24672985419724
+          final_abs_error_deg: 0.007872812532935819
+          settling_time_to_0p5deg_s: 0.16600000000000037
+        stability:
+          initial_torso_height_m: 0.288
+          minimum_torso_height_m: 0.28754932797017446
+          min_contacts: 4
+        command:
+          max_abs_joint_correction_deg: 0.668957134520207
+          median_qp_solve_time_us: 747.21
+          max_qp_solve_time_us: 1457.392
+        phase_sync:
+          active: false
+          scheduled_contact_events: 0
+          matched_contact_events: 0
+          skipped_contact_events: 0
+          max_abs_phase_offset_ms: 0.0
+          reference_events: []
+          event_records: []
+          configuration:
+            touch_threshold_N: 0.25
+            debounce_s: 0.01
+            match_window_s: 0.12
+            max_phase_offset_s: 0.06
+            max_phase_step_s: 0.02
+            correction_gain: 0.75
+        AR:
+          coefficients:
+          - 1.452620360718365
+          - -0.5922550392526089
+          - -0.19757360353664383
+          - 0.09553704428219557
+          spectral_radius: 0.8589016157068953
+          stabilized: false
+          fit_rmse_deg: 0.016910542414876023
+          source: /home/zhijian/biped_fddp_project/results/logs/c0_reference_only_backward_pitch_disturbance.csv
+      kpis:
+        stability:
+          fall_detected: false
+          min_contacts: 4
+          peak_abs_pitch_error_deg: 2.24672985419724
+          pitch_error_rms_deg: 0.6147358051578279
+          settling_time_to_0p5deg_s: 0.16600000000000037
+          iae_deg_s: 0.22949238686762422
+        tracking:
+          pitch_tracking_iae_deg_s: 0.22949238686762422
+          final_abs_pitch_error_deg: 0.007872812532935819
+          joint_angle_rmse_source: not_logged_in_current_C1_dataframe; command correction
+            and pitch tracking are logged
+        real_time:
+          control_frequency_hz: 50.0
+          median_qp_solve_time_us: 747.21
+          max_qp_solve_time_us: 1457.392
+          deadline_miss_rate: 0.0
+          solver_success_rate: 1.0
+        effort:
+          max_abs_joint_correction_deg: 0.668957134520207
+          alpha_rms_deg: 0.6028401950928192
+          squared_alpha_deg2_sum: 218.41319679254852
+      comparison_vs_C0:
+        iae_improvement_ratio: 0.14401128153874793
+        peak_error_increase_ratio: -3.953205224210066e-16
+        final_abs_error_increase_deg: 0.006931071305039091
+        stability_pass: true
+        performance_pass: true
+        integrity_passed: true
+      pass: true
+contact_switching_summary:
+  stage: C2_mujoco_contact_switching_mechanism_demo
+  scope_note: Scripted joint-position contact-switching mechanism validation only;
+    not FDDP walking, not hardware validation.
+  scripted_reference:
+    duration_s: 1.35
+    lift_start_s: 0.25
+    lift_full_s: 0.45
+    lower_start_s: 0.78
+    liftoff_event_reference_s: 0.36
+    touchdown_reference_s: 1.0
+    maximum_left_hip_deg: 25.0
+    maximum_left_knee_deg: -54.0
+    maximum_left_ankle_deg: 25.0
+  expected_events:
+  - time_s: 0.36
+    kind: left_liftoff
+    source: scripted_reference
+  - time_s: 1.0
+    kind: left_touchdown
+    source: scripted_reference
+  observed_events:
+  - &id001
+    time_s: 0.3800000000000003
+    kind: left_liftoff
+  - &id002
+    time_s: 1.0560000000000007
+    kind: left_touchdown
+  matched_event_records:
+  - status: matched
+    observed_event: *id001
+    reference_event:
+      time_s: 0.36
+      kind: left_liftoff
+      source: scripted_reference
+    timing_error_s: 0.020000000000000295
+    old_offset_s: 0.0
+    new_offset_s: -0.015000000000000221
+  - status: matched
+    observed_event: *id002
+    reference_event:
+      time_s: 1.0
+      kind: left_touchdown
+      source: scripted_reference
+    timing_error_s: 0.04100000000000059
+    old_offset_s: -0.015000000000000221
+    new_offset_s: -0.035000000000000225
+  skipped_event_records: []
+  metrics:
+    observed_left_liftoff_s: 0.3800000000000003
+    observed_left_touchdown_s: 1.0560000000000007
+    matched_events: 2
+    scheduled_events: 2
+    max_abs_phase_offset_ms: 35.00000000000023
+    final_phase_offset_ms: -35.00000000000023
+    min_contacts: 4
+    min_torso_height_m: 0.28783085648712836
+    left_contact_was_lost: true
+    left_contact_was_restored: true
+  outputs:
+    fixed_clock_csv: /home/zhijian/biped_fddp_project/results/logs/c2_contact_switching_demo_fixed_clock.csv
+    phase_sync_csv: /home/zhijian/biped_fddp_project/results/logs/c2_contact_switching_demo_phase_sync.csv
+    contacts_plot: /home/zhijian/biped_fddp_project/results/figures/c2_contact_switching_demo_contacts.png
+    phase_offset_plot: /home/zhijian/biped_fddp_project/results/figures/c2_contact_switching_demo_phase_offset.png
+    joint_retiming_plot: /home/zhijian/biped_fddp_project/results/figures/c2_contact_switching_demo_joint_retiming.png
+  acceptance:
+    left_liftoff_detected: true
+    left_touchdown_detected: true
+    all_expected_events_matched: true
+    phase_offset_bound_respected: true
+    support_contact_retained: true
+outputs:
+  table_csv: /home/zhijian/biped_fddp_project/results/logs/ppt_kpi_c0_c1_c2_evaluation_table.csv

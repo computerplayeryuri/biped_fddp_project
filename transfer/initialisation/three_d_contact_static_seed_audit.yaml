@@ -1,0 +1,61 @@
+stage: 7C_3d_contact_static_seed_audit
+purpose: Determine whether 3D translational support contacts require non-zero static
+  control input at x0, and whether that seed permits a stable zero-shift FDDP solve.
+model:
+  urdf: /home/zhijian/biped_fddp_project/model/biped_v1.urdf
+  nq: 13
+  nv: 12
+  nu: 6
+contact_model:
+  type: two ContactModel3D translational contacts
+  gains_Kp_Kd:
+  - 0.0
+  - 50.0
+zero_control_static_seed:
+  cost: 0.0
+  shooting_gaps:
+    max_gap_norm: 0.0925584360432
+    rms_gap_norm: 0.0925584360432
+    first_gap_norm: 0.0925584360432
+    last_gap_norm: 0.0925584360432
+quasi_static_static_seed:
+  binding_state_list_mode: running_nodes_only
+  control_max_abs: 3.2030361934620368e-15
+  control_rms: 1.3412530260894352e-15
+  cost: 6.476254847978632e-33
+  shooting_gaps:
+    max_gap_norm: 0.0925584360432
+    rms_gap_norm: 0.0925584360432
+    first_gap_norm: 0.0925584360432
+    last_gap_norm: 0.0925584360432
+quasi_static_rollout:
+  cost: null
+  shooting_gaps:
+    max_gap_norm: .nan
+    rms_gap_norm: .nan
+    first_gap_norm: 0.0
+    last_gap_norm: .nan
+  max_configuration_difference_norm: 2.956421845335142e+20
+  max_left_translation_error_m: 6.498660408765327e+18
+  max_right_translation_error_m: 6.498660408765327e+18
+  max_left_rotation_error_rad: 2.981135671819621
+  max_right_rotation_error_rad: 3.140350215365736
+fddp_from_quasi_static_static_seed:
+  max_iterations: 100
+  return_success: false
+  stop_criterion: 1184.4476901454173
+  threshold: 1.0e-07
+  accepted_convergence: false
+  cost: 84.62546701790664
+  shooting_gaps:
+    max_gap_norm: 0.0
+    rms_gap_norm: 0.0
+    first_gap_norm: 0.0
+    last_gap_norm: 0.0
+  max_configuration_difference_norm: 1.4891870652976802
+  max_left_translation_error_m: 0.020787968231042436
+  max_right_translation_error_m: 0.02703144516947584
+  max_left_rotation_error_rad: 0.5029768911128489
+  max_right_rotation_error_rad: 0.5045529240971512
+interpretation: The 3D translation-contact static state is not a suitable FDDP seed
+  under the current model/cost formulation. Do not continue with 03i.

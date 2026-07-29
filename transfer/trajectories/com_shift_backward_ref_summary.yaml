@@ -1,0 +1,75 @@
+stage: 7C_damped_6d_contact_fddp_full_continuation
+task: double_support_backward_com_shift_and_return
+purpose: "Generate a dynamically feasible full \xB16 mm nominal CoM-shift reference\
+  \ using FDDP continuation from a validated micro-shift formulation."
+coordinate_convention:
+  forward_axis: +Y
+  pitch_axis: +X
+model:
+  urdf: /home/zhijian/biped_fddp_project/model/biped_v1.urdf
+  nq: 13
+  nv: 12
+  ndx: 24
+  nu: 6
+contact_dynamics:
+  type: two 6D flat-foot contacts
+  reference_mode: exact world foot poses at x0
+  JMinvJt_damping: 1.0e-08
+  baumgarte_gains_Kp_Kd:
+  - 0.0
+  - 0.0
+  max_left_translation_error_m: 2.233123969336835e-06
+  max_right_translation_error_m: 2.2331130901326256e-06
+  max_left_rotation_error_rad: 9.90238910101411e-11
+  max_right_rotation_error_rad: 1.0388019815982037e-10
+continuation:
+  magnitudes_m:
+  - 0.0005
+  - 0.001
+  - 0.0015
+  - 0.002
+  - 0.0025
+  - 0.003
+  - 0.0035
+  - 0.004
+  - 0.0045
+  - 0.005
+  - 0.0055
+  - 0.006
+  max_iterations_per_stage: 220
+  retry_max_iterations: 420
+  trace_file: /home/zhijian/biped_fddp_project/transfer/initialisation/damped_6d_backward_continuation_trace.yaml
+  stage_count: 12
+warmstart:
+  source: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_warmstart.npz
+  reference_type: scaled contact-consistent kinematic warm-start
+com_motion:
+  requested_peak_shift_y_m: -0.006
+  achieved_peak_shift_y_m: -0.006038248945653808
+  peak_abs_y_tracking_error_m: 4.740275097953484e-05
+  final_return_error_y_m: 1.8798796342556058e-06
+final_shooting_gaps:
+  max_gap_norm: 0.0
+  rms_gap_norm: 0.0
+  first_gap_norm: 0.0
+  last_gap_norm: 0.0
+joint_limits:
+  minimum_lower_margin_rad: 0.40837748818490727
+  minimum_upper_margin_rad: 0.09993003644988038
+  minimum_margin_rad: 0.09993003644988038
+  within_position_limits: true
+  has_safety_margin: true
+outputs:
+  trajectory_npz: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+  q_ref_shape:
+  - 121
+  - 6
+  dq_ref_shape:
+  - 121
+  - 6
+  tau_ref_shape:
+  - 120
+  - 6
+  state_ref_shape:
+  - 121
+  - 25

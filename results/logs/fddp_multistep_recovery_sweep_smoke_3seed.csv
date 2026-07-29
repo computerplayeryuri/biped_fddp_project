@@ -1,0 +1,7 @@
+candidate,stage,status,direction,push_force_n,seed,passed,failures,minimum_contacts,maximum_unintended_flight_s,minimum_height_fraction,peak_abs_error_deg,event_match_ratio,event_order_valid,max_abs_alpha_deg,max_abs_delta_q_deg,max_abs_phase_offset_ms,saturation_fraction,foothold_y_m
+fir_fast,fir_qp_retune,executed,backward,-4.0,0,True,,0,0.0,0.9788190761311065,13.998077799121964,0.95,True,5.0,1.3500000000000003,95.0,0.0,0.0
+fir_fast,fir_qp_retune,executed,backward,-4.0,1,True,,0,0.0,0.9788163539252565,13.97726660971701,0.95,True,5.0,1.3500000000000003,95.0,0.0,0.0
+fir_fast,fir_qp_retune,executed,backward,-4.0,2,True,,0,0.0,0.9788189853838813,13.99633424162291,0.95,True,5.0,1.3500000000000003,95.0,0.0,0.0
+fir_fast,fir_qp_retune,executed,forward,4.0,0,True,,2,0.0,0.9784481181643186,8.841327012255432,0.95,True,5.0,1.3500000000000003,95.0,0.0,0.0
+fir_fast,fir_qp_retune,executed,forward,4.0,1,True,,2,0.0,0.9784122240969071,8.880435192515032,1.0,True,5.0,1.3500000000000003,98.75,0.0,0.0
+fir_fast,fir_qp_retune,executed,forward,4.0,2,True,,2,0.0,0.9784527508188707,8.842468310316782,0.95,True,5.0,1.3500000000000003,95.0,0.0,0.0

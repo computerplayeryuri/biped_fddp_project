@@ -1,0 +1,228 @@
+stage: C2_contact_event_phase_synchronised_FIR_QP_MPC
+scope_note: C2 is implemented as an event-capable phase synchronisation layer around
+  the existing C1 FIR-QP-MPC. The current references are double_support only, so no
+  contact transition is scheduled and the layer is expected to remain inactive in
+  this validation.
+controller_candidate:
+  name: balanced
+  q: 1500.0
+  r: 20.0
+  slew: 25.0
+disturbance:
+  time_s: 0.4
+  root_pitch_deg: 2.0
+  root_pitch_rate_rad_s: 0.25
+phase_sync_configuration:
+  touch_sensor_names:
+    left_toe: left_toe_touch
+    left_heel: left_heel_touch
+    right_toe: right_toe_touch
+    right_heel: right_heel_touch
+  touch_threshold_N: 0.25
+  debounce_s: 0.01
+  match_window_s: 0.12
+  max_phase_offset_s: 0.06
+  max_phase_step_s: 0.02
+  correction_gain: 0.75
+direction_results:
+  forward:
+    C0:
+      candidate: C0
+      direction: forward
+      fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz
+      mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_forward.csv
+      pitch:
+        iae_deg_s: 0.27099987504941403
+        peak_abs_error_deg: 2.2648421178258498
+        final_abs_error_deg: 0.009805976206992608
+        settling_time_to_0p5deg_s: 0.24800000000000044
+      stability:
+        initial_torso_height_m: 0.288
+        minimum_torso_height_m: 0.28724193331765274
+        min_contacts: 4
+      command:
+        max_abs_joint_correction_deg: 0.0
+        median_qp_solve_time_us: null
+        max_qp_solve_time_us: null
+    C1:
+      candidate: balanced
+      direction: forward
+      fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz
+      mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_forward.csv
+      pitch:
+        iae_deg_s: 0.24740359425382905
+        peak_abs_error_deg: 2.264842117825846
+        final_abs_error_deg: 0.001458894467888447
+        settling_time_to_0p5deg_s: 0.16600000000000037
+      stability:
+        initial_torso_height_m: 0.288
+        minimum_torso_height_m: 0.28735884794438527
+        min_contacts: 4
+      command:
+        max_abs_joint_correction_deg: 0.7112347183484434
+        median_qp_solve_time_us: 650.917
+        max_qp_solve_time_us: 883.936
+    C2:
+      candidate: balanced
+      direction: forward
+      fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_ref.npz
+      mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_forward.csv
+      pitch:
+        iae_deg_s: 0.24740359425382905
+        peak_abs_error_deg: 2.264842117825846
+        final_abs_error_deg: 0.001458894467888447
+        settling_time_to_0p5deg_s: 0.16600000000000037
+      stability:
+        initial_torso_height_m: 0.288
+        minimum_torso_height_m: 0.28735884794438527
+        min_contacts: 4
+      command:
+        max_abs_joint_correction_deg: 0.7112347183484434
+        median_qp_solve_time_us: 640.68
+        max_qp_solve_time_us: 932.861
+      phase_sync:
+        active: false
+        scheduled_contact_events: 0
+        matched_contact_events: 0
+        skipped_contact_events: 0
+        max_abs_phase_offset_ms: 0.0
+        reference_events: []
+        event_records: []
+        configuration:
+          touch_threshold_N: 0.25
+          debounce_s: 0.01
+          match_window_s: 0.12
+          max_phase_offset_s: 0.06
+          max_phase_step_s: 0.02
+          correction_gain: 0.75
+      AR:
+        coefficients:
+        - 1.1120152454049033
+        - -0.052213681591909825
+        - -0.4841399350984797
+        - 0.10076433983151382
+        spectral_radius: 0.8663307515015981
+        stabilized: false
+        fit_rmse_deg: 0.030452352418247446
+        source: /home/zhijian/biped_fddp_project/results/logs/c0_reference_only_forward_pitch_disturbance.csv
+    C0_vs_C2:
+      iae_improvement_ratio: 0.08707118699328716
+      peak_error_increase_ratio: -1.5686363525467073e-15
+      final_abs_error_increase_deg: -0.00834708173910416
+      stability_pass: true
+      performance_pass: true
+      integrity_passed: true
+    C1_vs_C2:
+      iae_change_ratio_vs_C1: 0.0
+      settling_change_s_vs_C1: 0.0
+      final_abs_error_change_deg_vs_C1: 0.0
+      max_joint_correction_change_deg_vs_C1: 0.0
+  backward:
+    C0:
+      candidate: C0
+      direction: backward
+      fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+      mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_backward.csv
+      pitch:
+        iae_deg_s: 0.2681021162056502
+        peak_abs_error_deg: 2.2467298541972407
+        final_abs_error_deg: 0.000941741227896728
+        settling_time_to_0p5deg_s: 0.24600000000000044
+      stability:
+        initial_torso_height_m: 0.288
+        minimum_torso_height_m: 0.28754293918368007
+        min_contacts: 4
+      command:
+        max_abs_joint_correction_deg: 0.0
+        median_qp_solve_time_us: null
+        max_qp_solve_time_us: null
+    C1:
+      candidate: balanced
+      direction: backward
+      fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+      mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_backward.csv
+      pitch:
+        iae_deg_s: 0.22949238686762422
+        peak_abs_error_deg: 2.24672985419724
+        final_abs_error_deg: 0.007872812532935819
+        settling_time_to_0p5deg_s: 0.16600000000000037
+      stability:
+        initial_torso_height_m: 0.288
+        minimum_torso_height_m: 0.28754932797017446
+        min_contacts: 4
+      command:
+        max_abs_joint_correction_deg: 0.668957134520207
+        median_qp_solve_time_us: 659.202
+        max_qp_solve_time_us: 1075.058
+    C2:
+      candidate: balanced
+      direction: backward
+      fddp_reference: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_backward_ref.npz
+      mujoco_baseline_reference: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_baseline_backward.csv
+      pitch:
+        iae_deg_s: 0.22949238686762422
+        peak_abs_error_deg: 2.24672985419724
+        final_abs_error_deg: 0.007872812532935819
+        settling_time_to_0p5deg_s: 0.16600000000000037
+      stability:
+        initial_torso_height_m: 0.288
+        minimum_torso_height_m: 0.28754932797017446
+        min_contacts: 4
+      command:
+        max_abs_joint_correction_deg: 0.668957134520207
+        median_qp_solve_time_us: 658.416
+        max_qp_solve_time_us: 899.218
+      phase_sync:
+        active: false
+        scheduled_contact_events: 0
+        matched_contact_events: 0
+        skipped_contact_events: 0
+        max_abs_phase_offset_ms: 0.0
+        reference_events: []
+        event_records: []
+        configuration:
+          touch_threshold_N: 0.25
+          debounce_s: 0.01
+          match_window_s: 0.12
+          max_phase_offset_s: 0.06
+          max_phase_step_s: 0.02
+          correction_gain: 0.75
+      AR:
+        coefficients:
+        - 1.452620360718365
+        - -0.5922550392526089
+        - -0.19757360353664383
+        - 0.09553704428219557
+        spectral_radius: 0.8589016157068953
+        stabilized: false
+        fit_rmse_deg: 0.016910542414876023
+        source: /home/zhijian/biped_fddp_project/results/logs/c0_reference_only_backward_pitch_disturbance.csv
+    C0_vs_C2:
+      iae_improvement_ratio: 0.14401128153874793
+      peak_error_increase_ratio: -3.953205224210066e-16
+      final_abs_error_increase_deg: 0.006931071305039091
+      stability_pass: true
+      performance_pass: true
+      integrity_passed: true
+    C1_vs_C2:
+      iae_change_ratio_vs_C1: 0.0
+      settling_change_s_vs_C1: 0.0
+      final_abs_error_change_deg_vs_C1: 0.0
+      max_joint_correction_change_deg_vs_C1: 0.0
+outputs:
+  forward:
+    c2_csv: /home/zhijian/biped_fddp_project/results/logs/c2_phase_sync_forward.csv
+    pitch_plot: /home/zhijian/biped_fddp_project/results/figures/c2_phase_sync_forward_pitch_comparison.png
+    phase_plot: /home/zhijian/biped_fddp_project/results/figures/c2_phase_sync_forward_contacts_phase.png
+    correction_plot: /home/zhijian/biped_fddp_project/results/figures/c2_phase_sync_forward_corrections.png
+  backward:
+    c2_csv: /home/zhijian/biped_fddp_project/results/logs/c2_phase_sync_backward.csv
+    pitch_plot: /home/zhijian/biped_fddp_project/results/figures/c2_phase_sync_backward_pitch_comparison.png
+    phase_plot: /home/zhijian/biped_fddp_project/results/figures/c2_phase_sync_backward_contacts_phase.png
+    correction_plot: /home/zhijian/biped_fddp_project/results/figures/c2_phase_sync_backward_corrections.png
+interpretation_guardrails:
+- Do not claim walking-gait phase synchronisation from this double-support validation.
+- The C2 layer is ready to use scheduled contact transitions when a walking/contact-switching
+  FDDP reference is added.
+- For the present CoM-shift references, C2 mainly validates sensor monitoring and
+  compatibility with C1, not a new performance gain.

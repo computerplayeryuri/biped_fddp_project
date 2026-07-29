@@ -1,0 +1,25 @@
+coordinate_convention:
+  x_axis: right
+  y_axis: forward
+  z_axis: upward
+  pitch_axis: x
+  sagittal_plane: yz
+
+geometry:
+  hip_spacing_m: 0.105
+  thigh_length_m: 0.100
+  shank_length_m: 0.100
+  foot_length_m: 0.145
+  foot_width_m: 0.085
+  foot_thickness_m: 0.006
+
+initial_pose:
+  hip_plate_height_m: 0.288
+  torso_pitch_rad: 0.0
+
+simulation_scope:
+  mode: planar
+  allowed_root_dofs:
+    - forward_translation_y
+    - vertical_translation_z
+    - pitch_rotation_x

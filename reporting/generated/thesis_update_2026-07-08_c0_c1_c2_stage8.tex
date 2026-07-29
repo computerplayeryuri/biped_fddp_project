@@ -1,0 +1,219 @@
+% Thesis update pack generated on 2026-07-08.
+% Purpose: paste into Overleaf main_v2_evidence_guided.tex to update the
+% software evidence, C0/C1/C2 results, Stage 8 preview, hardware deployment
+% boundary, and limitations.
+%
+% Recommended location:
+% 1. Put the C2/Stage 8 sections in Results or Evaluation.
+% 2. Put the hardware deployment section near Hardware/Implementation.
+% 3. Put the limitations section in Discussion/Future Work.
+% 4. Import the figures listed at the bottom into Overleaf before compiling.
+
+\section{Current Controller Evidence}
+\label{sec:current_controller_evidence}
+
+The current software pipeline evaluates three controller layers under a
+matched evidence framework. C0 is a joint-reference playback baseline. C1 adds
+a fixed-phase FIR-QP-MPC pitch-recovery layer. C2 keeps the C1 correction layer
+and adds contact-event phase synchronisation for toe/heel liftoff and touchdown
+events. This staged comparison separates baseline stability, predictive pitch
+correction, and contact-timing robustness.
+
+Table~\ref{tab:c0_c1_c2_current_evidence_20260708} summarises the current
+pitch-disturbance and runtime evidence. Relative to C0, both C1 and C2 reduce
+the integrated absolute pitch error in the forward and backward disturbance
+cases. In the current double-support CoM-shift reference, C2 gives the same
+pitch-recovery metrics as C1 because the nominal reference does not contain
+scheduled contact transitions. Therefore the C2 benefit should not be claimed
+from the pitch-recovery test alone; it is supported by the separate
+contact-event timing tests described below.
+
+\begin{table}[htbp]
+\centering
+\caption{Current C0/C1/C2 pitch-disturbance and runtime evidence.}
+\label{tab:c0_c1_c2_current_evidence_20260708}
+\begin{tabular}{@{}lllllll@{}}
+\toprule
+Controller & Direction & IAE (deg s) & Improvement & Settling (s) & Max corr. (deg) & Median solve (us) \\
+\midrule
+C0 & forward & 0.2710 & -- & 0.248 & 0.000 & -- \\
+C1 & forward & 0.2474 & 8.7\% & 0.166 & 0.711 & 711.3 \\
+C2 & forward & 0.2474 & 8.7\% & 0.166 & 0.711 & 677.2 \\
+C0 & backward & 0.2681 & -- & 0.246 & 0.000 & -- \\
+C1 & backward & 0.2295 & 14.4\% & 0.166 & 0.669 & 677.6 \\
+C2 & backward & 0.2295 & 14.4\% & 0.166 & 0.669 & 747.2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{C2 Contact-Phase Synchronisation}
+\label{sec:c2_contact_phase_synchronisation_20260708}
+
+The C2 layer is implemented as a contact-event phase synchronisation mechanism
+around the C1 FIR-QP-MPC controller. Its purpose is to keep the reference phase
+consistent with the measured contact phase when toe/heel contact events occur
+earlier or later than expected. A scripted contact-switching mechanism test
+validates this event path independently from the no-transition CoM-shift pitch
+test. In that mechanism test, C2 matched 2/2 scheduled contact events and the
+maximum absolute phase offset remained approximately
+\SI{35.0}{\milli\second}.
+
+This result should be interpreted as contact-event mechanism validation. It
+does not yet prove full FDDP walking-gait validation, because the current
+walking reference is still a conservative scripted preview rather than a fully
+optimised FDDP walking motion.
+
+\section{Stage 8 Scripted Alternating-Step Preview}
+\label{sec:stage8_scripted_alternating_step_20260708}
+
+The project now includes a Stage 8 scripted alternating-step locomotion
+preview. This preview is designed to exercise the left/right contact-transition
+pipeline before a full FDDP walking reference is available. It contains two
+scripted swing phases and scheduled left/right liftoff-touchdown events. The
+test is intentionally conservative and should be reported as software
+locomotion-plumbing validation rather than as final high-performance walking.
+
+In the current MuJoCo run, Stage 8 matched 4/4 scheduled contact events,
+reported a pitch RMS of \SI{0.334}{\degree}, and produced approximately
+\SI{13.6}{\milli\metre} of forward displacement over
+\SI{2.35}{\second}. The maximum phase offset was
+\SI{48.3}{\milli\second}, and no fall was detected. The acceptance checks
+confirm that all expected event kinds were observed, all expected events were
+matched, no reference events were skipped, the phase-offset bound was
+respected, support contact was retained, and no fall was detected.
+
+\begin{table}[htbp]
+\centering
+\caption{Stage 8 scripted alternating-step preview metrics.}
+\label{tab:stage8_preview_metrics_20260708}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Metric & Current value \\
+\midrule
+Duration & \SI{2.35}{\second} \\
+Scripted swing phases & 2 \\
+Scheduled contact events & 4 \\
+Matched contact events & 4/4 \\
+Skipped contact events & 0 \\
+Maximum phase offset & \SI{48.3}{\milli\second} \\
+Pitch RMS & \SI{0.334}{\degree} \\
+Peak absolute pitch & \SI{0.801}{\degree} \\
+Minimum torso height & \SI{0.288}{\metre} \\
+Forward displacement & \SI{13.6}{\milli\metre} \\
+Fall detected & False \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Hardware Runtime Export and Deployment Boundary}
+\label{sec:hardware_runtime_export_20260708}
+
+The current hardware-side software is a MuJoCo-free Python runtime for
+PC/ROS2-side deployment. It exposes C0, C1, and C2 as joint-position command
+controllers for the six ST3215 joints. The exported controller package is
+stored at \path{hardware/deploy/controller_package.json}. The package declares
+the command type as joint positions in radians, uses a
+\SI{20}{\milli\second} update period, and explicitly disallows torque
+commands.
+
+This is a controller package and runtime-loadability result, not a
+microcontroller firmware image. The runtime does not directly communicate with
+the ST3215 servos. A hardware bridge is still required to implement serial
+communication, timeouts, emergency stop, servo fault handling, calibration, and
+conversion from joint radians to calibrated servo position units.
+
+The practical deployment architecture is therefore:
+
+\begin{enumerate}
+    \item The PC or ROS2 computer runs the C0/C1/C2 Python runtime.
+    \item The runtime receives measurements such as time, pitch, pitch rate,
+    and toe/heel contact states.
+    \item The selected controller outputs six joint-position commands in
+    radians.
+    \item A hardware bridge converts these commands into ST3215-compatible
+    servo commands.
+    \item The control board or servo bus firmware sends the final position
+    commands to the servos and reports faults or telemetry.
+\end{enumerate}
+
+The current result supports hardware readiness because the package can be
+loaded and finite commands can be produced under the software smoke test. It
+does not yet demonstrate real hardware walking.
+
+\section{Simulation Coverage and Stability Conclusion}
+\label{sec:simulation_coverage_stability_20260708}
+
+The current simulation evidence covers several important but limited operating
+conditions:
+
+\begin{itemize}
+    \item forward and backward CoM-shift reference replay;
+    \item matched pitch-disturbance recovery for C0, C1, and C2;
+    \item actuator-aware command limiting using ST3215 delay, lag, velocity,
+    and rate-limit assumptions;
+    \item C2 contact-switching mechanism validation;
+    \item Stage 8 scripted alternating left/right contact transitions.
+\end{itemize}
+
+Within these tested conditions, the robot does not show a fall in the current
+software evidence, pitch remains bounded in the Stage 8 preview, and the
+controller commands remain finite and joint-limit checked in the runtime smoke
+test. Therefore the current software result supports the claim that the
+pipeline is stable under the tested scripted and disturbance conditions.
+
+However, the simulations do not yet cover all conditions required to claim
+general robust biped walking. A follow-on Stage 9 software robustness matrix
+now covers scripted long-duration operation, friction variation,
+slope-equivalent loading, small toe-step perturbations, and push pulses. In
+that matrix, 14/20 scenarios pass the current acceptance checks. The stable
+simulation envelope includes \SI{60}{\second} scripted operation, friction
+variation from $\mu=0.50$ to $\mu=1.10$, slope-equivalent loading up to
+$\pm\SI{6}{\degree}$, a \SI{2}{\milli\metre} toe step, and $\pm\SI{2}{\newton}$
+push pulses. The measured failure boundary is also clear: \SI{4}{\milli\metre}
+and \SI{6}{\milli\metre} toe steps fail contact-event robustness criteria,
+$\pm\SI{4}{\newton}$ push pulses cause transient support contact loss, and
+$\pm\SI{6}{\newton}$ push pulses cross the pitch fall threshold.
+
+The remaining open items are therefore narrower but still important: full FDDP
+walking-gait tracking, real servo communication faults, battery voltage
+effects, hardware contact sensor noise, repeated hardware trial success rate,
+and real hardware walking. These limitations should be stated explicitly to
+avoid overclaiming.
+
+\section{Remaining Validation Required}
+\label{sec:remaining_validation_required_20260708}
+
+The unchanged title can still be defended if the thesis clearly distinguishes
+implemented evidence from next-stage validation. The remaining work is:
+
+\begin{itemize}
+    \item real hardware bring-up with calibrated ST3215 joint zero positions;
+    \item a hardware bridge from C0/C1/C2 radian commands to servo bus commands;
+    \item IMU pitch and pitch-rate measurement integration;
+    \item toe/heel or foot-contact sensing integration;
+    \item C0 hardware reference playback test;
+    \item C1 hardware pitch-recovery test;
+    \item C2 hardware contact-event synchronisation test;
+    \item repeated trial success-rate measurement;
+    \item walking duration, velocity error, step-length error, and path
+    deviation metrics;
+    \item battery voltage drop, servo fault events, and current/energy logs.
+\end{itemize}
+
+\section{Figures To Import}
+\label{sec:figures_to_import_20260708}
+
+The following generated figures should be imported into Overleaf and referenced
+from the Results/Evaluation chapter:
+
+\begin{itemize}
+    \item \path{results/figures/c2_phase_sync_forward_pitch_comparison.png}
+    \item \path{results/figures/c2_phase_sync_backward_pitch_comparison.png}
+    \item \path{results/figures/c2_contact_switching_demo_phase_offset.png}
+    \item \path{results/figures/c2_contact_switching_demo_contacts.png}
+    \item \path{results/figures/stage8_scripted_alternating_step_contacts.png}
+    \item \path{results/figures/stage8_scripted_alternating_step_phase_offset.png}
+    \item \path{results/figures/stage8_scripted_alternating_step_body.png}
+    \item \path{results/figures/stage9_scripted_robustness_matrix_pass_fail.png}
+    \item \path{results/figures/stage9_scripted_robustness_matrix_pitch.png}
+\end{itemize}

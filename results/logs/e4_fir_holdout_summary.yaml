@@ -1,0 +1,107 @@
+stage: E4_fir_sign_held_out_validation
+limitation: One positive and one negative calibration pulse are available per direction;
+  sign-held-out validation is used.
+splits:
+- direction: forward
+  split: train_plus_validate_minus
+  train_source: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_plus_pulse_forward.csv
+  validation_source: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_minus_pulse_forward.csv
+  fir_coefficients_rad_per_rad:
+  - 0.0009778681163115017
+  - -0.029255455049401444
+  - -0.01700217493773332
+  - 0.016522640787711693
+  - 0.037482546841250866
+  - 0.01932344287821523
+  - -0.002076889358510786
+  - -0.021250712556557652
+  - -0.03350534144456275
+  - -0.02286681369399943
+  - -0.039002085917659024
+  - -0.027166881271942438
+  - -0.01108978754407454
+  - 0.0028815216575996294
+  - 0.031308358614210004
+  one_step_rmse_rad: 0.0
+  multi_step_rmse_rad: 0.00039153998333106213
+  nrmse: 0.05788343783630682
+  estimated_delay_s: 0.02
+  prediction_horizon_samples: 61
+- direction: forward
+  split: train_minus_validate_plus
+  train_source: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_minus_pulse_forward.csv
+  validation_source: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_plus_pulse_forward.csv
+  fir_coefficients_rad_per_rad:
+  - 0.0005109567731553002
+  - -0.02603061294587338
+  - -0.015661477722076135
+  - 0.009729289410331231
+  - 0.03647831264270416
+  - 0.02208439730579008
+  - 0.004373145439417266
+  - -0.013556846420039646
+  - -0.014564186213545494
+  - -0.016994984786844036
+  - -0.045420167922742956
+  - -0.03744678670804327
+  - -0.020248015639939537
+  - 0.003523029900208981
+  - 0.03268205807677597
+  one_step_rmse_rad: 0.0
+  multi_step_rmse_rad: 0.00037775054672419044
+  nrmse: 0.05464386415873413
+  estimated_delay_s: 0.02
+  prediction_horizon_samples: 61
+- direction: backward
+  split: train_plus_validate_minus
+  train_source: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_plus_pulse_backward.csv
+  validation_source: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_minus_pulse_backward.csv
+  fir_coefficients_rad_per_rad:
+  - 0.0005109479109844344
+  - -0.02603058815141705
+  - -0.015661459667744664
+  - 0.009729243830319914
+  - 0.03647829492402337
+  - 0.022084408892998026
+  - 0.004373194807376953
+  - -0.013556793189049047
+  - -0.014564041779496856
+  - -0.016994914687843803
+  - -0.04542020129572922
+  - -0.03744686081362893
+  - -0.020248094986924203
+  - 0.0035230229932763546
+  - 0.03268206688891866
+  one_step_rmse_rad: 0.0
+  multi_step_rmse_rad: 0.00037775291918613104
+  nrmse: 0.05464420743147616
+  estimated_delay_s: 0.02
+  prediction_horizon_samples: 61
+- direction: backward
+  split: train_minus_validate_plus
+  train_source: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_minus_pulse_backward.csv
+  validation_source: /home/zhijian/biped_fddp_project/results/logs/c1_qp0_plus_pulse_backward.csv
+  fir_coefficients_rad_per_rad:
+  - 0.0009778680502779793
+  - -0.02925545497871549
+  - -0.017002174819912636
+  - 0.016522640948084002
+  - 0.03748254655516069
+  - 0.01932344278605267
+  - -0.0020768895200267905
+  - -0.02125071278271149
+  - -0.03350534163406155
+  - -0.022866814398845102
+  - -0.03900208552323734
+  - -0.02716688051023332
+  - -0.011089786746195731
+  - 0.002881522191696776
+  - 0.03130835770400816
+  one_step_rmse_rad: 0.0
+  multi_step_rmse_rad: 0.00039154241731466615
+  nrmse: 0.05788379074129518
+  estimated_delay_s: 0.02
+  prediction_horizon_samples: 61
+outputs:
+  prediction_csv: /home/zhijian/biped_fddp_project/results/logs/e4_fir_holdout_predictions.csv
+  figure: /home/zhijian/biped_fddp_project/results/figures/e4_fir_holdout_measured_vs_predicted.png

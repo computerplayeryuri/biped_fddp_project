@@ -1,0 +1,26 @@
+stage: two_step_alternating_mujoco_position_command_replay
+purpose: MuJoCo position-command replay, not hardware walking
+inputs:
+  reference_npz: /home/zhijian/biped_fddp_project/transfer/trajectories/fddp_two_step_alternating_ref.npz
+  mujoco_xml: /home/zhijian/biped_fddp_project/model/biped_planar.xml
+  tau_ref_usage: analysis_only_never_sent_to_ctrl
+metrics:
+  max_joint_rmse_deg: 2.7066527354257803
+  max_abs_torso_pitch_deg: 10.595328429083077
+  min_torso_height_m: 0.281676251619285
+  initial_torso_height_m: 0.288
+  min_global_contact_count: 2
+  mujoco_achieved_com_y_shift_m: 0.015246203848599186
+  fddp_com_y_shift_m: 0.008118002095244463
+joint_rmse_deg:
+  left_hip_pitch_joint: 1.5944004382770636
+  left_knee_pitch_joint: 2.7066527354257803
+  left_ankle_pitch_joint: 0.8388010937652904
+  right_hip_pitch_joint: 1.7729774083156709
+  right_knee_pitch_joint: 2.251125020211313
+  right_ankle_pitch_joint: 0.6755953994404411
+integrity_passed: true
+failures: []
+outputs:
+  csv: /home/zhijian/biped_fddp_project/results/logs/fddp_two_step_alternating_mujoco_replay.csv
+  figure: /home/zhijian/biped_fddp_project/results/figures/fddp_two_step_alternating_mujoco_replay.png

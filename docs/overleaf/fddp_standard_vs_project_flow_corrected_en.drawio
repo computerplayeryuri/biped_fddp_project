@@ -1,0 +1,193 @@
+<mxfile host="Electron" agent="Codex Drawio Skill">
+  <diagram id="fddpCompare01" name="FDDP流程对比">
+    <mxGraphModel dx="4108" dy="2402" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3400" pageHeight="2400" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=38;fontStyle=1;fontFamily=Arial;fontColor=#111827;" value="Comparison of Standard FDDP and Project-Specific FDDP Engineering Workflows" vertex="1">
+          <mxGeometry height="65" width="2900" x="250" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leftHeader" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;strokeWidth=4;fontSize=32;fontStyle=1;fontFamily=Arial;fontColor=#1E3A8A;spacing=12;" value="A. Standard FDDP Solution Loop (Algorithm Core) [1–3]" vertex="1">
+          <mxGeometry height="75" width="1400" x="120" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="rightHeader" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;strokeWidth=4;fontSize=32;fontStyle=1;fontFamily=Arial;fontColor=#14532D;spacing=12;" value="B. Project-Specific Workflow (FDDP + Continuation + Evidence Gates)" vertex="1">
+          <mxGeometry height="75" width="1400" x="1880" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="divider" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#CBD5E1;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="2180" width="4" x="1698" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="L1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;strokeWidth=3;fontSize=26;fontFamily=Arial;fontColor=#111827;spacing=14;" value="Finite-Horizon Nonlinear OCP&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;min Σ ℓ&lt;sub&gt;k&lt;/sub&gt;(x&lt;sub&gt;k&lt;/sub&gt;,u&lt;sub&gt;k&lt;/sub&gt;) + ℓ&lt;sub&gt;N&lt;/sub&gt;(x&lt;sub&gt;N&lt;/sub&gt;)&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;x&lt;sub&gt;k+1&lt;/sub&gt; = f&lt;sub&gt;k&lt;/sub&gt;(x&lt;sub&gt;k&lt;/sub&gt;,u&lt;sub&gt;k&lt;/sub&gt;)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="150" width="1400" x="120" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="L2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;strokeWidth=3;fontSize=26;fontFamily=Arial;fontColor=#111827;spacing=14;" value="Initialise Nominal Trajectory&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;x̄&lt;sub&gt;0:N&lt;/sub&gt;, ū&lt;sub&gt;0:N−1&lt;/sub&gt;&lt;/span&gt;&lt;br&gt;FDDP permits a temporarily infeasible state-control trajectory" vertex="1">
+          <mxGeometry height="150" width="1400" x="120" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="L3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;strokeWidth=3;fontSize=26;fontFamily=Arial;fontColor=#111827;spacing=14;" value="Evaluate Cost and Shooting Gaps&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;J(x̄,ū), g&lt;sub&gt;k+1&lt;/sub&gt; = f&lt;sub&gt;k&lt;/sub&gt;(x̄&lt;sub&gt;k&lt;/sub&gt;,ū&lt;sub&gt;k&lt;/sub&gt;) ⊖ x̄&lt;sub&gt;k+1&lt;/sub&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="150" width="1400" x="120" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="L4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;strokeWidth=3;fontSize=26;fontFamily=Arial;fontColor=#111827;spacing=14;" value="Backward Pass: Local Quadratic Approximation and Riccati Recursion&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;δu&lt;sub&gt;k&lt;/sub&gt; = −k&lt;sub&gt;k&lt;/sub&gt; − K&lt;sub&gt;k&lt;/sub&gt;δx&lt;sub&gt;k&lt;/sub&gt;&lt;/span&gt;&lt;br&gt;Crocoddyl convention: feedforward k&lt;sub&gt;k&lt;/sub&gt;, feedback K&lt;sub&gt;k&lt;/sub&gt;" vertex="1">
+          <mxGeometry height="150" width="1400" x="120" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="L5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;strokeWidth=3;fontSize=26;fontFamily=Arial;fontColor=#111827;spacing=14;" value="Forward Rollout + Line Search&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;u&lt;sub&gt;k&lt;/sub&gt;&lt;sup&gt;+&lt;/sup&gt; = ū&lt;sub&gt;k&lt;/sub&gt; − αk&lt;sub&gt;k&lt;/sub&gt; − K&lt;sub&gt;k&lt;/sub&gt;(x&lt;sub&gt;k&lt;/sub&gt;&lt;sup&gt;+&lt;/sup&gt; ⊖ x̄&lt;sub&gt;k&lt;/sub&gt;)&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;α ∈ (0,1]&lt;/span&gt;" vertex="1">
+          <mxGeometry height="150" width="1400" x="120" y="1030" as="geometry" />
+        </mxCell>
+        <mxCell id="4KAnFSzlPXPTHq7SJWvd-1" edge="1" parent="1" source="L6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="L5" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L6" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D97706;strokeWidth=3;fontSize=26;fontStyle=1;fontFamily=Arial;fontColor=#7C2D12;spacing=10;" value="Line-Search Candidate Acceptable?&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;ΔV&lt;sub&gt;actual&lt;/sub&gt; &amp;gt; κΔV&lt;sub&gt;expected&lt;/sub&gt;&lt;/span&gt;&lt;br&gt;When infeasible, a small cost increase may be accepted to reduce gaps" vertex="1">
+          <mxGeometry height="150" width="880" x="380" y="1240" as="geometry" />
+        </mxCell>
+        <mxCell id="Lfail" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DC2626;strokeWidth=3;dashed=1;fontSize=26;fontFamily=Arial;fontColor=#7F1D1D;spacing=10;" value="Reject Candidate&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;α ↓, λ&lt;sub&gt;reg&lt;/sub&gt; ↑&lt;/span&gt;&lt;br&gt;Repeat backward pass" vertex="1">
+          <mxGeometry height="145" width="260" x="1260" y="1245" as="geometry" />
+        </mxCell>
+        <mxCell id="L7" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D97706;strokeWidth=3;fontSize=26;fontStyle=1;fontFamily=Arial;fontColor=#7C2D12;spacing=10;" value="Solver Converged?&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;feasible and stop &amp;lt; ε&lt;/span&gt;&lt;br&gt;Project-level gate separately checks &lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;max∥g&lt;sub&gt;k&lt;/sub&gt;∥ ≤ ε&lt;sub&gt;g&lt;/sub&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="150" width="880" x="380" y="1450" as="geometry" />
+        </mxCell>
+        <mxCell id="L8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;strokeWidth=4;fontSize=26;fontStyle=1;fontFamily=Arial;fontColor=#1E3A8A;spacing=14;" value="Output Locally Optimal Trajectory and Local Control Policy&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;x&lt;sub&gt;0:N&lt;/sub&gt;&lt;sup&gt;*&lt;/sup&gt;, u&lt;sub&gt;0:N−1&lt;/sub&gt;&lt;sup&gt;*&lt;/sup&gt;, K&lt;sub&gt;0:N−1&lt;/sub&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="150" width="1400" x="120" y="1660" as="geometry" />
+        </mxCell>
+        <mxCell id="Lnote" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#60A5FA;strokeWidth=3;dashed=1;fontSize=26;fontFamily=Arial;fontColor=#1E3A8A;spacing=14;" value="Key Distinction from Classical DDP&lt;br&gt;The backward pass can handle infeasible trajectories; early rollouts may retain and progressively reduce shooting gaps." vertex="1">
+          <mxGeometry height="145" width="1400" x="120" y="1870" as="geometry" />
+        </mxCell>
+        <mxCell id="R1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;strokeWidth=3;fontSize=26;fontFamily=Arial;fontColor=#111827;spacing=14;" value="Model and Actuator Boundaries&lt;br&gt;URDF → Pinocchio → Crocoddyl&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;n&lt;sub&gt;q&lt;/sub&gt; = 13, n&lt;sub&gt;v&lt;/sub&gt; = 12, τ&lt;sub&gt;ref&lt;/sub&gt;: analysis only&lt;/span&gt;" vertex="1">
+          <mxGeometry height="150" width="1400" x="1880" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="R2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;strokeWidth=3;fontSize=26;fontFamily=Arial;fontColor=#111827;spacing=14;" value="Fixed Contact Sequence and Multi-Contact OCP&lt;br&gt;DS → Right stance / Left swing → DS → Left stance / Right swing → DS&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;x&lt;sub&gt;k&lt;/sub&gt; = (q&lt;sub&gt;k&lt;/sub&gt;,v&lt;sub&gt;k&lt;/sub&gt;)&lt;/span&gt;; support / swing / CoM / regularisation costs" vertex="1">
+          <mxGeometry height="150" width="1400" x="1880" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="R3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;strokeWidth=3;fontSize=26;fontFamily=Arial;fontColor=#111827;spacing=14;" value="Two-Step Alternating FDDP&lt;br&gt;Left swing + Right swing&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;stop = 2.84×10&lt;sup&gt;−8&lt;/sup&gt;, max ∥g&lt;sub&gt;k&lt;/sub&gt;∥ = 0&lt;/span&gt;" vertex="1">
+          <mxGeometry height="150" width="1400" x="1880" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="R4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;strokeWidth=3;fontSize=26;fontFamily=Arial;fontColor=#111827;spacing=14;" value="Periodic Cycle + 7-Stage Homotopy&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;x&lt;sub&gt;N&lt;/sub&gt; ⊖ T&lt;sub&gt;Δy&lt;/sub&gt;(x&lt;sub&gt;0&lt;/sub&gt;) → 0, Δy = 10 mm&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;u&lt;sub&gt;0&lt;/sub&gt;,u&lt;sub&gt;N−1&lt;/sub&gt; → u&lt;sub&gt;qs&lt;/sub&gt; = 0 ⇒ u&lt;sub&gt;N−1&lt;/sub&gt; − u&lt;sub&gt;0&lt;/sub&gt; → 0&lt;/span&gt;; 7/7 converged" vertex="1">
+          <mxGeometry height="150" width="1400" x="1880" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="R5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;strokeWidth=3;fontSize=26;fontFamily=Arial;fontColor=#111827;spacing=14;" value="Multi-Step Continuation&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;2 → 4 → 6 → 10 steps&lt;/span&gt;&lt;br&gt;Final: &lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;N = 1000, Δt = 0.01 s, T = 10 s&lt;/span&gt;" vertex="1">
+          <mxGeometry height="150" width="1400" x="1880" y="1030" as="geometry" />
+        </mxCell>
+        <mxCell id="R6" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D97706;strokeWidth=3;fontSize=26;fontStyle=1;fontFamily=Arial;fontColor=#7C2D12;spacing=10;" value="Segment Planning Gates Passed?&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;stop ≤ 10&lt;sup&gt;−7&lt;/sup&gt;, max∥g&lt;sub&gt;k&lt;/sub&gt;∥ ≤ 10&lt;sup&gt;−7&lt;/sup&gt;&lt;/span&gt;&lt;br&gt;trajectory gates + embedded planar-contact checks" vertex="1">
+          <mxGeometry height="150" width="880" x="2140" y="1240" as="geometry" />
+        </mxCell>
+        <mxCell id="Rfail1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DC2626;strokeWidth=3;dashed=1;fontSize=26;fontFamily=Arial;fontColor=#7F1D1D;spacing=10;" value="FAIL&lt;br&gt;Stop Current Ladder&lt;br&gt;No New Candidate" vertex="1">
+          <mxGeometry height="145" width="255" x="3025" y="1245" as="geometry" />
+        </mxCell>
+        <mxCell id="R7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;strokeWidth=3;fontSize=26;fontFamily=Arial;fontColor=#111827;spacing=14;" value="Independent Contact Re-Extraction and Promotion Audit&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;F&lt;sub&gt;z&lt;/sub&gt;, η&lt;sub&gt;μ&lt;/sub&gt; = |F&lt;sub&gt;y&lt;/sub&gt;|/(μF&lt;sub&gt;z&lt;/sub&gt;), y&lt;sub&gt;CoP&lt;/sub&gt; = M&lt;sub&gt;x&lt;/sub&gt;/F&lt;sub&gt;z&lt;/sub&gt;, v&lt;sub&gt;t&lt;/sub&gt;&lt;/span&gt;&lt;br&gt;planar resultant / sagittal margin / slip; out-of-plane: diagnostics only" vertex="1">
+          <mxGeometry height="150" width="1400" x="1880" y="1450" as="geometry" />
+        </mxCell>
+        <mxCell id="R8" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D97706;strokeWidth=3;fontSize=26;fontStyle=1;fontFamily=Arial;fontColor=#7C2D12;spacing=10;" value="Contact Gates Passed?&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;F&lt;sub&gt;z&lt;/sub&gt; &amp;gt; 0, η&lt;sub&gt;μ&lt;/sub&gt; ≤ 0.90&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;margin&lt;sub&gt;CoP&lt;/sub&gt; ≥ 2 mm, v&lt;sub&gt;t&lt;/sub&gt; ≤ 10&lt;sup&gt;−3&lt;/sup&gt; m/s&lt;/span&gt;" vertex="1">
+          <mxGeometry height="160" width="880" x="2140" y="1650" as="geometry" />
+        </mxCell>
+        <mxCell id="Rfail2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DC2626;strokeWidth=3;dashed=1;fontSize=26;fontFamily=Arial;fontColor=#7F1D1D;spacing=10;" value="FAIL&lt;br&gt;No Promotion&lt;br&gt;Retain Previous Final" vertex="1">
+          <mxGeometry height="145" width="255" x="3025" y="1660" as="geometry" />
+        </mxCell>
+        <mxCell id="R9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;strokeWidth=4;fontSize=26;fontStyle=1;fontFamily=Arial;fontColor=#14532D;spacing=14;" value="Final Nominal Promotion / Export&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;t&lt;sub&gt;ref&lt;/sub&gt;, q&lt;sub&gt;ref&lt;/sub&gt;, dq&lt;sub&gt;ref&lt;/sub&gt;, state&lt;sub&gt;ref&lt;/sub&gt;, τ&lt;sub&gt;ref&lt;/sub&gt;&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;τ&lt;sub&gt;ref&lt;/sub&gt;&lt;/span&gt; remains analysis-only" vertex="1">
+          <mxGeometry height="150" width="1400" x="1880" y="1860" as="geometry" />
+        </mxCell>
+        <mxCell id="4KAnFSzlPXPTHq7SJWvd-2" edge="1" parent="1" source="R10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="R9" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="R10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#059669;strokeWidth=3;dashed=1;fontSize=26;fontFamily=Arial;fontColor=#065F46;spacing=14;" value="Independent MuJoCo / Controller Validation after FDDP&lt;br&gt;Nominal: &lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;q&lt;sub&gt;cmd&lt;/sub&gt; = q&lt;sub&gt;ref&lt;/sub&gt;&lt;/span&gt;; 10 s, 20/20 event matches (80 ms tolerance)&lt;br&gt;Controllers: &lt;span style=&quot;font-family:Cambria Math;font-style:italic;&quot;&gt;q&lt;sub&gt;cmd&lt;/sub&gt; = q&lt;sub&gt;ref&lt;/sub&gt;(t&lt;sub&gt;φ&lt;/sub&gt;) + Δq&lt;/span&gt;; C0 / C1 / phase-only / C2-final" vertex="1">
+          <mxGeometry height="155" width="1400" x="1880" y="2070" as="geometry" />
+        </mxCell>
+        <mxCell id="footer" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=26;fontFamily=Arial;fontColor=#374151;" value="Key comparison: the left side is the Crocoddyl FDDP algorithm loop; the right side adds periodic seeding, gated multi-step continuation, embedded and independent contact evidence, and MuJoCo/controller validation." vertex="1">
+          <mxGeometry height="70" width="2960" x="220" y="2290" as="geometry" />
+        </mxCell>
+        <mxCell id="E_L1_L2" edge="1" parent="1" source="L1" style="rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="L2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E_L2_L3" edge="1" parent="1" source="L2" style="rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="L3" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E_L3_L4" edge="1" parent="1" source="L3" style="rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="L4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E_L4_L5" edge="1" parent="1" source="L4" style="rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="L5" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E_L5_L6" edge="1" parent="1" source="L5" style="rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="L6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E_L6_L7" edge="1" parent="1" source="L6" style="rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;fontSize=26;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="L7" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E_L6_FAIL" edge="1" parent="1" source="L6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;fontSize=26;fontFamily=Arial;labelBackgroundColor=#FFFFFF;strokeColor=#DC2626;dashed=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="Lfail" value="No">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1245" y="1315" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E_FAIL_L4" edge="1" parent="1" source="Lfail" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;strokeColor=#DC2626;dashed=1;exitX=1;exitY=0.5;entryX=1;entryY=0.5;" target="L4" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1580" y="1315" />
+              <mxPoint x="1580" y="905" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E_L7_L8" edge="1" parent="1" source="L7" style="rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;fontSize=26;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="L8" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E_L7_L4" edge="1" parent="1" source="L7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;fontSize=26;fontFamily=Arial;labelBackgroundColor=#FFFFFF;strokeColor=#D97706;dashed=1;exitX=0;exitY=0.5;entryX=0;entryY=0.5;" target="L4" value="No">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="70" y="1525" />
+              <mxPoint x="70" y="905" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E_L8_NOTE" edge="1" parent="1" source="L8" style="rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;strokeColor=#60A5FA;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="Lnote" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E_R1_R2" edge="1" parent="1" source="R1" style="rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="R2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E_R2_R3" edge="1" parent="1" source="R2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="R3" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2580" y="605" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E_R3_R4" edge="1" parent="1" source="R3" style="rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="R4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E_R4_R5" edge="1" parent="1" source="R4" style="rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="R5" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E_R5_R6" edge="1" parent="1" source="R5" style="rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="R6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E_R6_R7" edge="1" parent="1" source="R6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;fontSize=26;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="R7" value="Yes">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2580" y="1420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E_R6_FAIL1" edge="1" parent="1" source="R6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;fontSize=26;fontFamily=Arial;labelBackgroundColor=#FFFFFF;strokeColor=#DC2626;dashed=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="Rfail1" value="No">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3010" y="1315" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E_R7_R8" edge="1" parent="1" source="R7" style="rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="R8" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E_R8_R9" edge="1" parent="1" source="R8" style="rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;fontSize=26;fontFamily=Arial;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="R9" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E_R8_FAIL2" edge="1" parent="1" source="R8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;fontSize=26;fontFamily=Arial;labelBackgroundColor=#FFFFFF;strokeColor=#DC2626;dashed=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="Rfail2" value="No">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3010" y="1730" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E_R9_R10" edge="1" parent="1" source="R9" style="rounded=0;orthogonalLoop=1;html=1;strokeColor=#475569;strokeWidth=3;endArrow=block;endFill=1;fontSize=26;fontFamily=Arial;labelBackgroundColor=#FFFFFF;strokeColor=#059669;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="R10" value="Independent Validation">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

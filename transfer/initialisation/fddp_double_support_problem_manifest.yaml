@@ -1,0 +1,33 @@
+stage: 7A_double_support_fddp_problem_build
+urdf: /home/zhijian/biped_fddp_project/model/biped_v1.urdf
+initialisation_file: /home/zhijian/biped_fddp_project/transfer/initialisation/fddp_double_support_x0.npz
+contact_file: /home/zhijian/biped_fddp_project/transfer/initialisation/fddp_double_support_contacts.yaml
+model:
+  nq: 13
+  nv: 12
+  ndx: 24
+  nu: 6
+contacts:
+  left_frame: left_foot_contact_fixed
+  left_frame_id: 17
+  right_frame: right_foot_contact_fixed
+  right_frame_id: 31
+  reference_frame: LOCAL_WORLD_ALIGNED
+  contact_signature: state, frame_id, SE3, LOCAL_WORLD_ALIGNED, nu, gains
+discretisation:
+  dt_s: 0.01
+  horizon_nodes: 40
+  horizon_s: 0.4
+costs:
+  state_regularisation_weight: 10.0
+  control_regularisation_weight: 0.001
+  state_residual_signature: state, xref, nu
+  control_residual_signature: state, uref
+one_step_evaluation:
+  cost: 0.0
+  finite_cost: true
+  finite_xnext: true
+notes:
+- This file verifies the first double-support FDDP problem before optimisation.
+- Both feet are ideal rigid 6D contacts at the Stage 6B world-frame references.
+- The next stage uses this same construction to run SolverFDDP and export stand_ref.npz.

@@ -1,0 +1,197 @@
+schema_version: fddp-multistep-replay-v1
+stage: fddp_multistep_mujoco_nominal_position_replay
+purpose: MuJoCo position-command replay of the independently promoted multi-step FDDP
+  nominal; not hardware walking.
+claim_boundary: simulation_only
+run_kind: smoke
+smoke_steps: 2
+reference_duration_s: 2.0
+control_source: q_ref_position_proxy_only
+tau_ref_sent_to_ctrl: false
+tau_ref_usage: analysis_only_never_sent_to_ctrl
+inputs:
+  reference_npz: /home/zhijian/biped_fddp_project/transfer/trajectories/fddp_multistep_10step_ref.npz
+  mujoco_xml: /home/zhijian/biped_fddp_project/model/biped_planar.xml
+  reference_schema_version: fddp-multistep-v1
+  reference_acceptance_state: planning_and_contact_accepted
+  mujoco_timestep_s: 0.002
+actuator_proxy:
+  command_delay_s: 0.004
+  first_order_time_constant_s: 0.008
+  maximum_command_speed_rad_per_s: 20.0
+contact_monitor:
+  event_match_tolerance_s: 0.08
+  penetration_depth_threshold_m: 0.003
+  maximum_unintended_flight_s: 0.02
+  maximum_sustained_penetration_s: 0.02
+metrics:
+  finite: true
+  fall_detected: false
+  max_joint_rmse_deg: 2.8800116194658516
+  max_abs_torso_pitch_deg: 9.390545993020705
+  minimum_height_fraction: 0.9789824066291989
+  maximum_unintended_flight_s: 0.0
+  maximum_sustained_penetration_s: 0.0
+  event_match_ratio: 0.5
+  event_order_valid: true
+  all_event_kinds_present: false
+  initial_torso_height_m: 0.288
+  minimum_torso_height_m: 0.28194693310920926
+  minimum_global_contact_count: 2
+  maximum_penetration_depth_m: 0.000244343793401049
+  scheduled_contact_events: 4
+  observed_contact_events: 4
+  matched_contact_events: 2
+  skipped_contact_events: 2
+  extra_observed_contact_events: 2
+  mujoco_final_com_y_shift_m: 0.017213184055679828
+  fddp_final_com_y_shift_m: 0.009989991009581723
+joint_rmse_deg:
+  left_hip_pitch_joint: 1.681240000918974
+  left_knee_pitch_joint: 2.8800116194658516
+  left_ankle_pitch_joint: 0.9177256611436715
+  right_hip_pitch_joint: 2.0428548921833944
+  right_knee_pitch_joint: 2.546302414989981
+  right_ankle_pitch_joint: 0.7610519413054645
+scheduled_events:
+- time_s: 0.2
+  kind: left_liftoff
+  index: 20
+  cycle_id: 0
+  source: left_contact_active
+- time_s: 0.9
+  kind: left_touchdown
+  index: 90
+  cycle_id: 0
+  source: left_contact_active
+- time_s: 1.1
+  kind: right_liftoff
+  index: 110
+  cycle_id: 0
+  source: right_contact_active
+- time_s: 1.8
+  kind: right_touchdown
+  index: 180
+  cycle_id: 0
+  source: right_contact_active
+observed_events:
+- time_s: 0.2840000000000002
+  kind: left_liftoff
+- time_s: 0.8760000000000007
+  kind: left_touchdown
+- time_s: 1.2020000000000008
+  kind: right_liftoff
+- time_s: 1.7740000000000014
+  kind: right_touchdown
+event_matching:
+  scheduled_count: 4
+  observed_count: 4
+  matched_count: 2
+  skipped_count: 2
+  extra_observed_count: 2
+  match_ratio: 0.5
+  event_order_valid: true
+  all_event_kinds_present: false
+  matched:
+  - scheduled_index: 1
+    observed_index: 1
+    scheduled_event:
+      time_s: 0.9
+      kind: left_touchdown
+      index: 90
+      cycle_id: 0
+      source: left_contact_active
+    observed_event:
+      time_s: 0.8760000000000007
+      kind: left_touchdown
+    timing_error_s: -0.023999999999999355
+  - scheduled_index: 3
+    observed_index: 3
+    scheduled_event:
+      time_s: 1.8
+      kind: right_touchdown
+      index: 180
+      cycle_id: 0
+      source: right_contact_active
+    observed_event:
+      time_s: 1.7740000000000014
+      kind: right_touchdown
+    timing_error_s: -0.02599999999999869
+  skipped:
+  - scheduled_index: 0
+    scheduled_event:
+      time_s: 0.2
+      kind: left_liftoff
+      index: 20
+      cycle_id: 0
+      source: left_contact_active
+  - scheduled_index: 2
+    scheduled_event:
+      time_s: 1.1
+      kind: right_liftoff
+      index: 110
+      cycle_id: 0
+      source: right_contact_active
+  extra_observed:
+  - observed_index: 0
+    observed_event:
+      time_s: 0.2840000000000002
+      kind: left_liftoff
+  - observed_index: 2
+    observed_event:
+      time_s: 1.2020000000000008
+      kind: right_liftoff
+acceptance:
+  passed: false
+  checks:
+    finite: true
+    fall_detected: true
+    max_joint_rmse_deg: true
+    max_abs_torso_pitch_deg: true
+    minimum_height_fraction: true
+    maximum_unintended_flight_s: true
+    maximum_sustained_penetration_s: true
+    event_match_ratio: false
+    event_order_valid: true
+    all_event_kinds_present: false
+  failures:
+  - event_match_ratio
+  - all_event_kinds_present
+  thresholds:
+    maximum_abs_pitch_deg: 15.0
+    maximum_joint_rmse_deg: 4.0
+    minimum_height_fraction: 0.65
+    minimum_event_match_ratio: 0.9
+    maximum_unintended_flight_s: 0.02
+    penetration_depth_threshold_m: 0.003
+    maximum_sustained_penetration_s: 0.02
+  diagnostics:
+    finite: true
+    fall_detected: false
+    max_joint_rmse_deg: 2.8800116194658516
+    max_abs_torso_pitch_deg: 9.390545993020705
+    minimum_height_fraction: 0.9789824066291989
+    maximum_unintended_flight_s: 0.0
+    maximum_sustained_penetration_s: 0.0
+    event_match_ratio: 0.5
+    event_order_valid: true
+    all_event_kinds_present: false
+    initial_torso_height_m: 0.288
+    minimum_torso_height_m: 0.28194693310920926
+    minimum_global_contact_count: 2
+    maximum_penetration_depth_m: 0.000244343793401049
+    scheduled_contact_events: 4
+    observed_contact_events: 4
+    matched_contact_events: 2
+    skipped_contact_events: 2
+    extra_observed_contact_events: 2
+    mujoco_final_com_y_shift_m: 0.017213184055679828
+    fddp_final_com_y_shift_m: 0.009989991009581723
+integrity_passed: false
+failures:
+- event_match_ratio
+- all_event_kinds_present
+outputs:
+  csv: /home/zhijian/biped_fddp_project/results/logs/fddp_multistep_nominal_replay_smoke_2step.csv
+  yaml: /home/zhijian/biped_fddp_project/results/logs/fddp_multistep_nominal_replay_smoke_2step.yaml
+  figure: /home/zhijian/biped_fddp_project/results/figures/fddp_multistep_nominal_replay_smoke_2step.png

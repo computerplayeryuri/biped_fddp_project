@@ -1,0 +1,120 @@
+stage: stage8_scripted_alternating_step_locomotion_preview
+scope_note: Scripted alternating left/right contact-transition preview only; not FDDP
+  walking, not hardware validation, and not a final locomotion controller.
+step_schedule:
+- leg: left
+  lift_start_s: 0.25
+  lift_full_s: 0.45
+  lower_start_s: 0.78
+  touchdown_s: 1.0
+  liftoff_event_s: 0.36
+- leg: right
+  lift_start_s: 1.18
+  lift_full_s: 1.38
+  lower_start_s: 1.7
+  touchdown_s: 1.95
+  liftoff_event_s: 1.3
+expected_events:
+- time_s: 0.36
+  kind: left_liftoff
+  source: scripted_alternating_step
+- time_s: 1.0
+  kind: left_touchdown
+  source: scripted_alternating_step
+- time_s: 1.3
+  kind: right_liftoff
+  source: scripted_alternating_step
+- time_s: 1.95
+  kind: right_touchdown
+  source: scripted_alternating_step
+observed_events:
+- &id001
+  time_s: 0.3800000000000003
+  kind: left_liftoff
+- &id002
+  time_s: 1.0560000000000007
+  kind: left_touchdown
+- &id003
+  time_s: 1.326000000000001
+  kind: right_liftoff
+- &id004
+  time_s: 2.012
+  kind: right_touchdown
+metrics:
+  duration_s: 2.349999999999963
+  scripted_step_count: 2
+  scheduled_contact_events: 4
+  observed_contact_events: 4
+  matched_contact_events: 4
+  skipped_contact_events: 0
+  max_abs_phase_offset_ms: 48.25000000000074
+  pitch_rms_deg: 0.3337162125723042
+  peak_abs_pitch_deg: 0.8005605083029743
+  min_torso_height_m: 0.28777665499023064
+  min_contacts: 2
+  forward_displacement_m: 0.013590910450552988
+  left_contact_was_lost: true
+  left_contact_was_restored: true
+  right_contact_was_lost: true
+  right_contact_was_restored: true
+  fall_detected: false
+outputs:
+  csv: /home/zhijian/biped_fddp_project/results/logs/stage8_scripted_alternating_step_locomotion.csv
+  contacts_plot: /home/zhijian/biped_fddp_project/results/figures/stage8_scripted_alternating_step_contacts.png
+  phase_offset_plot: /home/zhijian/biped_fddp_project/results/figures/stage8_scripted_alternating_step_phase_offset.png
+  body_plot: /home/zhijian/biped_fddp_project/results/figures/stage8_scripted_alternating_step_body.png
+  summary: /home/zhijian/biped_fddp_project/results/logs/stage8_scripted_alternating_step_locomotion_summary.yaml
+acceptance:
+  all_expected_event_kinds_observed: true
+  all_expected_events_matched: true
+  no_reference_events_skipped: true
+  phase_offset_bound_respected: true
+  support_contact_retained: true
+  no_fall_detected: true
+matched_event_records:
+- &id005
+  status: matched
+  observed_event: *id001
+  reference_event:
+    time_s: 0.36
+    kind: left_liftoff
+    source: scripted_alternating_step
+  timing_error_s: 0.020000000000000295
+  old_offset_s: 0.0
+  new_offset_s: -0.015000000000000221
+- &id006
+  status: matched
+  observed_event: *id002
+  reference_event:
+    time_s: 1.0
+    kind: left_touchdown
+    source: scripted_alternating_step
+  timing_error_s: 0.04100000000000059
+  old_offset_s: -0.015000000000000221
+  new_offset_s: -0.035000000000000225
+- &id007
+  status: matched
+  observed_event: *id003
+  reference_event:
+    time_s: 1.3
+    kind: right_liftoff
+    source: scripted_alternating_step
+  timing_error_s: -0.00899999999999923
+  old_offset_s: -0.035000000000000225
+  new_offset_s: -0.02825000000000074
+- &id008
+  status: matched
+  observed_event: *id004
+  reference_event:
+    time_s: 1.95
+    kind: right_touchdown
+    source: scripted_alternating_step
+  timing_error_s: 0.03374999999999928
+  old_offset_s: -0.02825000000000074
+  new_offset_s: -0.04825000000000074
+skipped_event_records: []
+event_records:
+- *id005
+- *id006
+- *id007
+- *id008

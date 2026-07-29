@@ -1,0 +1,59 @@
+stage: 7C_contact_consistent_kinematic_warmstart
+task: double_support_forward_com_shift_and_return_warmstart
+purpose: Provide SolverFDDP with a non-static, contact-nullspace-consistent initial
+  state trajectory instead of repeating the static x0 state.
+coordinate_convention:
+  forward_axis: +Y
+  pitch_axis: +X
+model:
+  urdf: /home/zhijian/biped_fddp_project/model/biped_v1.urdf
+  nq: 13
+  nv: 12
+  nu: 6
+discretisation:
+  dt_s: 0.01
+  horizon_nodes: 120
+  horizon_s: 1.2
+com_motion:
+  initial_com_world_m:
+  - 0.0
+  - 0.0
+  - 0.16572722046565108
+  requested_peak_shift_y_m: 0.006
+  achieved_peak_shift_y_m: 0.005993238307832193
+  peak_abs_y_tracking_error_m: 0.00015335705972373487
+  final_return_error_y_m: 1.9415636713198662e-07
+contacts:
+  left_frame: left_foot_contact_fixed
+  right_frame: right_foot_contact_fixed
+  construction_method: integrate least-norm CoM_y velocity inside the instantaneous
+    two-foot 6D contact-Jacobian nullspace
+  contact_jacobian_rank_min: 0
+  contact_jacobian_rank_max: 9
+  com_y_authority_min: 0.0
+  com_y_authority_max: 0.079470549574958
+  max_linearised_contact_velocity_residual: 2.229823889735794e-16
+  max_left_translation_drift_m: 2.2472522257657227e-06
+  max_right_translation_drift_m: 2.2472522257657503e-06
+  max_left_rotation_drift_rad: 2.0853616027649497e-17
+  max_right_rotation_drift_rad: 4.164139008197913e-17
+joint_limits:
+  minimum_lower_margin_rad: 0.44999818714154566
+  minimum_upper_margin_rad: 0.08938780428659499
+  minimum_margin_rad: 0.08938780428659499
+  within_position_limits: true
+  has_safety_margin: true
+outputs:
+  warmstart_npz: /home/zhijian/biped_fddp_project/transfer/trajectories/com_shift_forward_warmstart.npz
+  xs_init_shape:
+  - 121
+  - 25
+  us_init_shape:
+  - 120
+  - 6
+  q_ref_shape:
+  - 121
+  - 6
+  dq_ref_shape:
+  - 121
+  - 6

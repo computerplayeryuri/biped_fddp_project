@@ -1,0 +1,55 @@
+# Local agent and workspace state
+.agents/
+.codex_tmp/
+.superpowers/
+.worktrees/
+.codex_gitignore_global
+wsl$/
+tmp/
+
+# Nested repositories maintained independently
+6a5d1dbc538ca6d4415fde77/
+docs/overleaf/thesis_6a57ac33/
+
+# Python caches and test artefacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Patch, backup, and temporary files
+*.bak
+*.bkp
+*.orig
+*.rej
+*.tmp
+*.pre_integration_backup
+.$*
+
+# Credentials and private keys
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+credentials.json
+secrets.*

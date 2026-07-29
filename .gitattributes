@@ -1,0 +1,20 @@
+* text=auto
+
+*.drawio text
+*.md text
+*.py text
+*.tex text
+*.yaml text
+*.yml text
+*.csv text
+*.json text
+*.xml text
+
+*.gif binary
+*.jpeg binary
+*.jpg binary
+*.npz binary
+*.pdf binary
+*.png binary
+*.pptx binary
+*.zip binary
